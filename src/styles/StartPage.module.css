@@ -1,0 +1,26 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 20vw;
+
+    position: relative;
+
+
+    background-image: url("/public/assets/background/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+
+    width: 100vw;
+    pointer-events: none;
+}
