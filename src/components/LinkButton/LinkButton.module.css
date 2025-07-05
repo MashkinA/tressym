@@ -1,0 +1,41 @@
+.linkBtn {
+    width: 200px;
+    height: 70px;
+    box-sizing: border-box;
+
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(238, 202, 123);
+
+    background-image: url("/public/assets/link/linkBtn.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.linkBtn :hover {
+    background-image: url("/public/assets/link/linkBtn_hover.svg");
+}
+
+.linkBtnDisabled {
+    width: 200px;
+    height: 70px;
+    box-sizing: border-box;
+
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+
+    background-image: url("/public/assets/link/linkBtn.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    pointer-events: none;
+}
+.linkBtn :visited {
+    color: rgb(238, 202, 123);
+}
