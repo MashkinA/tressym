@@ -3,7 +3,7 @@
     height: 70px;
     box-sizing: border-box;
 
-    font-size: 35px;
+    font-size: 30px;
     line-height: 70px;
     text-align: center;
     text-decoration: none;
@@ -14,16 +14,16 @@
     background-repeat: no-repeat;
     background-size: contain;
 }
-.linkBtn:hover {
+.linkBtn :hover {
     background-image: url("/public/assets/link/linkBtn_hover.svg");
 }
 
-.linkBtn_disabled {
+.linkBtnDisabled {
     width: 200px;
     height: 70px;
     box-sizing: border-box;
 
-    font-size: 35px;
+    font-size: 30px;
     line-height: 70px;
     text-align: center;
     text-decoration: none;
@@ -36,6 +36,6 @@
 
     pointer-events: none;
 }
-.linkBtn:visited {
+.linkBtn :visited {
     color: rgb(238, 202, 123);
 }

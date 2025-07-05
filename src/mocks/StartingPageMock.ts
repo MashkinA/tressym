@@ -5,7 +5,7 @@ export const startingPageMock = {
       "components": [
         {
           "id": "characterCreation",
-          "title": "Создать персонажа",
+          "title": "Создать",
           "actions": [
             {
               "method": "GET",
