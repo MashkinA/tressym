@@ -1,15 +1,12 @@
-import StartPage from "../pages/StartPage";
-import ErrorPage from "../pages/ErrorPage";
-/*import CreateNamePage from "../pages/CreateNamePage";
-import CreateSpeciesPage from "../pages/CreateSpeciesPage";
-import CreateClassPage from "../pages/CreateClassPage";
-import CreateBackgroundPage from "../pages/CreateBackgroundPage";
-import СreateCharsPage from "../pages/СreateCharsPage";
-*/
+import { StartPage } from "../pages/StartPage.tsx";
+import { ErrorPage } from "../pages/ErrorPage.tsx";
+import { CreateNamePage } from "../pages/CreateNamePage.tsx";
+
 
 
 
 export const privateRoutes = [
   { path: "*", element: <ErrorPage />, exact: true },
   { path: "/", element: <StartPage />, exact: true },
+  { path: "/character/creation/name", element: <CreateNamePage />, exact: true },
 ]

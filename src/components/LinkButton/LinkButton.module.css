@@ -7,7 +7,6 @@
     line-height: 70px;
     text-align: center;
     text-decoration: none;
-    font-weight: bold;
     color: rgb(238, 202, 123);
 
     background-image: url("/public/assets/link/linkBtn.svg");
@@ -27,7 +26,6 @@
     line-height: 70px;
     text-align: center;
     text-decoration: none;
-    font-weight: bold;
     color: black;
 
     background-image: url("/public/assets/link/linkBtn.svg");
