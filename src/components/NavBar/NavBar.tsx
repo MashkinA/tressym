@@ -1,4 +1,3 @@
-import React from 'react';
 import cl from './NavBar.module.css';
 import LinkButton from '../LinkButton/LinkButton';
 
@@ -8,7 +7,7 @@ type NavBarProps = {
     nextPage: string;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({isValidationCorrect, prevPage, nextPage}) => {
+export const NavBar = ({isValidationCorrect, prevPage, nextPage}:NavBarProps) => {
     return (
         <div className={cl.navbar}>
             <LinkButton path={prevPage} isValidationCorrect={true}>
