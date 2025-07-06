@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-class ErrorPage extends Component {
+export class ErrorPage extends Component {
     render() {
         return (
             <h1 style={{color: 'red'}}>
@@ -10,5 +10,3 @@ class ErrorPage extends Component {
         );
     }
 }
-
-export default ErrorPage;

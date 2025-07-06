@@ -1,0 +1,44 @@
+.nameForm {
+    width: 100vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+.nameInput {
+    width: 600px;
+    height: 60px;
+
+    font-size: 30px;
+    line-height: 35px;
+    padding-left: 10px;
+
+    color: rgb(238, 202, 123);
+
+    border: 2px solid rgb(238, 202, 123);
+    outline: none;
+    background-color: rgba(125, 0, 0, 0.1);
+}
+.title {
+    margin-bottom: 20px;
+
+    font-size: 35px;
+    line-height: 35px;
+    color: rgb(238, 202, 123);
+}
+.nameHint {
+    margin-top: 10px;
+
+    width: 600px;
+    height: 25px;
+
+    font-size: 10px;
+    line-height: 25px;
+    font-family: "Roboto", serif;
+    text-align: start;
+
+    color: rgb(238, 202, 123);
+}
