@@ -38,12 +38,12 @@ export const CreateNamePage = () => {
                 :
                 <div className={cl.pageWrapper}>
                     <NameForm
-                        create={validationCheck}
+                        onCreate={validationCheck}
                     />
                     <NavBar
                         isValidationCorrect={validStatus}
                         prevPage={'/'}
-                        nextPage={'/species'}
+                        nextPage={'/character/creation/species'}
                     />
 
                 </div>

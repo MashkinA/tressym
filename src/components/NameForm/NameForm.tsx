@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import cl from './NameForm.module.css';
 
 type NameFormProps = {
-    create: (value: string) => void;
+    onCreate: (value: string) => void;
 };
 
-export const NameForm: React.FC<NameFormProps> = ({create}) => {
+export const NameForm = ({onCreate}: NameFormProps) => {
 
     const [name, setName] = useState('');
 
-    const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
-        create(e.target.value);
+        onCreate(e.target.value);
     }
 
 
@@ -21,9 +21,8 @@ export const NameForm: React.FC<NameFormProps> = ({create}) => {
             <input
                 className={cl.nameInput}
                 value={name}
-                onChange={validateInput}
+                onChange={handleInputChange}
                 type="text"
-                placeholder=""
             />
 
             <h6 className={cl.nameHint}>Имя персонажа должно соответствовать его расе и происхождению, а также отражать его характер и предысторию</h6>
