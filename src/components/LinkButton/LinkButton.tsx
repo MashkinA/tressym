@@ -8,7 +8,7 @@ type LinkButtonProps = {
   path: string;
 };
 
-const LinkButton: React.FC<LinkButtonProps> = ({isValidationCorrect, children, path} ) => {
+const LinkButton = ({isValidationCorrect, children, path}: LinkButtonProps ) => {
 
     
     return (

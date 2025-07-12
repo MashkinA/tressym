@@ -1,8 +1,19 @@
 .pageWrapper {
     width: 100vw;
     height: 100vh;
-
     background-image: url("/public/assets/background/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.pageCreateHeader {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+    line-height: 10vh;
+    color: rgb(238 202 123);
 }

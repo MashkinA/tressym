@@ -3,10 +3,8 @@
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import jest from 'eslint-plugin-jest'
-import perfectionist from 'eslint-plugin-perfectionist'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import featureSliced from '@conarti/eslint-plugin-feature-sliced'
 
 export default tseslint.config(
     {

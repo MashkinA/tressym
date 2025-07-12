@@ -2,38 +2,35 @@
     width: 200px;
     height: 70px;
     box-sizing: border-box;
-
     font-size: 30px;
     line-height: 70px;
     text-align: center;
     text-decoration: none;
-    color: rgb(238, 202, 123);
-
+    color: rgb(238 202 123);
     background-image: url("/public/assets/link/linkBtn.svg");
     background-repeat: no-repeat;
     background-size: contain;
 }
+
 .linkBtn :hover {
-    background-image: url("/public/assets/link/linkBtn_hover.svg");
+    background-color: rgb(125 0 0 / 10%);
 }
 
 .linkBtnDisabled {
     width: 200px;
     height: 70px;
     box-sizing: border-box;
-
     font-size: 30px;
     line-height: 70px;
     text-align: center;
     text-decoration: none;
     color: black;
-
     background-image: url("/public/assets/link/linkBtn.svg");
     background-repeat: no-repeat;
     background-size: contain;
-
     pointer-events: none;
 }
+
 .linkBtn :visited {
-    color: rgb(238, 202, 123);
+    color: rgb(238 202 123);
 }
