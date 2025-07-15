@@ -38,7 +38,7 @@ export const CreateNamePage = () => {
                 :
                 <div className={cl.pageWrapper}>
                     <NameForm
-                        onCreate={validationCheck}
+                        onChange={validationCheck}
                     />
                     <NavBar
                         isValidationCorrect={validStatus}

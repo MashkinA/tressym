@@ -7,6 +7,7 @@ type SliderSelectorProps = {
     onTrackSwitch: () => void;
     itemList: Item[];
 }
+const MIDDLE_ITEM = 2;
 
 export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelectorProps) => {
 
@@ -26,45 +27,45 @@ export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSele
     };
 
     // Функция перехода к следующему элементу из списка расс
-    const prevSlide = () => {
+    const toPrevSlide = () => {
         onTrackSwitch();
         setCurrentIndex((prev) => (prev - 1 + itemList.length) % itemList.length);
         onCreate(itemList[(currentIndex - 1 + itemList.length) % itemList.length].raceId);
     };
 
     // Функция перехода к предыдущему элементу из списка расс
-    const nextSlide = () => {
+    const toNextSlide = () => {
         onTrackSwitch();
         setCurrentIndex((prev) => (prev + 1) % itemList.length);
         onCreate(itemList[(currentIndex + 1) % itemList.length].raceId);
     };
 
     // Количество отображаемых элементов
-    const visibleIndex = getSlideIndex();
+    const visibleItems = getSlideIndex();
 
     return (
         <div className={cl.slider}>
-            <button className={cl.prevBtn} onClick={prevSlide}>
+            <button className={cl.prevBtn} onClick={toPrevSlide}>
                 &#10094;
             </button>
 
             <div className={cl.slidesContainer}>
-                {visibleIndex.map((index, i) => (
+                {visibleItems.map((item, i) => (
 
-                    <div className={i === 2 ? cl.slideActive : cl.slide} key={index}>
+                    <div className={i === MIDDLE_ITEM ? cl.slideActive : cl.slide} key={item}>
                         <img
                             className={cl.itemImage}
-                            src={itemList[index].image}
-                            alt="я не ебу как это описать"
+                            src={itemList[item].image}
+                            alt="Изображение выбранного элемента рассы/класса/предыстории"
                         />
 
-                        <b className={cl.itemTitle}>{itemList[index].title}</b>
+                        <b className={cl.itemTitle}>{itemList[item].title}</b>
                     </div>
 
                 ))}
             </div>
 
-            <button className={cl.nextBtn} onClick={nextSlide}>
+            <button className={cl.nextBtn} onClick={toNextSlide}>
                 &#10095;
             </button>
         </div>
