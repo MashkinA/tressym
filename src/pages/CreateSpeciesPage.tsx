@@ -1,17 +1,13 @@
 import { useState } from "react";
 import { NavBar } from '../components/NavBar/NavBar';
 import { SpeciesMock } from "../mocks/SpeciesMock.ts";
-import SelectList from '../components/SelectList/SelectList';
+import SelectWidget from '../components/SelectList/SelectWidget.tsx';
 import type {Item} from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
 
 export const CreateSpeciesPage = () => {
 
-
     const species: Item[] = SpeciesMock.mainInfo.items;
-
-
-
 
     const [selectedId, setSelectedId] = useState<string>("1");
     const [selectedSubId, setSelectedSubId] = useState<string>("1");
@@ -27,7 +23,7 @@ export const CreateSpeciesPage = () => {
             <div className={cl.pageCreateHeader}>
                 {SpeciesMock.body.header.title}
             </div>
-            <SelectList
+            <SelectWidget
                 itemList={species}
                 onSelectId={setSelectedId}
                 onSelectSubId={setSelectedSubId}

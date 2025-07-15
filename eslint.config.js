@@ -2,7 +2,6 @@
 
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
-import jest from 'eslint-plugin-jest'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 
@@ -34,8 +33,6 @@ export default tseslint.config(
         '@typescript-eslint': tseslint.plugin,
         'react-hooks': reactHooks,
         'react-refresh': reactRefresh,
-        perfectionist,
-        '@conarti/feature-sliced': featureSliced,
       },
       rules: {
         indent: ['error', 'tab', { SwitchCase: 1 }],
@@ -104,18 +101,4 @@ export default tseslint.config(
         ],
       },
     },
-
-    {
-      name: 'jest',
-      files: ['**/*.spec.*', '**/*.cspec.*'],
-      languageOptions: {
-        globals: jest.environments.globals.globals,
-      },
-      plugins: {
-        jest,
-      },
-      rules: {
-        ...jest.configs.recommended.rules,
-      },
-    }
 )

@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import cl from './NameForm.module.css';
 
 type NameFormProps = {
-    onCreate: (value: string) => void;
+    onChange: (value: string) => void;
 };
 
-export const NameForm = ({onCreate}: NameFormProps) => {
+export const NameForm = ({onChange}: NameFormProps) => {
 
     const [name, setName] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setName(e.target.value)
-        onCreate(e.target.value);
+        onChange(e.target.value);
     }
 
 

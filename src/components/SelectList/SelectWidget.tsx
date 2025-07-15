@@ -10,7 +10,7 @@ type SelectListProps = {
     itemList: Item[];
 }
 
-const SelectList = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) => {
+const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) => {
 
     // Начальное значение списка полученных расс
     const [currentId, setCurrentId] = useState<number>(0);
@@ -55,5 +55,5 @@ const SelectList = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) =>
     );
 };
 
-export default SelectList;
+export default SelectWidget;
 
