@@ -4,12 +4,12 @@ export const startingPageMock = {
     "mainInfo": {
       "components": [
         {
-          "id": "characterCreation",
-          "title": "Создать",
+          "componentId": "characterCreation",
+          "title": "Создать персонажа",
           "actions": [
             {
               "method": "GET",
-              "href": "https://tressym.ru/api/v1/character/creation/name"
+              "href": "/api/v1/character/creation/name"
             }
           ]
         }

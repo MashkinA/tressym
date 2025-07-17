@@ -4,12 +4,12 @@ export type SubItemAbilities = {
 }
 
 export type SubItemChars = {
-    value: string;
+    value: number;
     title: string;
 }
 
-export type SubItem = {
-    subraceId: string;
+export type SubComp = {
+    subRaceId: number;
     title: string;
     chars: SubItemChars[];
     description: string;
@@ -17,8 +17,8 @@ export type SubItem = {
 }
 
 export type Item = {
-    raceId: string;
+    raceId: number;
     title: string;
     image: string;
-    subitems: SubItem[];
+    subcomponents: SubComp[];
 }

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { NavBar } from '../components/NavBar/NavBar';
-import { SpeciesMock } from "../mocks/SpeciesMock.ts";
-import SelectWidget from '../components/SelectList/SelectWidget.tsx';
+import SelectWidget from '../components/SelectWidget/SelectWidget.tsx';
 import type {Item} from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
+import { SpeciesPageMock } from "../mocks/SpeciesPageMock.ts";
 
 export const CreateSpeciesPage = () => {
 
-    const species: Item[] = SpeciesMock.mainInfo.items;
+    const species: Item[] = SpeciesPageMock.mainInfo.components;
 
-    const [selectedId, setSelectedId] = useState<string>("1");
-    const [selectedSubId, setSelectedSubId] = useState<string>("1");
+    const [selectedId, setSelectedId] = useState<number>(1);
+    const [selectedSubId, setSelectedSubId] = useState<number>(1);
 
     const userInput = {
         "component_id": "race",
@@ -21,7 +21,7 @@ export const CreateSpeciesPage = () => {
     return (
         <div className={cl.pageWrapper}>
             <div className={cl.pageCreateHeader}>
-                {SpeciesMock.body.header.title}
+                {SpeciesPageMock.body.header.title}
             </div>
             <SelectWidget
                 itemList={species}

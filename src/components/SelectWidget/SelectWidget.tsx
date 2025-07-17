@@ -5,8 +5,8 @@ import { SelectSubItem } from "../SelectSubItem/SelectSubItem.tsx";
 import type { SelectSubItemHandle } from "../SelectSubItem/SelectSubItem.tsx";
 
 type SelectListProps = {
-    onSelectId: (value: string) => void;
-    onSelectSubId: (value: string) => void;
+    onSelectId: (value: number) => void;
+    onSelectSubId: (value: number) => void;
     itemList: Item[];
 }
 
@@ -16,17 +16,17 @@ const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) 
     const [currentId, setCurrentId] = useState<number>(0);
 
     // Переключение рассы колбеком (необходимо для currentSubItem)
-    const selectId = (id: string) => {
-        setCurrentId((parseInt(id) - 1) % itemList.length);
+    const selectId = (id: number) => {
+        setCurrentId((id - 1) % itemList.length);
         onSelectId(id);
     }
     // Отправка колбека выбранной подрассы наверх
-    const selectSubId = (subId: string) => {
+    const selectSubId = (subId: number) => {
         onSelectSubId(subId);
     }
 
     // Отображение списка подрасс для выбранной рассы
-    const currentSubItems = itemList[currentId].subitems;
+    const currentSubItems = itemList[currentId].subcomponents;
 
     // Получение доступа к дочернему API
     const subItemRef = useRef<SelectSubItemHandle>(null);

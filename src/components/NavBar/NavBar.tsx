@@ -14,8 +14,8 @@ export const NavBar = ({isValidationCorrect, prevPage, nextPage}:NavBarProps) =>
                 Назад
             </LinkButton>
 
-            <LinkButton path={'/'} isValidationCorrect={true}>
-                В ангар
+            <LinkButton path={'/character/creation/character-sheet'} isValidationCorrect={true}>
+                К листу
             </LinkButton>
 
             <LinkButton path={nextPage} isValidationCorrect={isValidationCorrect}>

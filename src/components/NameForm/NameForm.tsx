@@ -3,9 +3,10 @@ import cl from './NameForm.module.css';
 
 type NameFormProps = {
     onChange: (value: string) => void;
+    inputHint: string;
 };
 
-export const NameForm = ({onChange}: NameFormProps) => {
+export const NameForm = ({onChange, inputHint}: NameFormProps) => {
 
     const [name, setName] = useState('');
 
@@ -25,7 +26,7 @@ export const NameForm = ({onChange}: NameFormProps) => {
                 type="text"
             />
 
-            <h6 className={cl.nameHint}>Имя персонажа должно соответствовать его расе и происхождению, а также отражать его характер и предысторию</h6>
+            <h6 className={cl.nameHint}>{inputHint}</h6>
         </div>
     );
 };

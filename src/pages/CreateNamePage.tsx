@@ -3,6 +3,7 @@ import { NameForm } from '../components/NameForm/NameForm';
 import { NavBar } from '../components/NavBar/NavBar';
 import { Loader } from '../components/Loader/Loader';
 import cl from '../styles/Pages.module.css';
+import {NamePageMock} from "../mocks/NamePageMock.ts";
 
 export const CreateNamePage = () => {
 
@@ -11,14 +12,13 @@ export const CreateNamePage = () => {
     const fakeFetch = () => {
         setTimeout(() => {
             setIsFetchLoading(false)
-        }, 2000)
+        }, 1000)
     }
-
+    fakeFetch()
 
 
 
     const [validStatus, setValidStatus] = useState(false)
-
 
     const validationCheck = (name: string) => {
         setValidStatus(true)
@@ -27,29 +27,29 @@ export const CreateNamePage = () => {
         }
     }
 
-    fakeFetch()
+
 
     return (
-
         <div >
             {isFetchLoading
                 ?
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
+                    <div className={cl.pageCreateHeader}>
+                        {NamePageMock.body.header.title}
+                    </div>
                     <NameForm
                         onChange={validationCheck}
+                        inputHint={NamePageMock.mainInfo.components[0].description}
                     />
                     <NavBar
                         isValidationCorrect={validStatus}
                         prevPage={'/'}
-                        nextPage={'/character/creation/species'}
+                        nextPage={'/character/creation/race'}
                     />
-
                 </div>
-
             }
         </div>
-
     );
 };

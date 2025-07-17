@@ -3,7 +3,7 @@ import cl from './SliderSelector.module.css';
 import type {Item} from "../types.ts";
 
 type SliderSelectorProps = {
-    onCreate: (value: string) => void;
+    onCreate: (value: number) => void;
     onTrackSwitch: () => void;
     itemList: Item[];
 }

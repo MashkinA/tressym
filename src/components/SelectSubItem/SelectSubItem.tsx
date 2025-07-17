@@ -1,10 +1,10 @@
 import cl from "./SelectSubItem.module.css";
-import type { SubItem } from "../types.ts";
+import type { SubComp } from "../types.ts";
 import { useState, forwardRef, useImperativeHandle } from "react";
 
 export type SelectSubItemProps = {
-    subItemsList: SubItem[];
-    onCreate: (value: string) => void;
+    subItemsList: SubComp[];
+    onCreate: (value: number) => void;
 };
 
 export type SelectSubItemHandle = {
@@ -19,8 +19,8 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
     const [currentSubItem, setCurrentSubItem] = useState(0);
 
         // функция смены подрасы при клике по ее названию
-    const handleSwitchSubRace = (id: string) => {
-        setCurrentSubItem(parseInt(id) - 1);
+    const handleSwitchSubRace = (id: number) => {
+        setCurrentSubItem(id - 1);
         onCreate(id);
     }
 
@@ -28,7 +28,7 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
     useImperativeHandle(ref, () => ({
         resetSubId() {
             setCurrentSubItem(0);
-            onCreate("1");
+            onCreate(1);
         }
     }));
 
@@ -38,7 +38,7 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
             {/** Уровень заголовков подрасс */}
             <div className={cl.subItemTitle}>
                 {subItemsList.map((char) => (
-                    <h2 className={parseInt(char.subraceId) === (currentSubItem + 1) ? cl.subItemTitleValueActive : cl.subItemTitleValue} key={char.subraceId} onClick={() => handleSwitchSubRace(char.subraceId)}>
+                    <h2 className={char.subRaceId === (currentSubItem + 1) ? cl.subItemTitleValueActive : cl.subItemTitleValue} key={char.subRaceId} onClick={() => handleSwitchSubRace(char.subRaceId)}>
                         {char.title}
                     </h2>
                 ))}

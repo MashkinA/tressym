@@ -2,9 +2,7 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-
     display: flex;
-
     background-image: url("/public/assets/background/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,43 +10,48 @@
 
 
 @keyframes fly {
-    from {
+    0% {
         transform: translate(-50%, -50%);
     }
+
     50% {
         transform: translate(-50%, -20%);
     }
-    to {
+
+    100% {
         transform: translate(-50%, -50%);
     }
 }
 
 @keyframes rightRotate {
-    from {
+    0% {
         transform: translate(0%, -50%);
         transform: rotate(0deg);
-
     }
+
     50% {
         transform: translate(0%, -50%);
         transform: rotate(-30deg);
     }
-    to {
+
+    100% {
         transform: translate(0%, -50%);
         transform: rotate(0deg);
     }
 }
+
 @keyframes leftRotate {
-    from {
+    0% {
         transform: translate(0%, -50%);
         transform: rotate(0deg);
-
     }
+
     50% {
         transform: translate(0%, -50%);
         transform: rotate(30deg);
     }
-    to {
+
+    100% {
         transform: translate(0%, -50%);
         transform: rotate(0deg);
     }
@@ -56,30 +59,29 @@
 
 .head {
     position: absolute;
-
     left: 50vw;
     top: 40vh;
     width: 10vw;
     box-sizing: border-box;
-    animation: fly 2s infinite ease;
+    animation: fly 1s infinite ease;
 }
+
 .rightWing {
     position: absolute;
-
     left: 55vw;
     top: 40vh;
     width: 5vw;
     box-sizing: border-box;
     transform-origin: top left;
-    animation: rightRotate 2s infinite ease;
+    animation: rightRotate 1s infinite ease;
 }
+
 .leftWing {
     position: absolute;
-
     right: 55vw;
     top: 40vh;
     width: 5vw;
     box-sizing: border-box;
     transform-origin: top right;
-    animation: leftRotate 2s infinite ease;
+    animation: leftRotate 1s infinite ease;
 }
