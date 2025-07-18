@@ -1,9 +1,8 @@
 .slider {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    position: relative;
     width: 100vw;
     height: 40vh;
     overflow: hidden;
@@ -14,7 +13,7 @@
     gap: 5vw;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
 }
 
 .slide {
@@ -23,11 +22,14 @@
     justify-content: center;
     align-items: center;
     width: 12vw;
+    height: 16vw;
     opacity: 0.6;
     transform: scale(0.95);
-    transition: transform 0.3s, opacity 0.3s;
-    border: 2px solid rgb(238 202 123);
-    box-sizing: border-box;
+    cursor: pointer;
+    background-image: url("/public/assets/icons/widgetFrame.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .slideActive {
@@ -35,54 +37,54 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 12vw;
+    height: 16vw;
     opacity: 1;
     transform: scale(1.05);
-    border: 3px solid rgb(238 202 123);
-    background-color: rgb(125 0 0 / 10%);
+    background-image: url("/public/assets/icons/widgetFrame.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .itemImage {
-    width: 11.5vw;
-    box-sizing: border-box;
+    height: 11vw;
 }
 
 .itemTitle {
     display: flex;
-    width: 12vw;
-    height: 8vh;
-    font-size: 4vh;
-    line-height: 8vh;
+    width: 10.4vw;
+    height: 7vh;
+    font-size: 3vh;
+    line-height: 7vh;
     align-items: center;
     justify-content: center;
-    color: rgb(238 202 123);
-    border-top: 1px solid rgb(238 202 123);
+    color: rgb(255 203 93);
+    border-top: 1px solid rgb(255 203 93);
     box-sizing: border-box;
 }
 
 .prevBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    background: rgb(0 0 0 / 40%);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
+    height: 60px;
+    width: 33px;
+    background-image: url("/public/assets/icons/arrowBtn.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     cursor: pointer;
-    z-index: 10;
-    left: 10px;
+    outline: none;
+    border: none;
 }
 
 .nextBtn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2rem;
-    background: rgb(0 0 0 / 40%);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
+    height: 60px;
+    width: 33px;
+    transform: rotate(180deg);
+    background-image: url("/public/assets/icons/arrowBtn.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
     cursor: pointer;
-    z-index: 10;
-    right: 10px;
+    outline: none;
+    border: none;
 }

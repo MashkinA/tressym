@@ -1,17 +1,16 @@
 * {
-    color: rgb(238 202 123);
+    color: rgb(255 203 93);
 }
 
 .subItem {
     margin-left: 10vw;
     height: 30vh;
     width: 80vw;
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     padding-left: 5vw;
     padding-right: 5vw;
-
+    position: relative;
 }
 
 .subItemTitle {
@@ -35,7 +34,7 @@
     height: 5vh;
     font-size: 3vh;
     line-height: 5vh;
-    color: rgb(238 202 123 / 50%);
+    color: rgb(255 203 93 / 50%);
     cursor: pointer;
 }
 
@@ -72,4 +71,35 @@
 
 .subItemAbilitiesTitle {
     font-weight: bold;
+}
+
+.subItemCorner1 {
+    width: 5vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: scaleX(-1);
+}
+
+.subItemCorner2 {
+    width: 5vw;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.subItemCorner3 {
+    width: 5vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: scaleY(-1);
+}
+
+.subItemCorner4 {
+    width: 5vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: scaleY(-1) scaleX(-1);
 }

@@ -6,7 +6,7 @@
     line-height: 70px;
     text-align: center;
     text-decoration: none;
-    color: rgb(238 202 123);
+    color: rgb(255 203 93);
     background-image: url("/public/assets/link/linkBtn.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -32,5 +32,5 @@
 }
 
 .linkBtn :visited {
-    color: rgb(238 202 123);
+    color: rgb(255 203 93);
 }

@@ -38,7 +38,7 @@ export const SpeciesPageMock = {
             "image": "/assets/species/halfling.webp",
             "subcomponents": [
                 {
-                    "subRaceId": 1,
+                    "subRaceId": 2,
                     "title": "Коренастый",
                     "chars": [
                         {
@@ -55,7 +55,7 @@ export const SpeciesPageMock = {
                     ]
                 },
                 {
-                    "subRaceId": 2,
+                    "subRaceId": 3,
                     "title": "Легконогий",
                     "chars": [
                         {
@@ -79,7 +79,7 @@ export const SpeciesPageMock = {
             "image": "/assets/species/elf.webp",
             "subcomponents": [
                 {
-                    "subRaceId": 1,
+                    "subRaceId": 4,
                     "title": "Высший эльф",
                     "chars": [
                         {
@@ -96,7 +96,7 @@ export const SpeciesPageMock = {
                     ]
                 },
                 {
-                    "subRaceId": 2,
+                    "subRaceId": 5,
                     "title": "Лесной эльф",
                     "chars": [
                         {
@@ -120,7 +120,7 @@ export const SpeciesPageMock = {
             "image": "/assets/species/halfOrc.webp",
             "subcomponents": [
                 {
-                    "subRaceId": 1,
+                    "subRaceId": 6,
                     "title": "Полуорк",
                     "chars": [
                         {
@@ -144,7 +144,7 @@ export const SpeciesPageMock = {
             "image": "/assets/species/human.webp",
             "subcomponents": [
                 {
-                    "subRaceId": 1,
+                    "subRaceId": 7,
                     "title": "Человек",
                     "chars": [
                         {

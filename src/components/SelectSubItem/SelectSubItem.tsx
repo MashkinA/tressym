@@ -11,6 +11,8 @@ export type SelectSubItemHandle = {
     resetSubId: () => void;
 };
 
+const cornerImg = "/assets/icons/corner.webp";
+
 export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>(
     ({ subItemsList, onCreate }, ref) => {
 
@@ -19,8 +21,8 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
     const [currentSubItem, setCurrentSubItem] = useState(0);
 
         // функция смены подрасы при клике по ее названию
-    const handleSwitchSubRace = (id: number) => {
-        setCurrentSubItem(id - 1);
+    const handleSwitchSubRace = (index: number, id: number) => {
+        setCurrentSubItem(index);
         onCreate(id);
     }
 
@@ -28,17 +30,22 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
     useImperativeHandle(ref, () => ({
         resetSubId() {
             setCurrentSubItem(0);
-            onCreate(1);
         }
     }));
 
     return (
         <div className={cl.subItem}>
+            <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
+            <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
+            <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
+            <img className={cl.subItemCorner4} src={ cornerImg } alt=""/>
 
             {/** Уровень заголовков подрасс */}
             <div className={cl.subItemTitle}>
-                {subItemsList.map((char) => (
-                    <h2 className={char.subRaceId === (currentSubItem + 1) ? cl.subItemTitleValueActive : cl.subItemTitleValue} key={char.subRaceId} onClick={() => handleSwitchSubRace(char.subRaceId)}>
+                {subItemsList.map((char, index) => (
+                    <h2 className={index === currentSubItem ? cl.subItemTitleValueActive : cl.subItemTitleValue}
+                        key={char.subRaceId}
+                        onClick={() => handleSwitchSubRace(index, char.subRaceId)}>
                         {char.title}
                     </h2>
                 ))}
@@ -52,7 +59,7 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
                 <span className={cl.subItemCharsTitle}>Увеличение характеристик:</span>
 
                 {subItemsList[currentSubItem].chars.map((char) => (
-                    <span className={cl.subItemCharsValue} key={char.title}>{char.title}  +{char.value}</span>
+                    <span className={cl.subItemCharsValue} key={char.title}>{char.title} +{char.value}</span>
                 ))}
             </span>
 
@@ -66,4 +73,4 @@ export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>
 
         </div>
     );
-});
+    });

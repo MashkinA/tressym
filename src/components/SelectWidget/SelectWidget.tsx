@@ -19,6 +19,7 @@ const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) 
     const selectId = (id: number) => {
         setCurrentId((id - 1) % itemList.length);
         onSelectId(id);
+        onSelectSubId(itemList[id - 1].subcomponents[0].subRaceId);
     }
     // Отправка колбека выбранной подрассы наверх
     const selectSubId = (subId: number) => {

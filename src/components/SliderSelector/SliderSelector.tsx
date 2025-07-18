@@ -40,19 +40,26 @@ export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSele
         onCreate(itemList[(currentIndex + 1) % itemList.length].raceId);
     };
 
+    const handleSlideClick = (index: number) => {
+        onTrackSwitch();
+        setCurrentIndex(index);
+        onCreate(itemList[index].raceId);
+    };
+
     // Количество отображаемых элементов
     const visibleItems = getSlideIndex();
 
     return (
         <div className={cl.slider}>
-            <button className={cl.prevBtn} onClick={toPrevSlide}>
-                &#10094;
-            </button>
+            <div className={cl.prevBtn} onClick={toPrevSlide} />
 
             <div className={cl.slidesContainer}>
                 {visibleItems.map((item, i) => (
 
-                    <div className={i === MIDDLE_ITEM ? cl.slideActive : cl.slide} key={item}>
+                    <div
+                        className={i === MIDDLE_ITEM ? cl.slideActive : cl.slide}
+                        key={item}
+                        onClick={() => handleSlideClick(item)}>
                         <img
                             className={cl.itemImage}
                             src={itemList[item].image}
@@ -65,9 +72,8 @@ export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSele
                 ))}
             </div>
 
-            <button className={cl.nextBtn} onClick={toNextSlide}>
-                &#10095;
-            </button>
+            <div className={cl.nextBtn} onClick={toNextSlide}/>
+
         </div>
     );
 };

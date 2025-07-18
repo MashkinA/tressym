@@ -36,9 +36,6 @@ export const CreateNamePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader}>
-                        {NamePageMock.body.header.title}
-                    </div>
                     <NameForm
                         onChange={validationCheck}
                         inputHint={NamePageMock.mainInfo.components[0].description}

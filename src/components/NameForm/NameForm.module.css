@@ -1,6 +1,6 @@
 .nameForm {
     width: 100vw;
-    height: 70vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,8 +13,8 @@
     font-size: 30px;
     line-height: 35px;
     padding-left: 10px;
-    color: rgb(238 202 123);
-    border: 2px solid rgb(238 202 123);
+    color: rgb(255 203 93);
+    border: 2px solid rgb(255 203 93);
     outline: none;
     background-color: rgb(125 0 0 / 10%);
 }
@@ -23,7 +23,7 @@
     margin-bottom: 20px;
     font-size: 35px;
     line-height: 35px;
-    color: rgb(238 202 123);
+    color: rgb(255 203 93);
 }
 
 .nameHint {
@@ -34,5 +34,5 @@
     line-height: 25px;
     font-family: Roboto, serif;
     text-align: start;
-    color: rgb(238 202 123);
+    color: rgb(255 203 93);
 }
