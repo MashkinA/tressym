@@ -1,0 +1,100 @@
+.slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    height: 40vh;
+    overflow: hidden;
+}
+
+.slidesContainer {
+    display: flex;
+    gap: 5vw;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    height: 16vw;
+    opacity: 0.6;
+    transform: scale(0.95);
+    cursor: pointer;
+    background-image: url("/public/assets/icons/widgetFrame.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.slideActive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    height: 16vw;
+    opacity: 1;
+    transform: scale(1.05);
+    background-image: url("/public/assets/icons/widgetFrame.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+.slideBack {
+    position: absolute;
+    left: 1vw;
+    top: 1vh;
+    width: 10vw;
+    height: 14vw;
+    background-image: linear-gradient(to bottom, rgb(125 0 0 / 20%), transparent);
+}
+
+.itemImage {
+    height: 11vw;
+}
+
+.itemTitle {
+    display: flex;
+    width: 10.4vw;
+    height: 7vh;
+    font-size: 3vh;
+    line-height: 7vh;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255 203 93);
+    border-top: 1px solid rgb(255 203 93);
+    box-sizing: border-box;
+}
+
+.prevBtn {
+    height: 60px;
+    width: 33px;
+    background-image: url("/public/assets/icons/arrowBtn.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.nextBtn {
+    height: 60px;
+    width: 33px;
+    transform: rotate(180deg);
+    background-image: url("/public/assets/icons/arrowBtn.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
