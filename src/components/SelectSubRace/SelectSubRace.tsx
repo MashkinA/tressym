@@ -1,19 +1,19 @@
-import cl from "./SelectSubItem.module.css";
-import type { SubComp } from "../types.ts";
+import cl from "./SelectSubRace.module.css";
+import type { SubRace } from "../types.ts";
 import { useState, forwardRef, useImperativeHandle } from "react";
 
 export type SelectSubItemProps = {
-    subItemsList: SubComp[];
+    subItemsList: SubRace[];
     onCreate: (value: number) => void;
 };
 
-export type SelectSubItemHandle = {
+export type SelectSubRaceHandle = {
     resetSubId: () => void;
 };
 
 const cornerImg = "/assets/icons/corner.webp";
 
-export const SelectSubItem = forwardRef<SelectSubItemHandle, SelectSubItemProps>(
+export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>(
     ({ subItemsList, onCreate }, ref) => {
 
 

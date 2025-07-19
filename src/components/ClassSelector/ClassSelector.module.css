@@ -45,6 +45,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    position: relative;
+}
+
+.slideBack {
+    position: absolute;
+    left: 1vw;
+    top: 1vh;
+    width: 10vw;
+    height: 14vw;
+    background-image: linear-gradient(to bottom, rgb(125 0 0 / 20%), transparent);
+    z-index: -1;
 }
 
 .itemImage {
