@@ -1,24 +1,43 @@
-export type SubItemAbilities = {
+export type SubRaceAbilities = {
     title: string;
     description: string;
 }
 
-export type SubItemChars = {
+export type SubRaceChars = {
     value: number;
     title: string;
 }
 
-export type SubComp = {
+export type SubRace = {
     subRaceId: number;
     title: string;
-    chars: SubItemChars[];
+    chars: SubRaceChars[];
     description: string;
-    abilities: SubItemAbilities[];
+    abilities: SubRaceAbilities[];
 }
 
-export type Item = {
+export type Race = {
     raceId: number;
     title: string;
     image: string;
-    subcomponents: SubComp[];
+    subcomponents: SubRace[];
+}
+
+export type ClassSkills = {
+    string: string;
+}
+
+export type ClassSubComp = {
+    string: string;
+}
+
+export type Class = {
+    classId: number;
+    title: string;
+    image: string;
+    description: string;
+    detailedInfo: string;
+    hits: string;
+    skills: ClassSkills[];
+    subcomponents: ClassSubComp[];
 }

@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import cl from './SliderSelector.module.css';
-import type {Item} from "../types.ts";
+import cl from './RaceSelector.module.css';
+import type { Race } from "../types.ts";
 
 type SliderSelectorProps = {
     onCreate: (value: number) => void;
     onTrackSwitch: () => void;
-    itemList: Item[];
+    itemList: Race[];
 }
 const MIDDLE_ITEM = 2;
 
-export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelectorProps) => {
+export const RaceSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelectorProps) => {
 
     // Начальное значение элемента из списка расс
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -63,10 +63,12 @@ export const SliderSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSele
                         <img
                             className={cl.itemImage}
                             src={itemList[item].image}
-                            alt="Изображение выбранного элемента рассы/класса/предыстории"
+                            alt="Изображение выбранной рассы"
                         />
 
                         <b className={cl.itemTitle}>{itemList[item].title}</b>
+
+                        <div className={i === MIDDLE_ITEM ? cl.slideBack : cl.slideNoBack}/>
                     </div>
 
                 ))}

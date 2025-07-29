@@ -1,16 +1,16 @@
-import type { Item } from "../types.ts";
-import { SliderSelector } from "../SliderSelector/SliderSelector.tsx";
+import type { Race } from "../types.ts";
+import { RaceSelector } from "../RaceSelector/RaceSelector.tsx";
 import { useState, useRef } from "react";
-import { SelectSubItem } from "../SelectSubItem/SelectSubItem.tsx";
-import type { SelectSubItemHandle } from "../SelectSubItem/SelectSubItem.tsx";
+import { SelectSubRace } from "../SelectSubRace/SelectSubRace.tsx";
+import type { SelectSubRaceHandle } from "../SelectSubRace/SelectSubRace.tsx";
 
 type SelectListProps = {
     onSelectId: (value: number) => void;
     onSelectSubId: (value: number) => void;
-    itemList: Item[];
+    itemList: Race[];
 }
 
-const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) => {
+const SelectRace = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) => {
 
     // Начальное значение списка полученных расс
     const [currentId, setCurrentId] = useState<number>(0);
@@ -30,7 +30,7 @@ const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) 
     const currentSubItems = itemList[currentId].subcomponents;
 
     // Получение доступа к дочернему API
-    const subItemRef = useRef<SelectSubItemHandle>(null);
+    const subItemRef = useRef<SelectSubRaceHandle>(null);
 
     // Функция обнуления подрассы при переключении рассы
     const resetSubId = () => {
@@ -40,13 +40,13 @@ const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) 
     return (
         <div>
 
-            <SliderSelector
+            <RaceSelector
                 itemList={itemList}
                 onCreate={selectId}
                 onTrackSwitch={resetSubId}
             />
 
-            <SelectSubItem
+            <SelectSubRace
                 ref={subItemRef}
                 subItemsList={currentSubItems}
                 onCreate={selectSubId}
@@ -56,5 +56,5 @@ const SelectWidget = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) 
     );
 };
 
-export default SelectWidget;
+export default SelectRace;
 
