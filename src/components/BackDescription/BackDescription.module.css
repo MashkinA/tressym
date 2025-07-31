@@ -1,0 +1,91 @@
+* {
+    color: rgb(255 203 93);
+}
+
+.background {
+    margin-left: 10vw;
+    height: 30vh;
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+    position: relative;
+    background-image: radial-gradient(circle, rgb(125 0 0 / 20%), transparent);
+}
+
+.backgroundGrid {
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+.backgroundGrid_left {
+    width: 45vw;
+    height: 100%;
+}
+
+.backgroundGrid_right {
+    width: 29vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.backgroundDescription {
+    margin-bottom: 3vh;
+    width: 100%;
+    font-size: 2vh;
+    line-height: 3vh;
+    text-align: justify;
+    font-family: Roboto, sans-serif;
+}
+
+.backgroundSkills {
+    width: 100%;
+    margin-bottom: 3vh;
+}
+
+.backgroundSkillsTitle {
+    font-size: 2vh;
+    line-height: 3vh;
+    font-family: Roboto, sans-serif;
+    color: rgb(255 212 119);
+
+}
+
+.backgroundSkillsValue {
+    font-size: 2vh;
+    line-height: 3vh;
+    font-family: Roboto, sans-serif;
+}
+
+.backgroundCorner1 {
+    width: 5vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: scaleX(-1);
+}
+
+.backgroundCorner2 {
+    width: 5vw;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.backgroundCorner3 {
+    width: 5vw;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: scaleY(-1);
+}
+
+.backgroundCorner4 {
+    width: 5vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: scaleY(-1) scaleX(-1);
+}
