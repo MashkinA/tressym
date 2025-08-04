@@ -17,6 +17,15 @@
     border: 2px solid rgb(255 203 93);
     outline: none;
     background-color: rgb(125 0 0 / 10%);
+
+    /**
+    background-image: url("/public/assets/link/linkBtn.svg");
+    background-repeat: no-repeat;
+    background-size: contain; **/
+}
+
+.nameInput::placeholder {
+    color: rgb(255 203 93);
 }
 
 .title {

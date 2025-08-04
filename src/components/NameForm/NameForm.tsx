@@ -4,9 +4,10 @@ import cl from './NameForm.module.css';
 type NameFormProps = {
     onChange: (value: string) => void;
     inputHint: string;
+    placeholder: string;
 };
 
-export const NameForm = ({onChange, inputHint}: NameFormProps) => {
+export const NameForm = ({onChange, inputHint, placeholder}: NameFormProps) => {
 
     const [name, setName] = useState('');
 
@@ -18,12 +19,12 @@ export const NameForm = ({onChange, inputHint}: NameFormProps) => {
 
     return (
         <div className={cl.nameForm}>
-            <h1 className={cl.title}>Придумайте имя вашего персонажа</h1>
             <input
                 className={cl.nameInput}
                 value={name}
                 onChange={handleInputChange}
                 type="text"
+                placeholder={placeholder}
             />
 
             <h6 className={cl.nameHint}>{inputHint}</h6>

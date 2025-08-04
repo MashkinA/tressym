@@ -41,3 +41,15 @@ export type Class = {
     skills: ClassSkills[];
     subcomponents: ClassSubComp[];
 }
+
+export type Background = {
+    backgroundId: number;
+    title: string;
+    image: string;
+    description: string;
+    detailedInfo: string;
+    skill: string;
+    attainments: string[];
+    instruments: string[];
+    equipment: string[];
+}

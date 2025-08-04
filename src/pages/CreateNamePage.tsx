@@ -5,6 +5,9 @@ import { Loader } from '../components/Loader/Loader';
 import cl from '../styles/Pages.module.css';
 import {NamePageMock} from "../mocks/NamePageMock.ts";
 
+const tracery = "/assets/icons/tracery.webp";
+const tressym = "/assets/icons/tressym.webp";
+
 export const CreateNamePage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
@@ -36,9 +39,15 @@ export const CreateNamePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
+                    <div className={cl.pageCreateHeader}>
+                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
+                        <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
+                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
+                    </div>
                     <NameForm
                         onChange={validationCheck}
                         inputHint={NamePageMock.mainInfo.components[0].description}
+                        placeholder={NamePageMock.body.header.title}
                     />
                     <NavBar
                         isValidationCorrect={validStatus}

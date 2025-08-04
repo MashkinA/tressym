@@ -1,9 +1,12 @@
 .linkBtn {
-    width: 200px;
-    height: 70px;
+    position: absolute;
+    right: 15vw;
+    top: 40vh;
+    width: 20vw;
+    height: 7vw;
     box-sizing: border-box;
-    font-size: 19px;
-    line-height: 70px;
+    font-size: 1.9vw;
+    line-height: 7vw;
     text-align: center;
     text-decoration: none;
     color: rgb(255 203 93);
@@ -14,4 +17,9 @@
 
 .linkBtn :visited {
     color: rgb(255 203 93);
+}
+
+.linkBtn:hover {
+    background-image: url("/public/assets/link/linkBtn_hover.svg");
+    color: rgb(253 208 123);
 }
