@@ -30,7 +30,7 @@ export const StartPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.wrapper}>
+                <div className={cla.pageWrapper}>
                     <div className={cla.pageCreateHeader}>
                         <img className={cla.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
                         <img className={cla.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />

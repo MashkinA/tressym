@@ -1,8 +1,8 @@
 .wrapper {
     width: 100vw;
     height: 100vh;
-    display: flex; 
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: flex-end;
     padding-right: 20vw;

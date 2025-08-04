@@ -1,6 +1,8 @@
 .pageWrapper {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-image: linear-gradient(to top, rgb(0 0 0 / 60%), transparent), url("/public/assets/background/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
@@ -8,6 +10,7 @@
 
 .pageCreateHeader {
     height: 10vh;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -19,4 +22,8 @@
 
 .pageCreateHeaderTracery {
     height: 2vh;
+}
+
+.pageCreateHeaderTressym {
+    height: 10vh;
 }
