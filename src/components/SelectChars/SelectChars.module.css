@@ -1,0 +1,9 @@
+.charsGrid {
+    width: 100vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 17vw 17vw 17vw;
+    grid-template-rows: 13vw 13vw;
+    grid-gap: 25px;
+    place-content: center center;
+}
