@@ -47,59 +47,59 @@ const SelectChars = ({characteristics, onTrackChars, onValidationCheck}: SelectC
     }
 
     const changeStatsSum = (characteristic: {name: string; value: number}) => {
+        const statCost = calculateStats(characteristic.value);
+
+        let newStrength = strength;
+        let newDexterity = dexterity;
+        let newConstitution = constitution;
+        let newIntelligence = intelligence;
+        let newWisdom = wisdom;
+        let newCharisma = charisma;
+
         switch (characteristic.name) {
             case "Сила":
-                setStrength(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    strengthValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
+                newStrength = statCost;
+                setStrength(statCost);
+                onTrackChars(prev => ({ ...prev, strengthValue: characteristic.value }));
                 break;
             case "Ловкость":
-                setDexterity(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    dexterityValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
+                newDexterity = statCost;
+                setDexterity(statCost);
+                onTrackChars(prev => ({ ...prev, dexterityValue: characteristic.value }));
                 break;
             case "Телосложение":
-                setConstitution(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    constitutionValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
+                newConstitution = statCost;
+                setConstitution(statCost);
+                onTrackChars(prev => ({ ...prev, constitutionValue: characteristic.value }));
                 break;
             case "Интеллект":
-                setIntelligence(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    intelligenceValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
+                newIntelligence = statCost;
+                setIntelligence(statCost);
+                onTrackChars(prev => ({ ...prev, intelligenceValue: characteristic.value }));
                 break;
             case "Мудрость":
-                setWisdom(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    wisdomValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
+                newWisdom = statCost;
+                setWisdom(statCost);
+                onTrackChars(prev => ({ ...prev, wisdomValue: characteristic.value }));
                 break;
             case "Харизма":
-                setCharisma(calculateStats(characteristic.value));
-                onTrackChars(prev => ({
-                    ...prev,
-                    charismaValue: characteristic.value
-                }));
-                onValidationCheck(checkMaxStats(maxStats));
-                break;
-            default:
+                newCharisma = statCost;
+                setCharisma(statCost);
+                onTrackChars(prev => ({ ...prev, charismaValue: characteristic.value }));
                 break;
         }
-    }
+
+        const updatedMaxStats =
+            newStrength +
+            newDexterity +
+            newConstitution +
+            newIntelligence +
+            newWisdom +
+            newCharisma;
+
+        onValidationCheck(checkMaxStats(updatedMaxStats));
+    };
+
 
     return (
         <div className={cl.selectChars}>
