@@ -1,9 +1,38 @@
-.charsGrid {
+.selectChars {
     width: 100vw;
     height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.charsGrid {
     display: grid;
     grid-template-columns: 17vw 17vw 17vw;
     grid-template-rows: 13vw 13vw;
-    grid-gap: 25px;
-    place-content: center center;
+    grid-gap: 1vw;
+    place-items: center center;
+}
+
+.statGrid {
+    display: grid;
+    grid-template-columns: repeat(27, 1fr);
+    gap: 10px;
+    width: 52vw;
+    height: 5vh;
+    padding-top: 3vh;
+}
+
+.statBlock {
+    aspect-ratio: 1 / 1;
+    background-color: rgb(255 203 93);
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+    opacity: 0.5;
+}
+
+.statBlock.active {
+    background-color: rgb(255 203 93);
+    opacity: 1;
 }
