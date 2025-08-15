@@ -8,20 +8,19 @@
 }
 
 .nameInput {
-    width: 600px;
-    height: 60px;
+    width: 50vw;
+    height: 10.5vw;
     font-size: 30px;
     line-height: 35px;
-    padding-left: 10px;
+    padding-left: 2vw;
     color: rgb(255 203 93);
-    border: 2px solid rgb(255 203 93);
+    border: 0;
     outline: none;
     background-color: rgb(125 0 0 / 10%);
-
-    /**
-    background-image: url("/public/assets/link/linkBtn.svg");
+    background-image: url("/public/assets/icons/horizontalFrame.webp");
     background-repeat: no-repeat;
-    background-size: contain; **/
+    background-size: contain;
+    background-position: center center;
 }
 
 .nameInput::placeholder {
@@ -36,11 +35,11 @@
 }
 
 .nameHint {
-    margin-top: 10px;
-    width: 600px;
-    height: 25px;
-    font-size: 10px;
-    line-height: 25px;
+    margin-top: 1vw;
+    width: 50vw;
+    height: 0.85vw;
+    font-size: 0.85vw;
+    line-height: 0.85vw;
     font-family: Roboto, serif;
     text-align: start;
     color: rgb(255 203 93);
