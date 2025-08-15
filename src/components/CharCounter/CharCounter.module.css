@@ -1,0 +1,57 @@
+.charCounter {
+    height: 12vw;
+    width: 16vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/public/assets/icons/charFrame.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.modifier, .charName {
+    height: 3vw;
+    width: 100%;
+    text-align: center;
+    font-size: 1.8vw;
+    line-height: 3vw;
+}
+
+.valueBlock {
+    height: 5vw;
+    width: 15vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background: rgb(125 0 0 / 20%);
+    border-top: 2px solid rgb(255 203 93);
+    border-bottom: 2px solid rgb(255 203 93);
+}
+
+.value {
+    height: 100%;
+    width: 6vw;
+    text-align: center;
+    font-size: 4vw;
+    line-height: 5vw;
+}
+
+.btn, .btnDisabled {
+    font-size: 3.5vw;
+    height: 5vw;
+    width: 3.5vw;
+    box-sizing: border-box;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btnDisabled {
+    opacity: 0.5;
+    cursor: auto;
+}

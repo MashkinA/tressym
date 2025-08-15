@@ -53,3 +53,14 @@ export type Background = {
     instruments: string[];
     equipment: string[];
 }
+
+export type Char = {
+    characteristicId: number;
+    title: string;
+    strengthRecommendValue?: number;
+    dexterityRecommendValue?: number;
+    constitutionRecommendValue?: number;
+    intelligenceRecommendValue?: number;
+    wisdomRecommendValue?: number;
+    charismaRecommendValue?: number;
+}
