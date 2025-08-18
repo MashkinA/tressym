@@ -1,6 +1,8 @@
 import cl from "./SelectSubRace.module.css";
 import type { SubRace } from "../types.ts";
 import { useState, forwardRef, useImperativeHandle } from "react";
+import {userSlice} from "../../store/reducers/UserSlice.ts";
+import {useAppDispatch} from "../../hooks/redux.ts";
 
 export type SelectSubItemProps = {
     subItemsList: SubRace[];
@@ -16,6 +18,8 @@ const cornerImg = "/assets/icons/corner.webp";
 export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>(
     ({ subItemsList, onCreate }, ref) => {
 
+        const { setRace } = userSlice.actions
+        const dispatch = useAppDispatch()
 
         // начальное значение выбранной подрасы
     const [currentSubItem, setCurrentSubItem] = useState(0);
@@ -24,6 +28,7 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
     const handleSwitchSubRace = (index: number, id: number) => {
         setCurrentSubItem(index);
         onCreate(id);
+        dispatch(setRace(index))
     }
 
         // функция сброса индекса подрасы при переключении между рассами (вызывается при смене расы)

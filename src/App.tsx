@@ -1,15 +1,22 @@
 import { AppRouter } from './routes/AppRouter';
 import './styles/App.css';
 import { BrowserRouter } from 'react-router-dom';
+import {Provider} from "react-redux";
+import {setupStore} from "./store/store.ts";
 
 
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+      <Provider store={
+          setupStore()
+      }>
+          <BrowserRouter>
+              <AppRouter />
+          </BrowserRouter>
+      </Provider>
+
   )
 }
 

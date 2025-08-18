@@ -9,6 +9,7 @@ type SliderSelectorProps = {
 }
 const MIDDLE_ITEM = 2;
 
+
 export const ClassSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelectorProps) => {
 
     // Начальное значение элемента из списка расс
