@@ -23,14 +23,12 @@ export const CreateRacePage = () => {
     const species: Race[] = SpeciesPageMock.mainInfo.components;
 
     const [selectedId, setSelectedId] = useState<number>(1);
-    const [selectedSubId, setSelectedSubId] = useState<number>(1);
+    const selectedSubId = useAppSelector((state) => state.userReducer.subRaceId);
 
     const userInput = {
         "raceId": selectedId,
         "subRaceId": selectedSubId,
     }
-
-    const test = useAppSelector((state) => state.userReducer.subRaceId);
 
     return (
         <div >
@@ -39,7 +37,7 @@ export const CreateRacePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader} onClick={() => console.log(userInput, test)}>
+                    <div className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
                         {SpeciesPageMock.body.header.title}
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
@@ -47,7 +45,6 @@ export const CreateRacePage = () => {
                     <SelectRace
                         itemList={species}
                         onSelectId={setSelectedId}
-                        onSelectSubId={setSelectedSubId}
                     />
 
                     <NavBar

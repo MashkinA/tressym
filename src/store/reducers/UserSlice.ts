@@ -15,7 +15,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setRace: (state, action: PayloadAction<number>) => {
+        setSubRace: (state, action: PayloadAction<number>) => {
             state.subRaceId = action.payload;
         }
     }
