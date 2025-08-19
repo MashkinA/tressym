@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import cl from './SelectChars.module.css';
 import { CharCounter } from "../CharCounter/CharCounter.tsx";
 import type { Char } from "../types.ts";
+import { calculateStats } from "../CharCounter/CharCounter.tsx";
 
 type UserInput = {
     strengthValue: number;
@@ -32,19 +33,6 @@ const SelectChars = ({characteristics, onTrackChars, onValidationCheck}: SelectC
     const maxStats = strength + dexterity + constitution + intelligence + wisdom + charisma;
 
     const blocks = Array.from({ length: 27 }, (_, i) => i);
-
-    function calculateStats (stat: number)  {
-        if (stat === 8) { return 0 }
-        if (stat === 9) { return 1 }
-        if (stat === 10) { return 2 }
-        if (stat === 11) { return 3 }
-        if (stat === 12) { return 4 }
-        if (stat === 13) { return 5 }
-        if (stat === 14) { return 7 }
-        if (stat === 15) { return 9 }
-        // @ts-ignore
-        return 0
-    }
 
     const changeStatsSum = (characteristic: {name: string; value: number}) => {
         const statCost = calculateStats(characteristic.value);
