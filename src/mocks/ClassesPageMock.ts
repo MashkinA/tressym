@@ -22,14 +22,6 @@ export const ClassesPageMock = {
                 {
                     "string": "string"
                 }
-            ],
-            "subcomponents": [
-                {
-                    "string": "string"
-                },
-                {
-                    "string": "string"
-                }
             ]
         },
         {
@@ -40,14 +32,6 @@ export const ClassesPageMock = {
             "detailedInfo": "https://dnd.su/class/105-wizard/",
             "hits": "1d6",
             "skills": [
-                {
-                    "string": "string"
-                },
-                {
-                    "string": "string"
-                }
-            ],
-            "subcomponents": [
                 {
                     "string": "string"
                 },
