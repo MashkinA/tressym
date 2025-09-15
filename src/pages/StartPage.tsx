@@ -7,6 +7,8 @@ import StartButton from "../components/StartButton/StartButton.tsx";
 
 const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
+const linkPath = "/character/creation/name";
+const backImage = "./assets/background/sleepyDragon.webp";
 
 export const StartPage = () => {
 
@@ -21,8 +23,6 @@ export const StartPage = () => {
     const response = startingPageMock; // замена ручки
 
     const linkTitle = response.body.mainInfo.components[0].title;
-    const linkPath = "/character/creation/name";
-    const backImage = "./assets/background/sleepyDragon.webp";
 
     return (
         <div >

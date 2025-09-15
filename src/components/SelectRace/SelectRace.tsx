@@ -3,14 +3,20 @@ import { RaceSelector } from "../RaceSelector/RaceSelector.tsx";
 import { useState, useRef } from "react";
 import { SelectSubRace } from "../SelectSubRace/SelectSubRace.tsx";
 import type { SelectSubRaceHandle } from "../SelectSubRace/SelectSubRace.tsx";
+import { userSlice } from "../../store/reducers/UserSlice.ts";
+import { useAppDispatch } from "../../hooks/redux.ts";
 
 type SelectListProps = {
     onSelectId: (value: number) => void;
-    onSelectSubId: (value: number) => void;
     itemList: Race[];
 }
 
-const SelectRace = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) => {
+
+
+const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
+
+    const { setSubRace } = userSlice.actions
+    const dispatch = useAppDispatch()
 
     // Начальное значение списка полученных расс
     const [currentId, setCurrentId] = useState<number>(0);
@@ -19,11 +25,7 @@ const SelectRace = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) =>
     const selectId = (id: number) => {
         setCurrentId((id - 1) % itemList.length);
         onSelectId(id);
-        onSelectSubId(itemList[id - 1].subcomponents[0].subRaceId);
-    }
-    // Отправка колбека выбранной подрассы наверх
-    const selectSubId = (subId: number) => {
-        onSelectSubId(subId);
+        dispatch(setSubRace(itemList[id - 1].subcomponents[0].subRaceId));
     }
 
     // Отображение списка подрасс для выбранной рассы
@@ -49,7 +51,6 @@ const SelectRace = ({ itemList, onSelectId, onSelectSubId }: SelectListProps) =>
             <SelectSubRace
                 ref={subItemRef}
                 subItemsList={currentSubItems}
-                onCreate={selectSubId}
             />
 
         </div>

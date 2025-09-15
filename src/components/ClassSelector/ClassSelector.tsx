@@ -4,12 +4,12 @@ import type { Class } from "../types.ts";
 
 type SliderSelectorProps = {
     onCreate: (value: number) => void;
-    onTrackSwitch: () => void;
     itemList: Class[];
 }
 const MIDDLE_ITEM = 2;
 
-export const ClassSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelectorProps) => {
+
+export const ClassSelector = ({ itemList, onCreate }: SliderSelectorProps) => {
 
     // Начальное значение элемента из списка расс
     const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -28,20 +28,17 @@ export const ClassSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelec
 
     // Функция перехода к следующему элементу из списка расс
     const toPrevSlide = () => {
-        onTrackSwitch();
         setCurrentIndex((prev) => (prev - 1 + itemList.length) % itemList.length);
         onCreate(itemList[(currentIndex - 1 + itemList.length) % itemList.length].classId);
     };
 
     // Функция перехода к предыдущему элементу из списка расс
     const toNextSlide = () => {
-        onTrackSwitch();
         setCurrentIndex((prev) => (prev + 1) % itemList.length);
         onCreate(itemList[(currentIndex + 1) % itemList.length].classId);
     };
 
     const handleSlideClick = (index: number) => {
-        onTrackSwitch();
         setCurrentIndex(index);
         onCreate(itemList[index].classId);
     };

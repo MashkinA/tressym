@@ -4,7 +4,8 @@ import SelectRace from '../components/SelectRace/SelectRace.tsx';
 import type { Race } from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
 import { SpeciesPageMock } from "../mocks/SpeciesPageMock.ts";
-import {Loader} from "../components/Loader/Loader.tsx";
+import { Loader } from "../components/Loader/Loader.tsx";
+import { useAppSelector } from "../hooks/redux.ts";
 
 const tracery = "/assets/icons/tracery.webp";
 
@@ -22,7 +23,7 @@ export const CreateRacePage = () => {
     const species: Race[] = SpeciesPageMock.mainInfo.components;
 
     const [selectedId, setSelectedId] = useState<number>(1);
-    const [selectedSubId, setSelectedSubId] = useState<number>(1);
+    const selectedSubId = useAppSelector((state) => state.userReducer.subRaceId);
 
     const userInput = {
         "raceId": selectedId,
@@ -44,7 +45,6 @@ export const CreateRacePage = () => {
                     <SelectRace
                         itemList={species}
                         onSelectId={setSelectedId}
-                        onSelectSubId={setSelectedSubId}
                     />
 
                     <NavBar

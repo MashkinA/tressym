@@ -1,5 +1,5 @@
 import type { Class } from "../types.ts";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {ClassSelector} from "../ClassSelector/ClassSelector.tsx";
 
 type SelectListProps = {
@@ -9,7 +9,7 @@ type SelectListProps = {
 
 const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
 
-    // Начальное значение списка полученных расс
+    // Начальное значение списка полученных классов
     const [currentId, setCurrentId] = useState<number>(0);
 
     // Переключение рассы колбеком (необходимо для currentSubItem)
@@ -18,18 +18,11 @@ const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
         onSelectId(id);
     }
 
-    // Функция обнуления подрассы при переключении рассы
-    const resetSubId = () => {
-
-    };
-
     return (
         <div>
-
             <ClassSelector
                 itemList={itemList}
                 onCreate={selectId}
-                onTrackSwitch={resetSubId}
             />
 
         </div>

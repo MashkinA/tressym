@@ -13,23 +13,22 @@ type CharCounterProps = {
     validation: number;
 }
 
+export const calculateStats = (stat: number): number => {
+    switch (stat) {
+        case 8: return 0;
+        case 9: return 1;
+        case 10: return 2;
+        case 11: return 3;
+        case 12: return 4;
+        case 13: return 5;
+        case 14: return 7;
+        case 15: return 9;
+        default: return 0;
+    }
+}
+
 export const CharCounter = ({statsTrack, charName, initial, validation}: CharCounterProps) => {
     const [count, setCount] = useState<number>(initial ?? 100);
-
-    function calculateStats(stat: number): number {
-        switch (stat) {
-            case 8: return 0;
-            case 9: return 1;
-            case 10: return 2;
-            case 11: return 3;
-            case 12: return 4;
-            case 13: return 5;
-            case 14: return 7;
-            case 15: return 9;
-            default: return 0;
-        }
-    }
-
     const currentStatCost = calculateStats(count);
     const nextStatCost = calculateStats(count + 1);
     const newValidation = validation - currentStatCost + nextStatCost;
