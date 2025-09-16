@@ -13,13 +13,13 @@
     background-image: url("/public/assets/link/linkBtn.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    opacity: 0.8;
 }
 
-.linkBtn :visited {
+.linkBtn:visited {
     color: rgb(255 203 93);
 }
 
 .linkBtn:hover {
-    background-image: url("/public/assets/link/linkBtn_hover.svg");
-    color: rgb(253 208 123);
+    opacity: 1;
 }

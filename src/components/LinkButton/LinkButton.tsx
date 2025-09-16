@@ -12,7 +12,7 @@ const LinkButton = ({isValidationCorrect, children, path}: LinkButtonProps ) => 
 
     
     return (
-        <Link className={isValidationCorrect ? cl.linkBtn : cl.linkBtnDisabled} to={path}>
+        <Link className={isValidationCorrect ? cl.linkBtn : cl.linkBtnDis} to={path}>
             {children}
         </Link>
     );
