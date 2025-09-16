@@ -37,11 +37,12 @@ export const CreateRacePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
+                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
                         {SpeciesPageMock.body.header.title}
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </div>
+                    </header>
+
                     <SelectRace
                         itemList={species}
                         onSelectId={setSelectedId}
@@ -52,7 +53,6 @@ export const CreateRacePage = () => {
                         prevPage={'/character/creation/name'}
                         nextPage={'/character/creation/class'}
                     />
-
                 </div>
             }
         </div>

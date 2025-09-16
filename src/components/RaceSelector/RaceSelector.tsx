@@ -50,7 +50,7 @@ export const RaceSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelect
     const visibleItems = getSlideIndex();
 
     return (
-        <div className={cl.slider}>
+        <main className={cl.slider}>
             <div className={cl.prevBtn} onClick={toPrevSlide} />
 
             <div className={cl.slidesContainer}>
@@ -75,7 +75,6 @@ export const RaceSelector = ({ itemList, onCreate, onTrackSwitch }: SliderSelect
             </div>
 
             <div className={cl.nextBtn} onClick={toNextSlide}/>
-
-        </div>
+        </main>
     );
 };
