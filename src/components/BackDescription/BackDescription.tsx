@@ -10,7 +10,7 @@ const cornerImg = "/assets/icons/corner.webp";
 export const BackDescription = ({ selectedBack }: BackDescriptionProps) => {
 
     return (
-        <div className={cl.background}>
+        <section className={cl.background}>
             <img className={cl.backgroundCorner1} src={ cornerImg } alt=""/>
             <img className={cl.backgroundCorner2} src={ cornerImg } alt=""/>
             <img className={cl.backgroundCorner3} src={ cornerImg } alt=""/>
@@ -60,5 +60,5 @@ export const BackDescription = ({ selectedBack }: BackDescriptionProps) => {
                     </span>
                 </div>
             </div>
-        </div>
+        </section>
     )};

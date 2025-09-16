@@ -34,11 +34,11 @@ export const CreateClassPage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
+                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
                         {ClassesPageMock.body.header.title}
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </div>
+                    </header>
 
                     <SelectClass
                         itemList={classes}

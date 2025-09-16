@@ -90,7 +90,7 @@ const SelectChars = ({characteristics, onTrackChars, onValidationCheck}: SelectC
 
 
     return (
-        <div className={cl.selectChars}>
+        <main className={cl.selectChars}>
             <div className={cl.charsGrid}>
                 <CharCounter statsTrack={changeStatsSum} charName={characteristics[0].title} initial={characteristics[0].strengthRecommendValue} validation={maxStats}/>
                 <CharCounter statsTrack={changeStatsSum} charName={characteristics[1].title} initial={characteristics[1].dexterityRecommendValue} validation={maxStats}/>
@@ -107,7 +107,7 @@ const SelectChars = ({characteristics, onTrackChars, onValidationCheck}: SelectC
                     />
                 ))}
             </div>
-        </div>
+        </main>
 
     );
 };
