@@ -18,7 +18,7 @@ export const NameForm = ({onChange, inputHint, placeholder}: NameFormProps) => {
 
 
     return (
-        <div className={cl.nameForm}>
+        <main className={cl.nameForm}>
             <input
                 className={cl.nameInput}
                 value={name}
@@ -28,6 +28,6 @@ export const NameForm = ({onChange, inputHint, placeholder}: NameFormProps) => {
             />
 
             <h6 className={cl.nameHint}>{inputHint}</h6>
-        </div>
+        </main>
     );
 };

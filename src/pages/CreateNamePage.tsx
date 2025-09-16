@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { NameForm } from '../components/NameForm/NameForm';
 import { NavBar } from '../components/NavBar/NavBar';
 import { Loader } from '../components/Loader/Loader';
+import { NamePageMock } from "../mocks/NamePageMock.ts";
+import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
 import cl from '../styles/Pages.module.css';
-import {NamePageMock} from "../mocks/NamePageMock.ts";
-
-const tracery = "/assets/icons/tracery.webp";
-const tressym = "/assets/icons/tressym.webp";
 
 export const CreateNamePage = () => {
 
@@ -30,8 +28,6 @@ export const CreateNamePage = () => {
         }
     }
 
-
-
     return (
         <div >
             {isFetchLoading
@@ -39,11 +35,7 @@ export const CreateNamePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader}>
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                        <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </div>
+                    <TressymHeader />
                     <NameForm
                         onChange={validationCheck}
                         inputHint={NamePageMock.mainInfo.components[0].description}

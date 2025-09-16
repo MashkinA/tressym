@@ -47,7 +47,7 @@ export const ClassSelector = ({ itemList, onCreate }: SliderSelectorProps) => {
     const visibleItems = getSlideIndex();
 
     return (
-        <div className={cl.slider}>
+        <main className={cl.slider}>
             <div className={cl.prevBtn} onClick={toPrevSlide} />
 
             <div className={cl.slidesContainer}>
@@ -73,6 +73,6 @@ export const ClassSelector = ({ itemList, onCreate }: SliderSelectorProps) => {
 
             <div className={cl.nextBtn} onClick={toNextSlide}/>
 
-        </div>
+        </main>
     );
 };

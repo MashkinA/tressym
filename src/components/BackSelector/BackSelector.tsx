@@ -46,7 +46,7 @@ export const BackSelector = ({ itemList, onCreate }: BackSelectorProps) => {
     const visibleItems = getSlideIndex();
 
     return (
-        <div className={cl.slider}>
+        <main className={cl.slider}>
             <div className={cl.prevBtn} onClick={toPrevSlide} />
 
             <div className={cl.slidesContainer}>
@@ -72,6 +72,6 @@ export const BackSelector = ({ itemList, onCreate }: BackSelectorProps) => {
 
             <div className={cl.nextBtn} onClick={toNextSlide}/>
 
-        </div>
+        </main>
     );
 };

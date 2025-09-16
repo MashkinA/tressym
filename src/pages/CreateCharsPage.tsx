@@ -48,11 +48,11 @@ export const CreateCharsPage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <div className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
+                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
                         {CharsPageMock.body.header.title}
                         <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </div>
+                    </header>
                     <SelectChars
                         characteristics={chars}
                         onTrackChars={setUserInput}
@@ -63,7 +63,6 @@ export const CreateCharsPage = () => {
                         prevPage={'/character/creation/background'}
                         nextPage={'/character/creation/start'}
                     />
-
                 </div>
             }
         </div>

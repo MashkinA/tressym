@@ -41,7 +41,6 @@ const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
 
     return (
         <div>
-
             <RaceSelector
                 itemList={itemList}
                 onCreate={selectId}
@@ -52,7 +51,6 @@ const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
                 ref={subItemRef}
                 subItemsList={currentSubItems}
             />
-
         </div>
     );
 };

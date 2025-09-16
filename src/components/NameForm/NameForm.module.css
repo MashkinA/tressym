@@ -16,7 +16,7 @@
     color: rgb(255 203 93);
     border: 0;
     outline: none;
-    background-color: rgb(125 0 0 / 10%);
+    background-color: rgb(125 0 0 / 0%);
     background-image: url("/public/assets/icons/horizontalFrame.webp");
     background-repeat: no-repeat;
     background-size: contain;
@@ -37,9 +37,9 @@
 .nameHint {
     margin-top: 1vw;
     width: 50vw;
-    height: 0.85vw;
-    font-size: 0.85vw;
-    line-height: 0.85vw;
+    height: 1vw;
+    font-size: 1vw;
+    line-height: 2vw;
     font-family: Roboto, serif;
     text-align: start;
     color: rgb(255 203 93);

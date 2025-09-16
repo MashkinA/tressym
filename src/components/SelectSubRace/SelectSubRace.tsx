@@ -37,7 +37,7 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
     }));
 
     return (
-        <div className={cl.subItem}>
+        <section className={cl.subItem}>
             <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
             <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
             <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
@@ -74,6 +74,6 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
                 </div>
             ))}
 
-        </div>
+        </section>
     );
     });
