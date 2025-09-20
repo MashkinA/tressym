@@ -7,10 +7,8 @@
     height: 30vh;
     width: 80vw;
     display: flex;
+    gap: 1vh;
     flex-direction: column;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    position: relative;
 }
 
 .subItemTitle {
@@ -20,6 +18,16 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.subItemDescriptionContainer {
+    width: 100%;
+    height: 24vh;
+    position: relative;
+    padding: 1vh 5vw;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
 }
 
 .subItemTitleValueActive {
@@ -39,11 +47,37 @@
 }
 
 .subItemDescription {
-    margin-bottom: 1vh;
     width: 100%;
+    overflow-y: scroll;
     font-size: 2vh;
     line-height: 3vh;
     font-family: Roboto, sans-serif;
+    padding-right: 5px;
+}
+
+.subItemDescription::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+}
+
+.subItemDescription::-webkit-scrollbar-thumb {
+    background: rgb(255 203 93);
+}
+
+.subItemAbilities {
+    width: 100%;
+    overflow-y: scroll;
+    padding-right: 5px;
+}
+
+.subItemAbilities::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+}
+
+.subItemAbilities::-webkit-scrollbar-thumb {
+    background: rgb(255 203 93);
+    border-radius: 50%;
 }
 
 .subItemChars {
@@ -52,25 +86,28 @@
 
 .subItemCharsTitle {
     font-size: 2vh;
-    line-height: 4vh;
+    line-height: 3vh;
     font-family: Roboto, sans-serif;
+    color: rgb(180 0 0);
+
 }
 
 .subItemCharsValue {
     margin-left: 1vw;
     font-size: 2vh;
-    line-height: 4vh;
+    line-height: 3vh;
     font-family: Roboto, sans-serif;
 }
 
 .subItemAbilitiesTitle, .subItemAbilitiesDescription{
     font-family: Roboto, sans-serif;
     font-size: 2vh;
-    line-height: 4vh;
+    line-height: 3vh;
 }
 
 .subItemAbilitiesTitle {
     font-weight: bold;
+    color: rgb(180 0 0);
 }
 
 .subItemCorner1 {

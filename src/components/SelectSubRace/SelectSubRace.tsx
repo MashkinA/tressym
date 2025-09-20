@@ -38,11 +38,6 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
 
     return (
         <section className={cl.subItem}>
-            <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
-            <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
-            <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
-            <img className={cl.subItemCorner4} src={ cornerImg } alt=""/>
-
             {/** Уровень заголовков подрасс */}
             <div className={cl.subItemTitle}>
                 {subItemsList.map((char, index) => (
@@ -54,26 +49,33 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
                 ))}
             </div>
 
-            {/** Уровень описания подрассы */}
-            <h2 className={cl.subItemDescription}>{subItemsList[currentSubItem].description}</h2>
+            <div className={cl.subItemDescriptionContainer}>
+                <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
+                <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
+                <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
+                <img className={cl.subItemCorner4} src={ cornerImg } alt=""/>
 
-            {/** Уровень строки увеличения характеристик */}
-            <span className={cl.subItemChars}>
-                <span className={cl.subItemCharsTitle}>Увеличение характеристик:</span>
+                {/** Уровень описания подрассы */}
+                <h2 className={cl.subItemDescription}>{subItemsList[currentSubItem].description}</h2>
 
-                {subItemsList[currentSubItem].chars.map((char) => (
-                    <span className={cl.subItemCharsValue} key={char.title}>{char.title} +{char.value}</span>
-                ))}
-            </span>
+                {/** Уровень строки увеличения характеристик */}
+                <div className={cl.subItemAbilities}>
+                    <span className={cl.subItemChars}>
+                        <span className={cl.subItemCharsTitle}>Увеличение характеристик:</span>
+                        {subItemsList[currentSubItem].chars.map((char) => (
+                            <span className={cl.subItemCharsValue} key={char.title}>{char.title} +{char.value}</span>
+                        ))}
+                    </span>
 
-            {/** Уровень строки способностей подрассы */}
-            {subItemsList[currentSubItem].abilities.map((char) => (
-                <div className={cl.subItemAbilities} key={char.title}>
-                    <span className={cl.subItemAbilitiesTitle}>{char.title}. </span>
-                    <span className={cl.subItemAbilitiesDescription}>{char.description}</span>
+                    {/** Уровень строки способностей подрассы */}
+                    {subItemsList[currentSubItem].abilities.map((char) => (
+                        <div className={cl.subItemAbilities} key={char.title}>
+                            <span className={cl.subItemAbilitiesTitle}>{char.title}. </span>
+                            <span className={cl.subItemAbilitiesDescription}>{char.description}</span>
+                        </div>
+                    ))}
                 </div>
-            ))}
-
+            </div>
         </section>
     );
     });
