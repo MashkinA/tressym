@@ -25,7 +25,7 @@ export type Race = {
 
 export type ClassSkills = {
     title: string;
-    description: string;
+    description: string[];
 }
 
 export type Class = {
