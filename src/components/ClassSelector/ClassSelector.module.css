@@ -99,3 +99,92 @@
     outline: none;
     border: none;
 }
+
+.class {
+    margin-left: 10vw;
+    height: 30vh;
+    width: 80vw;
+    position: relative;
+    padding: 1vh 5vw;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.classDescription {
+    width: 100%;
+    overflow-y: scroll;
+    font-size: 2vh;
+    line-height: 3vh;
+    padding-right: 5px;
+}
+
+.classDescription::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+}
+
+.classDescription::-webkit-scrollbar-thumb {
+    background: rgb(255 203 93);
+}
+
+.classBaseText,
+.classTitleText {
+    font-size: 2vh;
+    line-height: 3vh;
+    font-family: Roboto, sans-serif;
+    display: block;
+}
+
+.classTitleText {
+    font-weight: bold;
+    color: rgb(255 207 107);
+}
+
+.classAbilities {
+    width: 100%;
+    overflow-y: scroll;
+    font-size: 2vh;
+    line-height: 3vh;
+    padding-right: 5px;
+}
+
+.classAbilities::-webkit-scrollbar {
+    width: 1px;
+    background: transparent;
+}
+
+.classAbilities::-webkit-scrollbar-thumb {
+    background: rgb(255 203 93);
+}
+
+.subItemCorner1,
+.subItemCorner2,
+.subItemCorner3,
+.subItemCorner4 {
+    width: 5vw;
+    position: absolute;
+}
+
+.subItemCorner1 {
+    left: 0;
+    top: 0;
+    transform: scaleX(-1);
+}
+
+.subItemCorner2 {
+    right: 0;
+    top: 0;
+}
+
+.subItemCorner3 {
+    right: 0;
+    bottom: 0;
+    transform: scaleY(-1);
+}
+
+.subItemCorner4 {
+    left: 0;
+    bottom: 0;
+    transform: scaleY(-1) scaleX(-1);
+}

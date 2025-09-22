@@ -24,11 +24,8 @@ export type Race = {
 }
 
 export type ClassSkills = {
-    string: string;
-}
-
-export type ClassSubComp = {
-    string: string;
+    title: string;
+    description: string[];
 }
 
 export type Class = {
@@ -39,7 +36,6 @@ export type Class = {
     detailedInfo: string;
     hits: string;
     skills: ClassSkills[];
-    subcomponents: ClassSubComp[];
 }
 
 export type Background = {
