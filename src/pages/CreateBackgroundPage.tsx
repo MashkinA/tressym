@@ -5,8 +5,7 @@ import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import {BackgroundPageMock} from "../mocks/BackgroundPageMock.ts";
 import SelectBack from "../components/SelectBack/SelectBack.tsx";
-
-const tracery = "/assets/icons/tracery.webp";
+import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 
 export const CreateBackgroundPage = () => {
 
@@ -33,12 +32,10 @@ export const CreateBackgroundPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper}>
-                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                        {BackgroundPageMock.body.header.title}
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </header>
+                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                    <TressymHeaderPages
+                        currentPage={BackgroundPageMock.body.header.title}
+                    />
                     <SelectBack
                         itemList={backgrounds}
                         onSelectId={setSelectedId}

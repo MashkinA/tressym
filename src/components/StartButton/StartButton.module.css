@@ -1,12 +1,9 @@
 .linkBtn {
-    position: absolute;
-    right: 15vw;
-    top: 40vh;
-    width: 20vw;
-    height: 7vw;
+    width: 20vh;
+    height: 7vh;
     box-sizing: border-box;
-    font-size: 1.9vw;
-    line-height: 7vw;
+    font-size: 1.9vh;
+    line-height: 7vh;
     text-align: center;
     text-decoration: none;
     color: rgb(255 203 93);

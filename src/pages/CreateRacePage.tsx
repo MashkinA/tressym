@@ -6,8 +6,7 @@ import cl from "../styles/Pages.module.css";
 import { SpeciesPageMock } from "../mocks/SpeciesPageMock.ts";
 import { Loader } from "../components/Loader/Loader.tsx";
 import { useAppSelector } from "../hooks/redux.ts";
-
-const tracery = "/assets/icons/tracery.webp";
+import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 
 export const CreateRacePage = () => {
 
@@ -36,13 +35,10 @@ export const CreateRacePage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper}>
-                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                        {SpeciesPageMock.body.header.title}
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </header>
-
+                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                    <TressymHeaderPages
+                        currentPage={SpeciesPageMock.body.header.title}
+                    />
                     <SelectRace
                         itemList={species}
                         onSelectId={setSelectedId}

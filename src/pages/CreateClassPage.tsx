@@ -5,8 +5,7 @@ import cl from "../styles/Pages.module.css";
 import { ClassesPageMock } from "../mocks/ClassesPageMock.ts";
 import SelectClass from "../components/SelectClass/SelectClass.tsx";
 import {Loader} from "../components/Loader/Loader.tsx";
-
-const tracery = "/assets/icons/tracery.webp";
+import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 
 export const CreateClassPage = () => {
 
@@ -33,12 +32,10 @@ export const CreateClassPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper}>
-                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                        {ClassesPageMock.body.header.title}
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </header>
+                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                    <TressymHeaderPages
+                        currentPage={ClassesPageMock.body.header.title}
+                    />
 
                     <SelectClass
                         itemList={classes}

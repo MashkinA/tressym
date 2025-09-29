@@ -3,8 +3,9 @@ import { NameForm } from '../components/NameForm/NameForm';
 import { NavBar } from '../components/NavBar/NavBar';
 import { Loader } from '../components/Loader/Loader';
 import { NamePageMock } from "../mocks/NamePageMock.ts";
-import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
+import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import cl from '../styles/Pages.module.css';
+
 
 export const CreateNamePage = () => {
 
@@ -35,11 +36,13 @@ export const CreateNamePage = () => {
                 <Loader />
                 :
                 <div className={cl.pageWrapper}>
-                    <TressymHeader />
+                    <TressymHeaderPages
+                        currentPage={NamePageMock.body.header.title}
+                    />
                     <NameForm
                         onChange={validationCheck}
                         inputHint={NamePageMock.mainInfo.components[0].description}
-                        placeholder={NamePageMock.body.header.title}
+                        placeholder={"Придумайте имя вашего персонажа"}
                     />
                     <NavBar
                         isValidationCorrect={validStatus}
