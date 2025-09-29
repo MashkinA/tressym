@@ -1,10 +1,8 @@
 import cl from '../styles/StartPage.module.css';
 import cla from "../styles/Pages.module.css";
-import { startingPageMock } from '../mocks/StartingPageMock';
 import { Loader } from "../components/Loader/Loader.tsx";
 import { useState } from "react";
-import StartButton from "../components/StartButton/StartButton.tsx";
-import {TressymHeader} from "../components/TressymHeader/TressymHeader.tsx";
+import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
 
 const backImage = "./assets/background/sleepyDragon.webp";
 
@@ -18,8 +16,6 @@ export const StartPage = () => {
     }
     fakeFetch();
 
-    const linkTitle = startingPageMock.body.mainInfo.components[0].title;
-
     return (
         <div >
             {isFetchLoading
@@ -28,8 +24,12 @@ export const StartPage = () => {
                 :
                 <main className={cla.pageWrapper}>
                     <TressymHeader />
-                    <StartButton path={ "/character/creation/name" }> { linkTitle } </StartButton>
                     <img className={cl.img} src={ backImage }  alt="Приключенец сидит на спящем драконе" />
+
+                    <div className={cl.startSlogan}>
+                        <h2 className={cl.startPageH2}>D&D это просто</h2>
+                        <h3 className={cl.startPageH3}>С помощью этого сайта вы сможете поэтапно  создать персонажа для игры в Dungeons & Dragons. Ваш герой — это сочетание игровых характеристик, элементов ролевого отыгрыша и вашего воображения!</h3>
+                    </div>
                 </main>
             }
         </div>

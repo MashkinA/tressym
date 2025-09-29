@@ -5,8 +5,7 @@ import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import { CharsPageMock } from "../mocks/CharsPageMock.ts";
 import SelectChars from "../components/SelectChars/SelectChars.tsx";
-
-const tracery = "/assets/icons/tracery.webp";
+import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 
 type UserInput = {
     strengthValue: number;
@@ -47,12 +46,10 @@ export const CreateCharsPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper}>
-                    <header className={cl.pageCreateHeader} onClick={() => console.log(userInput)}>
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                        {CharsPageMock.body.header.title}
-                        <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    </header>
+                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                    <TressymHeaderPages
+                        currentPage={CharsPageMock.body.header.title}
+                    />
                     <SelectChars
                         characteristics={chars}
                         onTrackChars={setUserInput}

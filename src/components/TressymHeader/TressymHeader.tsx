@@ -1,14 +1,19 @@
 import cl from "../../styles/Pages.module.css";
-
-const tracery = "/assets/icons/tracery.webp";
+import StartButton from "../StartButton/StartButton.tsx";
+import { Link } from "react-router-dom";
 const tressym = "/assets/icons/tressym.webp";
+
+
 
 export const TressymHeader = () => {
     return (
-        <header className={cl.pageCreateHeader}>
-            <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
+        <header className={cl.tressymHeader}>
             <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
-            <img className={cl.pageCreateHeaderTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
+            <h1>Tressym</h1>
+            <Link className={cl.linkBtn} to="/character/creation/name"> Книга игрока </Link>
+            <Link className={cl.linkBtn} to="/character/creation/name"> Сюжеты </Link>
+            <Link className={cl.linkBtn} to="/character/creation/name"> О нас </Link>
+            <StartButton path={"/character/creation/name"}> Создать персонажа </StartButton>
         </header>
     );
 };
