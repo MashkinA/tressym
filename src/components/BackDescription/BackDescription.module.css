@@ -8,9 +8,8 @@
     width: 80vw;
     display: flex;
     flex-direction: column;
-    padding: 2vw;
+    padding: 1vh 5vw;
     position: relative;
-    background-image: radial-gradient(circle, rgb(125 0 0 / 20%), transparent);
 }
 
 .backgroundGrid {
@@ -59,33 +58,18 @@
     font-family: Roboto, sans-serif;
 }
 
-.backgroundCorner1 {
-    width: 5vw;
+.subItemTopLine {
+    height: 1.5vh;
     position: absolute;
-    left: 0;
-    top: 0;
-    transform: scaleX(-1);
-}
-
-.backgroundCorner2 {
-    width: 5vw;
-    position: absolute;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
     top: 0;
 }
 
-.backgroundCorner3 {
-    width: 5vw;
+.subItemBottomLine {
+    height: 1.5vh;
     position: absolute;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
     bottom: 0;
-    transform: scaleY(-1);
-}
-
-.backgroundCorner4 {
-    width: 5vw;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: scaleY(-1) scaleX(-1);
 }

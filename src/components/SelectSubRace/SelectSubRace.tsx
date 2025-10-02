@@ -4,7 +4,7 @@ import { useState, forwardRef, useImperativeHandle } from "react";
 import { userSlice } from "../../store/reducers/UserSlice.ts";
 import { useAppDispatch } from "../../hooks/redux.ts";
 
-const cornerImg = "/assets/icons/corner.webp";
+const borderline = "/assets/icons/borderLine.webp";
 
 export type SelectSubItemProps = {
     subItemsList: SubRace[];
@@ -49,11 +49,11 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
                 ))}
             </div>
 
+
+
             <div className={cl.subItemDescriptionContainer}>
-                <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
-                <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
-                <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
-                <img className={cl.subItemCorner4} src={ cornerImg } alt=""/>
+                <img className={cl.subItemTopLine} src={ borderline } alt=""/>
+                <img className={cl.subItemBottomLine} src={ borderline } alt=""/>
 
                 {/** Уровень описания подрассы */}
                 <h2 className={cl.subItemDescription}>{subItemsList[currentSubItem].description}</h2>
@@ -61,7 +61,7 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
                 {/** Уровень строки увеличения характеристик */}
                 <div className={cl.subItemAbilities}>
                     <span className={cl.subItemChars}>
-                        <span className={cl.subItemCharsTitle}>Увеличение характеристик:</span>
+                        <span className={cl.subItemCharsTitle}>• Увеличение характеристик:</span>
                         {subItemsList[currentSubItem].chars.map((char) => (
                             <span className={cl.subItemCharsValue} key={char.title}>{char.title} +{char.value}</span>
                         ))}
@@ -70,12 +70,13 @@ export const SelectSubRace = forwardRef<SelectSubRaceHandle, SelectSubItemProps>
                     {/** Уровень строки способностей подрассы */}
                     {subItemsList[currentSubItem].abilities.map((char) => (
                         <div className={cl.subItemAbilities} key={char.title}>
-                            <span className={cl.subItemAbilitiesTitle}>{char.title}. </span>
-                            <span className={cl.subItemAbilitiesDescription}>{char.description}</span>
+                            <h3 className={cl.subItemAbilitiesTitle}>• {char.title} </h3>
+                            <p className={cl.subItemAbilitiesDescription}> {char.description} </p>
                         </div>
                     ))}
                 </div>
             </div>
+
         </section>
     );
     });
