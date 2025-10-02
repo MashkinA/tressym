@@ -158,33 +158,18 @@
     background: rgb(255 203 93);
 }
 
-.subItemCorner1,
-.subItemCorner2,
-.subItemCorner3,
-.subItemCorner4 {
-    width: 5vw;
+.subItemTopLine {
+    height: 1.5vh;
     position: absolute;
-}
-
-.subItemCorner1 {
-    left: 0;
-    top: 0;
-    transform: scaleX(-1);
-}
-
-.subItemCorner2 {
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
     top: 0;
 }
 
-.subItemCorner3 {
-    right: 0;
+.subItemBottomLine {
+    height: 1.5vh;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 100%);
     bottom: 0;
-    transform: scaleY(-1);
-}
-
-.subItemCorner4 {
-    left: 0;
-    bottom: 0;
-    transform: scaleY(-1) scaleX(-1);
 }

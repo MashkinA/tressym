@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ClassSelector } from "../ClassSelector/ClassSelector.tsx";
 import cl from '../ClassSelector/ClassSelector.module.css';
 
-const cornerImg = "/assets/icons/corner.webp";
+const borderline = "/assets/icons/borderLine.webp";
 
 type SelectListProps = {
     onSelectId: (value: number) => void;
@@ -30,10 +30,8 @@ const SelectRace = ({ itemList, onSelectId }: SelectListProps) => {
 
             <section className={cl.class}>
 
-                    <img className={cl.subItemCorner1} src={ cornerImg } alt=""/>
-                    <img className={cl.subItemCorner2} src={ cornerImg } alt=""/>
-                    <img className={cl.subItemCorner3} src={ cornerImg } alt=""/>
-                    <img className={cl.subItemCorner4} src={ cornerImg } alt=""/>
+                <img className={cl.subItemTopLine} src={ borderline } alt=""/>
+                <img className={cl.subItemBottomLine} src={ borderline } alt=""/>
 
                     {/** Колонка описания класса + ссылка */}
                     <div className={cl.classDescription}>

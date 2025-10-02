@@ -88,8 +88,7 @@
     font-size: 2vh;
     line-height: 3vh;
     font-family: Roboto, sans-serif;
-    color: rgb(180 0 0);
-
+    color: rgb(255 207 107);
 }
 
 .subItemCharsValue {
@@ -100,43 +99,28 @@
 }
 
 .subItemAbilitiesTitle, .subItemAbilitiesDescription{
-    font-family: Roboto, sans-serif;
     font-size: 2vh;
     line-height: 3vh;
+    font-family: Roboto, sans-serif;
 }
 
 .subItemAbilitiesTitle {
     font-weight: bold;
-    color: rgb(180 0 0);
+    color: rgb(255 207 107);
 }
 
-.subItemCorner1 {
-    width: 5vw;
+.subItemTopLine {
+    height: 1.5vh;
     position: absolute;
-    left: 0;
-    top: 0;
-    transform: scaleX(-1);
-}
-
-.subItemCorner2 {
-    width: 5vw;
-    position: absolute;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
     top: 0;
 }
 
-.subItemCorner3 {
-    width: 5vw;
+.subItemBottomLine {
+    height: 1.5vh;
     position: absolute;
-    right: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
     bottom: 0;
-    transform: scaleY(-1);
-}
-
-.subItemCorner4 {
-    width: 5vw;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: scaleY(-1) scaleX(-1);
 }

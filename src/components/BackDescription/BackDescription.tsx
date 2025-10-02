@@ -5,16 +5,14 @@ export type BackDescriptionProps = {
     selectedBack: Background;
 };
 
-const cornerImg = "/assets/icons/corner.webp";
+const borderline = "/assets/icons/borderLine.webp";
 
 export const BackDescription = ({ selectedBack }: BackDescriptionProps) => {
 
     return (
         <section className={cl.background}>
-            <img className={cl.backgroundCorner1} src={ cornerImg } alt=""/>
-            <img className={cl.backgroundCorner2} src={ cornerImg } alt=""/>
-            <img className={cl.backgroundCorner3} src={ cornerImg } alt=""/>
-            <img className={cl.backgroundCorner4} src={ cornerImg } alt=""/>
+            <img className={cl.subItemTopLine} src={ borderline } alt=""/>
+            <img className={cl.subItemBottomLine} src={ borderline } alt=""/>
 
             <div className={cl.backgroundGrid}>
                 <div className={cl.backgroundGrid_left}>
