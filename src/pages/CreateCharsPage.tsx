@@ -58,7 +58,7 @@ export const CreateCharsPage = () => {
                     <NavBar
                         isValidationCorrect={validStatus}
                         prevPage={'/character/creation/background'}
-                        nextPage={'/character/creation/start'}
+                        nextPage={'/character/creation/skills'}
                     />
                 </div>
             }

@@ -7,7 +7,7 @@ export const SkillsPageMock = {
         }
     },
     "mainInfo": {
-        "components": [
+        "components":
             {
                 "amount": 2,
                 "skills": ["История",
@@ -16,7 +16,6 @@ export const SkillsPageMock = {
                     "Религия",
                     "Убеждения"]
             }
-        ]
     },
     "footer": {
         "components": [

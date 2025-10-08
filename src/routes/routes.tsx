@@ -5,6 +5,7 @@ import { CreateRacePage } from "../pages/CreateRacePage.tsx";
 import { CreateClassPage } from "../pages/CreateClassPage.tsx";
 import { CreateBackgroundPage } from "../pages/CreateBackgroundPage.tsx";
 import { CreateCharsPage } from "../pages/CreateCharsPage.tsx";
+import { CreateSkillsPage } from "../pages/CreateSkillsPage.tsx";
 
 export const privateRoutes = [
   { path: "*", element: <ErrorPage />, exact: true },
@@ -14,4 +15,6 @@ export const privateRoutes = [
   { path: "/character/creation/class", element: <CreateClassPage />, exact: true },
   { path: "/character/creation/background", element: <CreateBackgroundPage />, exact: true },
   { path: "/character/creation/characteristics", element: <CreateCharsPage />, exact: true },
+  { path: "/character/creation/skills", element: <CreateSkillsPage />, exact: true },
+
 ]

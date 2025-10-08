@@ -33,6 +33,5 @@
 }
 
 .statBlock.active {
-    background-color: rgb(255 203 93);
     opacity: 1;
 }
