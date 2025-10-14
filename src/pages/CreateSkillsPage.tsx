@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useCallback, useState} from 'react';
 import { Loader } from "../components/Loader/Loader.tsx";
 import cl from "../styles/Pages.module.css";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
@@ -21,9 +21,12 @@ export const CreateSkillsPage = () => {
     }
     fakeFetch()
 
-    const [userInput, setUserInput] = useState<UserInput>({
-        "selectedSkills": []
-    });
+    const [userInput, setUserInput] = useState<UserInput>({ selectedSkills: [] });
+
+    // Стабильный колбэк — ссылка не меняется, пока не изменится setUserInput (стабильна)
+    const handleTrackSkills = useCallback((skillsArray: string[]) => {
+        setUserInput(prev => ({ ...prev, selectedSkills: skillsArray }));
+    }, [setUserInput]);
 
     return (
         <div>
@@ -31,26 +34,24 @@ export const CreateSkillsPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                <div className={cl.pageWrapper}>
                     <TressymHeaderPages
                         currentPage={SkillsPageMock.body.header.title}
                     />
 
                     <SelectSkills
                         skills={SkillsPageMock.mainInfo.components}
-                        onTrackSkills={(skillsArray) =>
-                            setUserInput((prev) => ({
-                                ...prev,
-                                selectedSkills: skillsArray,
-                            }))
-                        }
+                        onTrackSkills={handleTrackSkills}
                     />
 
                     <NavBar
                         isValidationCorrect={true}
                         prevPage={'/character/creation/characteristics'}
-                        nextPage={'/character/creation/class'}
+                        nextPage={'/character/creation/character-sheet'}
                     />
+
+                    <div onClick={() => {console.log(userInput)}}></div>
+
                 </div>
             }
         </div>

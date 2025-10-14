@@ -46,7 +46,7 @@ export const CreateCharsPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                <div className={cl.pageWrapper}>
                     <TressymHeaderPages
                         currentPage={CharsPageMock.body.header.title}
                     />
@@ -60,6 +60,9 @@ export const CreateCharsPage = () => {
                         prevPage={'/character/creation/background'}
                         nextPage={'/character/creation/skills'}
                     />
+
+                    <div onClick={() => {console.log(userInput)}}></div>
+
                 </div>
             }
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import cl from "./SelectSkills.module.css";
 import type { Skills } from "../types.ts";
 

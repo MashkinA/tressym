@@ -10,9 +10,12 @@ type LinkButtonProps = {
 
 const LinkButton = ({isValidationCorrect, children, path}: LinkButtonProps ) => {
 
-    
+    const sendUserInput = () => {
+
+    }
+
     return (
-        <Link className={isValidationCorrect ? cl.linkBtn : cl.linkBtnDis} to={path}>
+        <Link className={isValidationCorrect ? cl.linkBtn : cl.linkBtnDis} to={path} onClick={() => {sendUserInput()}}>
             {children}
         </Link>
     );
