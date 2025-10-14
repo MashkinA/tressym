@@ -32,7 +32,7 @@ export const CreateBackgroundPage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                <div className={cl.pageWrapper}>
                     <TressymHeaderPages
                         currentPage={BackgroundPageMock.body.header.title}
                     />
@@ -45,6 +45,8 @@ export const CreateBackgroundPage = () => {
                         prevPage={'/character/creation/class'}
                         nextPage={'/character/creation/characteristics'}
                     />
+
+                    <div onClick={() => {console.log(userInput)}}></div>
 
                 </div>
             }

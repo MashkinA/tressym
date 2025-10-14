@@ -60,3 +60,8 @@ export type Char = {
     wisdomRecommendValue?: number;
     charismaRecommendValue?: number;
 }
+
+export type Skills = {
+    amount: number;
+    skills: string[];
+}

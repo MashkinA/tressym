@@ -35,7 +35,7 @@ export const CreateRacePage = () => {
                 ?
                 <Loader />
                 :
-                <div className={cl.pageWrapper} onClick={() => console.log(userInput)}>
+                <div className={cl.pageWrapper}>
                     <TressymHeaderPages
                         currentPage={SpeciesPageMock.body.header.title}
                     />
@@ -49,6 +49,7 @@ export const CreateRacePage = () => {
                         prevPage={'/character/creation/name'}
                         nextPage={'/character/creation/class'}
                     />
+                    <div onClick={() => {console.log(userInput)}}></div>
                 </div>
             }
         </div>
