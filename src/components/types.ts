@@ -1,3 +1,29 @@
+export type NamePageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: {
+            name: string;
+            description: string;
+        }[];
+    };
+    footer: {
+        components: {
+            componentId: string;
+            title: string;
+            actions: {
+                method: string;
+                href: string;
+            }[];
+        }[];
+    };
+};
+
 export type SubRaceAbilities = {
     title: string;
     description: string;
