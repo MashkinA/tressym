@@ -1,5 +1,5 @@
 export const CharsPageMock = {
-    "screenId": "backgroundSelection",
+    "screenId": "characteristicSelection",
     "uuidSession": "22345200-abe8-4f60-90c8-0d43c5f6c0f6",
     "body": {
         "header": {

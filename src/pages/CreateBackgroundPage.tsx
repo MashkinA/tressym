@@ -1,55 +1,60 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { NavBar } from '../components/NavBar/NavBar';
-import type { Background } from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
-import {BackgroundPageMock} from "../mocks/BackgroundPageMock.ts";
 import SelectBack from "../components/SelectBack/SelectBack.tsx";
 import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
+import axios from "axios";
+import type { BackPageType } from "../components/types.ts";
 
 export const CreateBackgroundPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-
-    const fakeFetch = () => {
-        setTimeout(() => {
-            setIsFetchLoading(false)
-        }, 1000)
-    }
-    fakeFetch()
-
-    const backgrounds: Background[] = BackgroundPageMock.mainInfo.components;
-
     const [selectedId, setSelectedId] = useState<number>(1);
+    const [backPage, setBackPage] = useState<BackPageType | null>(null);
+
+    useEffect(() => {
+        async function fetchPage() {
+            try {
+                const response = await axios.get("http://localhost:3001/backgroundSelection");
+                setBackPage(response.data);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            } finally {
+                setIsFetchLoading(false);
+            }
+        }
+
+        fetchPage();
+    }, []);
+
+
 
     const userInput = {
         "backgroundId": selectedId
     }
 
+    if (isFetchLoading || !backPage) {
+        return <Loader />;
+    }
+
     return (
-        <div >
-            {isFetchLoading
-                ?
-                <Loader />
-                :
-                <div className={cl.pageWrapper}>
-                    <TressymHeaderPages
-                        currentPage={BackgroundPageMock.body.header.title}
-                    />
-                    <SelectBack
-                        itemList={backgrounds}
-                        onSelectId={setSelectedId}
-                    />
-                    <NavBar
-                        isValidationCorrect={true}
-                        prevPage={'/character/creation/class'}
-                        nextPage={'/character/creation/characteristics'}
-                    />
+        <div className={cl.pageWrapper}>
+            <TressymHeaderPages
+                currentPage={backPage.body.header.title}
+            />
+            <SelectBack
+                itemList={backPage.mainInfo.components}
+                onSelectId={setSelectedId}
+            />
+            <NavBar
+                isValidationCorrect={true}
+                prevPage={'/character/creation/class'}
+                nextPage={'/character/creation/characteristics'}
+            />
 
-                    <div onClick={() => {console.log(userInput)}}></div>
+            <div onClick={() => {console.log(userInput)}}></div>
 
-                </div>
-            }
         </div>
     );
 };

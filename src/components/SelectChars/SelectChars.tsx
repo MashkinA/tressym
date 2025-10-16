@@ -15,7 +15,7 @@ type UserInput = {
 
 type SelectCharsProps = {
     characteristics: Char[];
-    onTrackChars: React.Dispatch<React.SetStateAction<UserInput>>;
+    onTrackChars: React.Dispatch <React.SetStateAction<UserInput>>;
     onValidationCheck: (checkResult: boolean) => void;
 }
 

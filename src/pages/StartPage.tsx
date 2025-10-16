@@ -1,7 +1,7 @@
 import cl from '../styles/StartPage.module.css';
 import cla from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
 import axios from "axios";
 
@@ -11,21 +11,11 @@ export const StartPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
 
-
-    async function fetchPage () {
-        const response = await axios.get("http://localhost:3001/startPage");
-        console.log(response.data);
-        setIsFetchLoading(false);
-    }
-
-    fetchPage();
-    
-    /*
     useEffect(() => {
         async function fetchPage() {
             try {
                 const response = await axios.get("http://localhost:3001/startPage");
-                setNamePage(response.data);
+                console.log(response.data);
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
@@ -35,7 +25,6 @@ export const StartPage = () => {
 
         fetchPage();
     }, []);
-     */
 
     return (
         <div >
