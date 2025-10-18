@@ -116,6 +116,29 @@ export type CharPageType = {
     };
 };
 
+export type SkillPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Skills;
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
 export type SubRaceAbilities = {
     title: string;
     description: string;
