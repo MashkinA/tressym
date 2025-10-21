@@ -1,10 +1,11 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { Loader } from "../components/Loader/Loader.tsx";
 import cl from "../styles/Pages.module.css";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
-import { SkillsPageMock } from "../mocks/SkillsPageMock.ts";
+import type { SkillPageType } from "../components/types.ts"
 import { NavBar } from "../components/NavBar/NavBar.tsx";
 import SelectSkills from "../components/SelectSkill/SelectSkills.tsx";
+import axios from "axios";
 
 type UserInput = {
     selectedSkills: string[];
@@ -13,47 +14,64 @@ type UserInput = {
 export const CreateSkillsPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-
-    const fakeFetch = () => {
-        setTimeout(() => {
-            setIsFetchLoading(false)
-        }, 1000)
-    }
-    fakeFetch()
-
     const [userInput, setUserInput] = useState<UserInput>({ selectedSkills: [] });
+    const [skillPage, setSkillPage] = useState<SkillPageType | null>(null);
 
-    // Стабильный колбэк — ссылка не меняется, пока не изменится setUserInput (стабильна)
+
+    useEffect(() => {
+        async function fetchPage() {
+            try {
+                const response = await axios.get("http://localhost:3001/skillsSelection");
+                setSkillPage(response.data);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            } finally {
+                setIsFetchLoading(false);
+            }
+        }
+
+        fetchPage();
+    }, []);
+
+
     const handleTrackSkills = useCallback((skillsArray: string[]) => {
         setUserInput(prev => ({ ...prev, selectedSkills: skillsArray }));
     }, [setUserInput]);
 
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                skill: userInput.selectedSkills
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
+
+    if (isFetchLoading || !skillPage) {
+        return <Loader />;
+    }
+
     return (
-        <div>
-            {isFetchLoading
-                ?
-                <Loader />
-                :
-                <div className={cl.pageWrapper}>
-                    <TressymHeaderPages
-                        currentPage={SkillsPageMock.body.header.title}
-                    />
+        <div className={cl.pageWrapper}>
+            <TressymHeaderPages
+                currentPage={skillPage.body.header.title}
+            />
 
-                    <SelectSkills
-                        skills={SkillsPageMock.mainInfo.components}
-                        onTrackSkills={handleTrackSkills}
-                    />
+            <SelectSkills
+                skills={skillPage.mainInfo.components}
+                onTrackSkills={handleTrackSkills}
+            />
 
-                    <NavBar
-                        isValidationCorrect={true}
-                        prevPage={'/character/creation/characteristics'}
-                        nextPage={'/character/creation/character-sheet'}
-                    />
+            <NavBar
+                isValidationCorrect={true}
+                prevPage={'/character/creation/characteristics'}
+                nextPage={'/character/creation/character-sheet'}
+                onNextClick={handleSend}
+            />
 
-                    <div onClick={() => {console.log(userInput)}}></div>
+            <div onClick={() => {console.log(userInput)}}></div>
 
-                </div>
-            }
         </div>
     );
 };

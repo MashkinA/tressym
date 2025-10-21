@@ -5,9 +5,10 @@ type NavBarProps = {
     isValidationCorrect: boolean;
     prevPage: string;
     nextPage: string;
+    onNextClick?: () => void;
 }
 
-export const NavBar = ({isValidationCorrect, prevPage, nextPage}:NavBarProps) => {
+export const NavBar = ({isValidationCorrect, prevPage, nextPage, onNextClick}:NavBarProps) => {
     return (
         <nav className={cl.navbar}>
             <LinkButton path={prevPage} isValidationCorrect={true}>
@@ -18,7 +19,7 @@ export const NavBar = ({isValidationCorrect, prevPage, nextPage}:NavBarProps) =>
                 К листу
             </LinkButton>
 
-            <LinkButton path={nextPage} isValidationCorrect={isValidationCorrect}>
+            <LinkButton path={nextPage} isValidationCorrect={isValidationCorrect} onNextClick={onNextClick}>
                 Далее
             </LinkButton>
         </nav>

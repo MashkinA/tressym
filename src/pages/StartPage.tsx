@@ -1,20 +1,30 @@
 import cl from '../styles/StartPage.module.css';
 import cla from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
+import axios from "axios";
 
 const backImage = "./assets/background/sleepyDragon.webp";
 
 export const StartPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-    const fakeFetch = () => {
-        setTimeout(() => {
-            setIsFetchLoading(false)
-        }, 1000)
-    }
-    fakeFetch();
+
+    useEffect(() => {
+        async function fetchPage() {
+            try {
+                const response = await axios.get("http://localhost:3001/startPage");
+                console.log(response.data);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            } finally {
+                setIsFetchLoading(false);
+            }
+        }
+
+        fetchPage();
+    }, []);
 
     return (
         <div >

@@ -1,3 +1,144 @@
+export type NamePageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: {
+            name: string;
+            description: string;
+        }[];
+    };
+    footer: {
+        components: {
+            componentId: string;
+            title: string;
+            actions: {
+                method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                href: string;
+            }[];
+        }[];
+    };
+};
+
+export type SpeciesPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Race[];
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
+export type ClassesPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Class[];
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
+export type BackPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Background[];
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
+export type CharPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Char[];
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
+export type SkillPageType = {
+    screenId: string;
+    uuidSession: string;
+    body: {
+        header: {
+            title: string;
+        };
+    };
+    mainInfo: {
+        components: Skills;
+        footer: {
+            components: {
+                componentId: string;
+                title: string;
+                actions: {
+                    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+                    href: string;
+                }[];
+            }[];
+        };
+    };
+};
+
 export type SubRaceAbilities = {
     title: string;
     description: string;
