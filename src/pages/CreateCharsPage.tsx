@@ -56,7 +56,22 @@ export const CreateCharsPage = () => {
         fetchPage();
     }, []);
 
-
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                characteristic: {
+                    strength: userInput.strengthValue,
+                    dexterity: userInput.dexterityValue,
+                    constitution: userInput.constitutionValue,
+                    intelligence: userInput.intelligenceValue,
+                    wisdom: userInput.wisdomValue,
+                    charisma: userInput.charismaValue
+                }
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
 
     if (isFetchLoading || !charPage) {
         return <Loader />;
@@ -76,6 +91,7 @@ export const CreateCharsPage = () => {
                 isValidationCorrect={validStatus}
                 prevPage={'/character/creation/background'}
                 nextPage={'/character/creation/skills'}
+                onNextClick={handleSend}
             />
 
             <div onClick={() => {console.log(userInput)}}></div>

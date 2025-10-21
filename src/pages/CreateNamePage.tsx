@@ -43,7 +43,6 @@ export const CreateNamePage = () => {
             await axios.patch("http://localhost:3001/users/1", {
                 name: userInput.name
             });
-            console.log("✅ Данные успешно отправлены:", userInput.name);
         } catch (error) {
             console.error("❌ Ошибка при отправке данных:", error);
         }

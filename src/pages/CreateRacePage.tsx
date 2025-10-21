@@ -36,6 +36,16 @@ export const CreateRacePage = () => {
         "subRaceId": selectedSubId,
     }
 
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                race: userInput.raceId
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
+
     if (isFetchLoading || !racePage) {
         return <Loader />;
     }
@@ -54,6 +64,7 @@ export const CreateRacePage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/name'}
                 nextPage={'/character/creation/class'}
+                onNextClick={handleSend}
             />
             <div onClick={() => {console.log(userInput)}}></div>
         </div>

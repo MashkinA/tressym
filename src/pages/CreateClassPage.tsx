@@ -34,6 +34,16 @@ export const CreateClassPage = () => {
         "classId": selectedId,
     }
 
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                class: userInput.classId
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
+
     if (isFetchLoading || !classPage) {
         return <Loader />;
     }
@@ -53,6 +63,7 @@ export const CreateClassPage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/race'}
                 nextPage={'/character/creation/background'}
+                onNextClick={handleSend}
             />
 
             <div onClick={() => {console.log(userInput)}}></div>

@@ -34,6 +34,16 @@ export const CreateBackgroundPage = () => {
         "backgroundId": selectedId
     }
 
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                background: userInput.backgroundId
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
+
     if (isFetchLoading || !backPage) {
         return <Loader />;
     }
@@ -51,6 +61,7 @@ export const CreateBackgroundPage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/class'}
                 nextPage={'/character/creation/characteristics'}
+                onNextClick={handleSend}
             />
 
             <div onClick={() => {console.log(userInput)}}></div>

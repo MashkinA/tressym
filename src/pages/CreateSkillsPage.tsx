@@ -38,6 +38,16 @@ export const CreateSkillsPage = () => {
         setUserInput(prev => ({ ...prev, selectedSkills: skillsArray }));
     }, [setUserInput]);
 
+    const handleSend = async () => {
+        try {
+            await axios.patch("http://localhost:3001/users/1", {
+                skill: userInput.selectedSkills
+            });
+        } catch (error) {
+            console.error("❌ Ошибка при отправке данных:", error);
+        }
+    };
+
     if (isFetchLoading || !skillPage) {
         return <Loader />;
     }
@@ -57,6 +67,7 @@ export const CreateSkillsPage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/characteristics'}
                 nextPage={'/character/creation/character-sheet'}
+                onNextClick={handleSend}
             />
 
             <div onClick={() => {console.log(userInput)}}></div>
