@@ -1,6 +1,10 @@
 import cl from "../styles/CharacterSheetPage.module.css";
 import clsx from "clsx";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {Loader} from "../components/Loader/Loader.tsx";
+import type { SheetPageType } from "../components/types.ts";
 
 const a = "dd"
 const attemptsImg = "/assets/icons/hitsAttempt.webp";
@@ -8,6 +12,41 @@ const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
 
 export const CharacterSheetPage = () => {
+
+    const [isFetchLoading, setIsFetchLoading] = useState(true);
+    const [sheetPage, setSheetPage] = useState<SheetPageType | null>(null);
+
+    const strength = sheetPage?.characteristic?.strength ?? 0;
+    const dexterity = sheetPage?.characteristic?.dexterity ?? 0;
+    const constitution = sheetPage?.characteristic?.constitution ?? 0;
+    const intelligence = sheetPage?.characteristic?.intelligence ?? 0;
+    const wisdom = sheetPage?.characteristic?.wisdom ?? 0;
+    const charisma = sheetPage?.characteristic?.charisma ?? 0;
+
+    const modifier = (count: number): string => {
+        const value = Math.floor((count - 10) / 2);
+        return value > 0 ? `+${value}` : `${value}`;
+    };
+
+    useEffect(() => {
+        async function fetchPage() {
+            try {
+                const response = await axios.get("http://localhost:3001/users/1");
+                setSheetPage(response.data);
+            } catch (error) {
+                console.error('Ошибка загрузки данных:', error);
+            } finally {
+                setIsFetchLoading(false);
+            }
+        }
+
+        fetchPage();
+    }, []);
+
+
+    if (isFetchLoading || !sheetPage) {
+        return <Loader />;
+    }
 
     return (
         <div className={cl.pageWrapper}>
@@ -144,44 +183,365 @@ export const CharacterSheetPage = () => {
                                     <input className={cl.abilitiesInput} type="text" placeholder={a}/>
                                 </section>
 
-                                <section className={cl.strength}>
+                                <section className={clsx(cl.strength, cl.abilityBlock)}>
                                     <h5 className={cl.abilitiesH}>Сила</h5>
-                                    <div className={cl.modifier}>
 
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(strength)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{strength}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
                                     </div>
-                                    <div className={cl.strength}>
 
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(strength)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(strength)}</span>
+                                            <span className={cl.featureName}>Атлетика</span>
+                                        </div>
                                     </div>
                                 </section>
 
-                                <section className={cl.proficiency}>
+                                <section className={clsx(cl.dexterity, cl.abilityBlock)}>
                                     <h5 className={cl.abilitiesH}>Ловкость</h5>
-                                    <input className={cl.abilitiesInput} type="text" placeholder={a}/>
+
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(dexterity)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{dexterity}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <span className={cl.featureName}>Акробатика</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <span className={cl.featureName}>Ловкость рук</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <span className={cl.featureName}>Скрытность</span>
+                                        </div>
+                                    </div>
                                 </section>
 
-                                <section className={cl.proficiency}>
+                                <section className={clsx(cl.constitution, cl.abilityBlock)}>
                                     <h5 className={cl.abilitiesH}>Телосложение</h5>
-                                    <input className={cl.abilitiesInput} type="text" placeholder={a}/>
+
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(constitution)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{constitution}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(constitution)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                    </div>
                                 </section>
 
-                                <section className={cl.proficiency}>
+                                <section className={clsx(cl.exhaustion, cl.abilityBlock)}>
                                     <h5 className={cl.abilitiesH}>Истощение</h5>
-                                    <input className={cl.abilitiesInput} type="text" placeholder={a}/>
+                                    <div className={cl.exhaustionBar}>
+                                        <button className={cl.featureBtn}/>
+                                        <button className={cl.featureBtn}/>
+                                        <button className={cl.featureBtn}/>
+                                        <button className={cl.featureBtn}/>
+                                        <button className={cl.featureBtn}/>
+                                        <button className={cl.featureBtn}/>
+                                    </div>
                                 </section>
 
-                                <section className={cl.proficiency}>
+                                <section className={clsx(cl.inspiration, cl.abilityBlock)}>
                                     <h5 className={cl.abilitiesH}>Героическое вдохновение</h5>
-                                    <input className={cl.abilitiesInput} type="text" placeholder={a}/>
+                                    <button className={cl.featureBtn}/>
                                 </section>
                             </div>
 
                             <div className={cl.abilitiesColumn}>
+                                <section className={clsx(cl.intelligence, cl.abilityBlock)}>
+                                    <h5 className={cl.abilitiesH}>Интеллект</h5>
 
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(intelligence)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{intelligence}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={cl.featureName}>Анализ</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={cl.featureName}>История</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={cl.featureName}>Магия</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={cl.featureName}>Природа</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <span className={cl.featureName}>Религия</span>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section className={clsx(cl.wisdom, cl.abilityBlock)}>
+                                    <h5 className={cl.abilitiesH}>Мудрость</h5>
+
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(wisdom)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{wisdom}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={cl.featureName}>Восприятие</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={cl.featureName}>Выживание</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={cl.featureName}>Медицина</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={cl.featureName}>Проницательность</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <span className={cl.featureName}>Уход за животными</span>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section className={clsx(cl.charisma, cl.abilityBlock)}>
+                                    <h5 className={cl.abilitiesH}>Харизма</h5>
+
+                                    <div className={cl.AbilityModifier}>
+                                        <div className={cl.modifierLabel}>
+                                            <span className={cl.modifier}>{modifier(charisma)}</span>
+                                            <span className={cl.abilityLabel}>Модификатор</span>
+                                        </div>
+
+                                        <div className={cl.valueLabel}>
+                                            <span className={cl.value}>{charisma}</span>
+                                            <span className={cl.abilityLabel}>Значение</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={cl.abilitiesList}>
+                                        <div className={clsx(cl.feature, cl.featureFirst)}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <span className={cl.featureName}>Выступление</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <span className={cl.featureName}>Запугивание</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <span className={cl.featureName}>Обман</span>
+                                        </div>
+                                        <div className={cl.feature}>
+                                            <button className={cl.featureBtn}/>
+                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <span className={cl.featureName}>Убеждение</span>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
                         </div>
                     </div>
                     <div className={cl.mainFeatures}>
+                        <div className={cl.characteristic}>
+                            <section className={cl.charBlock}>
+                                <h5 className={cl.label}>Инициатива</h5>
+                                <span className={cl.charValue}>{modifier(dexterity)}</span>
+                            </section>
 
+                            <section className={cl.charBlock}>
+                                <h5 className={cl.label}>Скорость</h5>
+                                <span className={cl.charValue}>30</span>
+                            </section>
+
+                            <section className={cl.charBlock}>
+                                <h5 className={cl.label}>Размер</h5>
+                                <span className={clsx(cl.charValue, cl.charText)}>Средний</span>
+                            </section>
+
+                            <section className={clsx(cl.charBlock, cl.blockExtended)}>
+                                <h5 className={cl.label}>Пассивное восприятие</h5>
+                                <span className={cl.charValue}>{10 + Math.floor((wisdom - 10) / 2)}</span>
+                            </section>
+                        </div>
+
+                        <div className={cl.weaponBar}>
+                            <h5 className={cl.label}>Оружие и боевые заговоры</h5>
+                            <section className={cl.weapon}>
+                                <span className={cl.weaponText}>Наименование</span>
+                                <span className={cl.weaponText}>Бонус / Сложность</span>
+                                <span className={cl.weaponText}>Урон / Вид</span>
+                                <span className={cl.weaponText}>Заметки</span>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                                <div className={cl.weaponInput}>
+                                    <input className={cl.input} type="text"/>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>

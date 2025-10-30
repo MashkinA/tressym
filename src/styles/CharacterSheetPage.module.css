@@ -154,7 +154,7 @@
 .input {
     border: 0;
     border-bottom: 1px solid rgb(255 203 93);
-    width: 90%;
+    width: 95%;
     font-size: 10px;
     outline: none;
     background: none;
@@ -253,8 +253,18 @@
 .mainFeatures {
     height: 100%;
     width: 435px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     box-sizing: border-box;
-    border: 2px solid #a9a9ac;
+}
+
+.characteristic {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .abilities {
@@ -289,7 +299,7 @@
     width: 100%;
     text-align: center;
     font-size: 12px;
-    line-height: 15px;
+    line-height: 20px;
     text-transform: uppercase;
 }
 
@@ -306,8 +316,7 @@
     z-index: 1;
 }
 
-.strength {
-    height: 130px;
+.abilityBlock {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -315,13 +324,218 @@
     text-align: center;
     border: 2px solid #a9a9ac;
     box-sizing: border-box;
-    padding: 2px;
+    padding: 5px 2px;
 }
 
-.modifier {
+.strength {
+    height: 130px;
+}
+
+.dexterity {
+    height: 170px;
+}
+
+.constitution {
+    height: 110px;
+}
+
+.exhaustion {
+    height: 50px;
+}
+
+.inspiration {
+    height: 70px;
+}
+
+.intelligence {
+    height: 210px;
+}
+
+.wisdom {
+    height: 210px;
+}
+
+.charisma {
+    height: 190px;
+}
+
+.AbilityModifier {
     height: 60px;
     width: 100%;
     display: flex;
     flex-direction: row;
+}
 
+.modifierLabel {
+    width: 70px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    transform: translateX(12.5%);
+}
+
+.valueLabel {
+    width: 55px;
+    height: 100%;
+    padding-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+    transform: translateX(-12.5%);
+}
+
+.modifier {
+    font-size: 30px;
+    display: inline-flex;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #a9a9ac;
+    border-radius: 50%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.value {
+    font-size: 20px;
+    display: inline-flex;
+    width: 50px;
+    height: 25px;
+    border: 1px solid #a9a9ac;
+    border-radius: 5%;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
+.abilityLabel {
+    font-size: 8px;
+    text-transform: uppercase;
+    line-height: 10px;
+}
+
+.abilitiesList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature {
+    height: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20px 20px 80px;
+    box-sizing: border-box;
+}
+
+.featureFirst {
+    border-bottom: 1px solid #a9a9ac;
+    border-top: 1px solid #a9a9ac;
+}
+
+.featureBtn {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    place-self: center center;
+}
+
+.featureValue {
+    font-size: 15px;
+    line-height: 18px;
+    text-decoration: underline;
+    place-self: center center;
+}
+
+.featureName {
+    font-size: 8px;
+    line-height: 10px;
+    place-self: center start;
+}
+
+.featureSave {
+    font-weight: bold;
+}
+
+.exhaustionBar {
+    height: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    box-sizing: border-box;
+    place-items: center center;
+}
+
+.charBlock {
+    height: 100%;
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #a9a9ac;
+    text-align: center;
+}
+
+.blockExtended {
+    width: 150px;
+}
+
+.charValue {
+    font-size: 30px;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #a9a9ac;
+    box-sizing: border-box;
+}
+
+.charText {
+    font-size: 15px;
+    line-height: 40px;
+}
+
+.weaponBar {
+    width: 100%;
+    height: 165px;
+    border: 2px solid #a9a9ac;
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.weapon {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 120px 50px 100px 155px;
+    grid-template-rows: repeat(7, 20px);
+    place-items: start center;
+}
+
+.weapon > :nth-child(4n+1) { border-left: none; }
+.weapon > :nth-child(4n) { border-right: none; }
+
+.weaponInput {
+    border: none;
+    border-left: 1px solid #a9a9ac;
+    outline: none;
+    background: none;
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.weaponText {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    border-bottom: 1px solid #a9a9ac;
+    border-left: 1px solid #a9a9ac;
+    font-size: 8px;
+    line-height: 10px;
+    align-items: center;
+    padding-left: 5px;
 }
