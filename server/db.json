@@ -984,8 +984,8 @@
   "users": [
     {
       "id": "1",
-      "name": "dsdffsd",
-      "race": 2,
+      "name": "dsffds",
+      "race": 1,
       "class": 1,
       "background": 1,
       "characteristic": {
@@ -997,8 +997,8 @@
         "charisma": 8
       },
       "skill": [
-        "Проницательность",
-        "Религия"
+        "Религия",
+        "Убеждения"
       ]
     }
   ]

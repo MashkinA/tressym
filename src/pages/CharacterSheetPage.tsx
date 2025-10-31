@@ -118,7 +118,7 @@ export const CharacterSheetPage = () => {
                                 d="M84 1H6V64C6 70 41 99 45 99C49 99 84 70 84 64V1Z"
                                 fill="transparent"
                                 stroke="#A9A9AC"
-                                stroke-width="2"
+                                strokeWidth="2"
                             />
                         </svg>
 
@@ -437,6 +437,35 @@ export const CharacterSheetPage = () => {
                                 </section>
                             </div>
                         </div>
+
+                        <section className={cl.equipment}>
+                            <h5 className={cl.abilitiesH}>Владение снаряжением и умения</h5>
+
+                            <div className={cl.equipmentHeader}>
+                                <span className={cl.featureName}>Владение доспехами</span>
+                                <span className={cl.equipmentHeaderList}>
+                                    <button className={cl.featureBtn}/>
+                                    <span className={cl.featureName}>Легкая</span>
+                                </span>
+                                <span className={cl.equipmentHeaderList}>
+                                    <button className={cl.featureBtn}/>
+                                    <span className={cl.featureName}>Средняя</span>
+                                </span>
+                                <span className={cl.equipmentHeaderList}>
+                                    <button className={cl.featureBtn}/>
+                                    <span className={cl.featureName}>Тяжелая</span>
+                                </span>
+                                <span className={cl.equipmentHeaderList}>
+                                    <button className={cl.featureBtn}/>
+                                    <span className={cl.featureName}>Щиты</span>
+                                </span>
+                            </div>
+
+                            <h5 className={cl.equipmentName}>Оружие</h5>
+                            <textarea className={cl.featsInput} maxLength={625}/>
+                            <h5 className={cl.equipmentName}>Инструменты</h5>
+                            <textarea className={cl.featsInput} maxLength={625}/>
+                        </section>
                     </div>
                     <div className={cl.mainFeatures}>
                         <div className={cl.characteristic}>
@@ -540,6 +569,26 @@ export const CharacterSheetPage = () => {
                                 <div className={cl.weaponInput}>
                                     <input className={cl.input} type="text"/>
                                 </div>
+                            </section>
+                        </div>
+
+                        <div className={cl.classFeatures}>
+                            <h5 className={cl.label}>Классовые особенности</h5>
+                            <section className={cl.classColumns}>
+                                <textarea className={cl.classArea} maxLength={625}/>
+                                <textarea className={cl.classArea} maxLength={625}/>
+                            </section>
+                        </div>
+
+                        <div className={cl.classFeats}>
+                            <section className={cl.featsColumn}>
+                                <h5 className={cl.label}>Рассовые особенности</h5>
+                                <textarea className={cl.featsInput} maxLength={625}/>
+                            </section>
+
+                            <section className={cl.featsColumn}>
+                                <h5 className={cl.label}>Черты</h5>
+                                <textarea className={cl.featsInput} maxLength={625}/>
                             </section>
                         </div>
                     </div>
