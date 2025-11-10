@@ -14,11 +14,13 @@ export const CreateRacePage = () => {
     const [selectedId, setSelectedId] = useState<number>(1);
     const [racePage, setRacePage] = useState<SpeciesPageType | null>(null);
 
+
     useEffect(() => {
         async function fetchPage() {
             try {
                 const response = await axios.get("http://localhost:3001/raceSelection");
                 setRacePage(response.data);
+
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {

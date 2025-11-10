@@ -4,17 +4,31 @@ import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPag
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Loader} from "../components/Loader/Loader.tsx";
-import type { SheetPageType } from "../components/types.ts";
+import type {Background, Class, Race, SheetPageType} from "../components/types.ts";
 
 const a = "dd"
 const attemptsImg = "/assets/icons/hitsAttempt.webp";
 const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
+const nameBorder = "/assets/icons/nameBorder.webp";
+const lvlBorder = "/assets/icons/lvlBorder.webp";
+const armorBorder = "/assets/icons/armorBorder.webp";
+const hitsBorder = "/assets/icons/hitsBorder.webp";
+const proficiency = "/assets/icons/proficiency.webp";
+const strengthBorder = "/assets/icons/strengthBorder.webp";
+const dexterityBorder = "/assets/icons/dexterityBorder.webp";
+const constitutionBorder = "/assets/icons/constitutionBorder.webp";
+const exhaustionBorder = "/assets/icons/exhaustionBorder.webp";
+const inspirationBorder = "/assets/icons/inspirationBorder.webp";
+
 
 export const CharacterSheetPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
     const [sheetPage, setSheetPage] = useState<SheetPageType | null>(null);
+    const [race, setRace] = useState<Race | null>(null);
+    const [classs, setClasss] = useState<Class | null>(null);
+    const [background, setBackground] = useState<Background | null>(null);
 
     const strength = sheetPage?.characteristic?.strength ?? 0;
     const dexterity = sheetPage?.characteristic?.dexterity ?? 0;
@@ -29,19 +43,51 @@ export const CharacterSheetPage = () => {
     };
 
     useEffect(() => {
+        const controller = new AbortController();
+
         async function fetchPage() {
             try {
-                const response = await axios.get("http://localhost:3001/users/1");
-                setSheetPage(response.data);
-            } catch (error) {
-                console.error('Ошибка загрузки данных:', error);
+                const userRes = await axios.get("http://localhost:3001/users/1", {
+                    signal: controller.signal,
+                });
+                setSheetPage(userRes.data);
+
+                if (userRes.data.race > 0) {
+                    const raceRes = await axios.get("http://localhost:3001/raceSelection", {
+                        signal: controller.signal,
+                    });
+                    const raceData = raceRes.data?.mainInfo?.components?.[userRes.data.race - 1];
+                    if (raceData) setRace(raceData);
+                }
+                if (userRes.data.class > 0) {
+                    const classRes = await axios.get("http://localhost:3001/classSelection", {
+                        signal: controller.signal,
+                    });
+                    const classData = classRes.data?.mainInfo?.components?.[userRes.data.class - 1];
+                    if (classData) setClasss(classData);
+                }
+                if (userRes.data.background > 0) {
+                    const backgroundRes = await axios.get("http://localhost:3001/backgroundSelection", {
+                        signal: controller.signal,
+                    });
+                    const backgroundData = backgroundRes.data?.mainInfo?.components?.[userRes.data.background - 1];
+                    if (backgroundData) setBackground(backgroundData);
+                }
+
+            } catch (error: any) {
+                if (!axios.isCancel(error)) {
+                    console.error("Ошибка загрузки данных:", error);
+                }
             } finally {
                 setIsFetchLoading(false);
             }
         }
 
         fetchPage();
+
+        return () => controller.abort();
     }, []);
+
 
 
     if (isFetchLoading || !sheetPage) {
@@ -56,92 +102,81 @@ export const CharacterSheetPage = () => {
             <div className={cl.charPage}>
                 <div className={cl.sheetHeader}>
                     <div className={cl.name}>
-                        <span className={clsx(cl.borderCorner, cl.cornerTL, cl.cornerCircle)}></span>
+                        <picture className={cl.border}>
+                            <source srcSet={nameBorder} type="image/webp"/>
+                            <img src={nameBorder} alt="Рамка блока имени"/>
+                        </picture>
+
                         <label className={cl.name1row}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <span className={cl.text}>{sheetPage?.name}</span>
                             <span className={cl.label}>Имя персонажа</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <span className={cl.text}>{background?.title}</span>
                             <span className={cl.label}>Предыстория</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <span className={cl.text}>{classs?.title}</span>
                             <span className={cl.label}>Класс</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <span className={cl.text}>{race?.title}</span>
                             <span className={cl.label}>Раса</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <span className={cl.text}> </span>
                             <span className={cl.label}>Подкласс</span>
                         </label>
                     </div>
 
                     <div className={cl.lvl}>
+                        <picture className={cl.border}>
+                            <source srcSet={lvlBorder} type="image/webp"/>
+                            <img src={lvlBorder} alt="Рамка блока уровня"/>
+                        </picture>
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <input className={cl.input} type="text" placeholder="1"/>
                             <span className={cl.label}>Уровень</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
-                            <input className={cl.input} type="text" placeholder={a}/>
+                            <input className={cl.input} type="text"/>
                             <span className={cl.label}>Опыт</span>
                         </label>
                     </div>
 
                     <div className={cl.armor}>
-                        <svg
-                            className={cl.shield}
-                            width="90"
-                            height="100"
-                            viewBox="0 0 90 100"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M9 0.5L2 0.5L5.5 2.5L9 0.5Z"
-                                fill="#A9A9AC"
-                                stroke="#A9A9AC"
-                            />
-                            <path
-                                d="M88 0.5L81 0.5L84.5 2.5L88 0.5Z"
-                                fill="#A9A9AC"
-                                stroke="#A9A9AC"
-                            />
-                            <path
-                                d="M84 1H6V64C6 70 41 99 45 99C49 99 84 70 84 64V1Z"
-                                fill="transparent"
-                                stroke="#A9A9AC"
-                                strokeWidth="2"
-                            />
-                        </svg>
-
+                        <picture className={cl.border}>
+                            <source srcSet={armorBorder} type="image/webp"/>
+                            <img src={armorBorder} alt="Рамка блока брони"/>
+                        </picture>
                         <span className={cl.label}>Класс защиты</span>
                         <input className={cl.inputArmor} type="text" placeholder={a}/>
                         <span className={cl.label}>Щит</span>
                         <div className={cl.shieldCheck}></div>
-
                     </div>
 
                     <div className={cl.hits}>
+                        <picture className={cl.border}>
+                            <source srcSet={hitsBorder} type="image/webp"/>
+                            <img src={hitsBorder} alt="Рамка блока хитов"/>
+                        </picture>
                         <div className={cl.hitPoints}>
                             <h5 className={cl.hitHeader}>ХИТЫ</h5>
 
                             <label className={cl.sheetLabel}>
-                                <input className={cl.input} type="text" placeholder={a}/>
+                                <span className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
                                 <span className={cl.label}>Текущие</span>
                             </label>
 
                             <label className={cl.sheetLabel}>
-                                <input className={cl.input} type="text" placeholder={a}/>
+                                <span className={cl.text}> 0 </span>
                                 <span className={cl.label}>Временные</span>
-                                <input className={cl.input} type="text" placeholder={a}/>
+                                <span className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
                                 <span className={cl.label}>Максимум</span>
                             </label>
                         </div>
@@ -149,9 +184,9 @@ export const CharacterSheetPage = () => {
                         <div className={cl.hitDice}>
                             <h5 className={cl.hitHeader}>КОСТИ ХИТОВ</h5>
                             <label className={cl.sheetLabel}>
-                                <input className={cl.input} type="text" placeholder={a}/>
+                                <span className={cl.text}>1/1</span>
                                 <span className={cl.label}>Текущие</span>
-                                <input className={cl.input} type="text" placeholder={a}/>
+                                <span className={cl.text}>{classs?.hits}</span>
                                 <span className={cl.label}>Кости</span>
                             </label>
                         </div>
@@ -179,11 +214,20 @@ export const CharacterSheetPage = () => {
                         <div className={cl.abilities}>
                             <div className={cl.abilitiesColumn}>
                                 <section className={cl.proficiency}>
-                                    <h5 className={cl.abilitiesH}>Бонус владения</h5>
-                                    <input className={cl.abilitiesInput} type="text" placeholder={a}/>
+                                    <picture className={cl.border}>
+                                        <source srcSet={proficiency} type="image/webp"/>
+                                        <img src={proficiency} alt="Рамка блока вдохновения"/>
+                                    </picture>
+                                    <h5 className={cl.abilitiesH}>Вдохновение</h5>
+                                    <span className={cl.value}>+2</span>
                                 </section>
 
                                 <section className={clsx(cl.strength, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={strengthBorder} type="image/webp"/>
+                                        <img src={strengthBorder} alt="Рамка блока силы"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Сила</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -213,6 +257,11 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.dexterity, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={dexterityBorder} type="image/webp"/>
+                                        <img src={dexterityBorder} alt="Рамка блока ловкости"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Ловкость</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -252,6 +301,11 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.constitution, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={constitutionBorder} type="image/webp"/>
+                                        <img src={constitutionBorder} alt="Рамка блока выносливости"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Телосложение</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -276,6 +330,10 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.exhaustion, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={exhaustionBorder} type="image/webp"/>
+                                        <img src={exhaustionBorder} alt="Рамка блока истощения"/>
+                                    </picture>
                                     <h5 className={cl.abilitiesH}>Истощение</h5>
                                     <div className={cl.exhaustionBar}>
                                         <button className={cl.featureBtn}/>
@@ -288,6 +346,10 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.inspiration, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={inspirationBorder} type="image/webp"/>
+                                        <img src={inspirationBorder} alt="Рамка блока вдохновения"/>
+                                    </picture>
                                     <h5 className={cl.abilitiesH}>Героическое вдохновение</h5>
                                     <button className={cl.featureBtn}/>
                                 </section>
