@@ -3,11 +3,10 @@ import clsx from "clsx";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {Loader} from "../components/Loader/Loader.tsx";
-import type {Background, Class, Race, SheetPageType} from "../components/types.ts";
+import { Loader } from "../components/Loader/Loader.tsx";
+import type {Background, Class, SheetPageType, SubRace} from "../components/types.ts";
+import {NavBar} from "../components/NavBar/NavBar.tsx";
 
-const a = "dd"
-const attemptsImg = "/assets/icons/hitsAttempt.webp";
 const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
 const nameBorder = "/assets/icons/nameBorder.webp";
@@ -20,13 +19,21 @@ const dexterityBorder = "/assets/icons/dexterityBorder.webp";
 const constitutionBorder = "/assets/icons/constitutionBorder.webp";
 const exhaustionBorder = "/assets/icons/exhaustionBorder.webp";
 const inspirationBorder = "/assets/icons/inspirationBorder.webp";
+const intNwisBorder = "/assets/icons/int&wisBorder.webp";
+const charismaBorder = "/assets/icons/charismaBorder.webp";
+const characteristicBorder = "/assets/icons/characteristicBorder.webp";
+const excharacteristicBorder = "/assets/icons/excharacteristicBorder.webp";
+const weaponBorder = "/assets/icons/weaponBorder.webp";
+const classBorder = "/assets/icons/classBorder.webp";
+const featsBorder = "/assets/icons/featsBorder.webp";
+const equipmentBorder = "/assets/icons/equipmentBorder.webp";
 
 
 export const CharacterSheetPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
     const [sheetPage, setSheetPage] = useState<SheetPageType | null>(null);
-    const [race, setRace] = useState<Race | null>(null);
+    const [race, setRace] = useState<SubRace | null>(null);
     const [classs, setClasss] = useState<Class | null>(null);
     const [background, setBackground] = useState<Background | null>(null);
 
@@ -57,7 +64,9 @@ export const CharacterSheetPage = () => {
                         signal: controller.signal,
                     });
                     const raceData = raceRes.data?.mainInfo?.components?.[userRes.data.race - 1];
-                    if (raceData) setRace(raceData);
+                    const subRace = raceData?.subcomponents?.find((sub: any) => sub.subRaceId === userRes.data.subRace);
+                    if (subRace) setRace(subRace);
+                    console.log(subRace);
                 }
                 if (userRes.data.class > 0) {
                     const classRes = await axios.get("http://localhost:3001/classSelection", {
@@ -99,6 +108,7 @@ export const CharacterSheetPage = () => {
             <TressymHeaderPages
                 currentPage={""}
             />
+
             <div className={cl.charPage}>
                 <div className={cl.sheetHeader}>
                     <div className={cl.name}>
@@ -155,7 +165,7 @@ export const CharacterSheetPage = () => {
                             <img src={armorBorder} alt="Рамка блока брони"/>
                         </picture>
                         <span className={cl.label}>Класс защиты</span>
-                        <input className={cl.inputArmor} type="text" placeholder={a}/>
+                        <input className={cl.inputArmor} type="text"/>
                         <span className={cl.label}>Щит</span>
                         <div className={cl.shieldCheck}></div>
                     </div>
@@ -169,14 +179,16 @@ export const CharacterSheetPage = () => {
                             <h5 className={cl.hitHeader}>ХИТЫ</h5>
 
                             <label className={cl.sheetLabel}>
-                                <span className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
+                                <span
+                                    className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
                                 <span className={cl.label}>Текущие</span>
                             </label>
 
                             <label className={cl.sheetLabel}>
                                 <span className={cl.text}> 0 </span>
                                 <span className={cl.label}>Временные</span>
-                                <span className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
+                                <span
+                                    className={cl.text}> {Number(classs?.hits.split('d')[1]) + Number(modifier(constitution))} </span>
                                 <span className={cl.label}>Максимум</span>
                             </label>
                         </div>
@@ -194,9 +206,17 @@ export const CharacterSheetPage = () => {
                         <div className={cl.deathSaves}>
                             <h5 className={cl.hitHeader}>БРОСКИ</h5>
                             <label className={cl.sheetLabel}>
-                                <img className={cl.attempts} src={ attemptsImg }  alt="Попытки бросков" />
+                                <span>
+                                    <button className={cl.featureBtn}/>
+                                    <button className={cl.featureBtn}/>
+                                    <button className={cl.featureBtn}/>
+                                </span>
                                 <span className={cl.label}>Успехи</span>
-                                <img className={cl.attempts} src={ attemptsImg }  alt="Попытки бросков" />
+                                <span>
+                                    <button className={cl.featureBtn}/>
+                                    <button className={cl.featureBtn}/>
+                                    <button className={cl.featureBtn}/>
+                                </span>
                                 <span className={cl.label}>Провалы</span>
                             </label>
                         </div>
@@ -204,9 +224,9 @@ export const CharacterSheetPage = () => {
                 </div>
 
                 <div className={cl.sheetLogo}>
-                    <img className={cl.logoTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
-                    <img className={cl.logoTressym} src={ tressym }  alt="Трессум" />
-                    <img className={cl.logoTracery} src={ tracery }  alt="Ажурный узор в шапке страницы" />
+                    <img className={cl.logoTracery} src={tracery} alt="Ажурный узор в шапке страницы"/>
+                    <img className={cl.logoTressym} src={tressym} alt="Трессум"/>
+                    <img className={cl.logoTracery} src={tracery} alt="Ажурный узор в шапке страницы"/>
                 </div>
 
                 <div className={cl.sheetMain}>
@@ -357,6 +377,11 @@ export const CharacterSheetPage = () => {
 
                             <div className={cl.abilitiesColumn}>
                                 <section className={clsx(cl.intelligence, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={intNwisBorder} type="image/webp"/>
+                                        <img src={intNwisBorder} alt="Рамка блока интеллекта"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Интеллект</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -406,6 +431,11 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.wisdom, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={intNwisBorder} type="image/webp"/>
+                                        <img src={intNwisBorder} alt="Рамка блока мудрости"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Мудрость</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -455,6 +485,11 @@ export const CharacterSheetPage = () => {
                                 </section>
 
                                 <section className={clsx(cl.charisma, cl.abilityBlock)}>
+                                    <picture className={cl.border}>
+                                        <source srcSet={charismaBorder} type="image/webp"/>
+                                        <img src={charismaBorder} alt="Рамка блока харизмы"/>
+                                    </picture>
+
                                     <h5 className={cl.abilitiesH}>Харизма</h5>
 
                                     <div className={cl.AbilityModifier}>
@@ -501,6 +536,10 @@ export const CharacterSheetPage = () => {
                         </div>
 
                         <section className={cl.equipment}>
+                            <picture className={cl.border}>
+                                <source srcSet={equipmentBorder} type="image/webp"/>
+                                <img src={equipmentBorder} alt="Рамка блока снаряжения"/>
+                            </picture>
                             <h5 className={cl.abilitiesH}>Владение снаряжением и умения</h5>
 
                             <div className={cl.equipmentHeader}>
@@ -532,28 +571,50 @@ export const CharacterSheetPage = () => {
                     <div className={cl.mainFeatures}>
                         <div className={cl.characteristic}>
                             <section className={cl.charBlock}>
-                                <h5 className={cl.label}>Инициатива</h5>
+                                <picture className={cl.border}>
+                                    <source srcSet={characteristicBorder} type="image/webp"/>
+                                    <img src={characteristicBorder} alt="Рамка блока характеристики"/>
+                                </picture>
+                                <h5 className={cl.charlabel}>Инициатива</h5>
                                 <span className={cl.charValue}>{modifier(dexterity)}</span>
                             </section>
 
                             <section className={cl.charBlock}>
-                                <h5 className={cl.label}>Скорость</h5>
-                                <span className={cl.charValue}>30</span>
+                                <picture className={cl.border}>
+                                    <source srcSet={characteristicBorder} type="image/webp"/>
+                                    <img src={characteristicBorder} alt="Рамка блока характеристики"/>
+                                </picture>
+                                <h5 className={cl.charlabel}>Скорость</h5>
+                                <span className={cl.charValue}>{race?.speed}</span>
                             </section>
 
                             <section className={cl.charBlock}>
-                                <h5 className={cl.label}>Размер</h5>
-                                <span className={clsx(cl.charValue, cl.charText)}>Средний</span>
+                                <picture className={cl.border}>
+                                    <source srcSet={characteristicBorder} type="image/webp"/>
+                                    <img src={characteristicBorder} alt="Рамка блока характеристики"/>
+                                </picture>
+                                <h5 className={cl.charlabel}>Размер</h5>
+                                <span className={clsx(cl.charValue, cl.charText)}>{race?.size}</span>
                             </section>
 
                             <section className={clsx(cl.charBlock, cl.blockExtended)}>
-                                <h5 className={cl.label}>Пассивное восприятие</h5>
+                                <picture className={cl.border}>
+                                    <source srcSet={excharacteristicBorder} type="image/webp"/>
+                                    <img src={excharacteristicBorder} alt="Рамка блока характеристики"/>
+                                </picture>
+                                <h5 className={cl.charlabel}>Пассивное восприятие</h5>
                                 <span className={cl.charValue}>{10 + Math.floor((wisdom - 10) / 2)}</span>
                             </section>
                         </div>
 
                         <div className={cl.weaponBar}>
+                            <picture className={cl.border}>
+                                <source srcSet={weaponBorder} type="image/webp"/>
+                                <img src={weaponBorder} alt="Рамка блока оружия и боевых ззаговоров"/>
+                            </picture>
+
                             <h5 className={cl.label}>Оружие и боевые заговоры</h5>
+
                             <section className={cl.weapon}>
                                 <span className={cl.weaponText}>Наименование</span>
                                 <span className={cl.weaponText}>Бонус / Сложность</span>
@@ -635,20 +696,33 @@ export const CharacterSheetPage = () => {
                         </div>
 
                         <div className={cl.classFeatures}>
+                            <picture className={cl.border}>
+                                <source srcSet={classBorder} type="image/webp"/>
+                                <img src={classBorder} alt="Рамка блока классовых особенностей"/>
+                            </picture>
                             <h5 className={cl.label}>Классовые особенности</h5>
                             <section className={cl.classColumns}>
-                                <textarea className={cl.classArea} maxLength={625}/>
-                                <textarea className={cl.classArea} maxLength={625}/>
+                                <textarea className={cl.classArea} defaultValue={classs?.skills.map(a => `${a.title}: ${a.description}`).join("\n\n")} />
+                                <textarea className={cl.classArea} />
                             </section>
                         </div>
 
                         <div className={cl.classFeats}>
                             <section className={cl.featsColumn}>
+                                <picture className={cl.border}>
+                                    <source srcSet={featsBorder} type="image/webp"/>
+                                    <img src={featsBorder} alt="Рамка блока рассовые особенностей"/>
+                                </picture>
                                 <h5 className={cl.label}>Рассовые особенности</h5>
-                                <textarea className={cl.featsInput} maxLength={625}/>
+                                <textarea className={cl.featsInput} defaultValue={race?.abilities.map(a => `${a.title}: ${a.description}`)
+                                    .join("\n\n")}/>
                             </section>
 
                             <section className={cl.featsColumn}>
+                                <picture className={cl.border}>
+                                    <source srcSet={featsBorder} type="image/webp"/>
+                                    <img src={featsBorder} alt="Рамка блока чертей =)"/>
+                                </picture>
                                 <h5 className={cl.label}>Черты</h5>
                                 <textarea className={cl.featsInput} maxLength={625}/>
                             </section>
@@ -656,6 +730,12 @@ export const CharacterSheetPage = () => {
                     </div>
                 </div>
             </div>
+
+            <NavBar
+                isValidationCorrect={true}
+                prevPage={'/character/creation/class'}
+                nextPage={'/character/creation/characteristics'}
+            />
         </div>
     );
 };

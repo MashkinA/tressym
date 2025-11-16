@@ -41,7 +41,8 @@ export const CreateRacePage = () => {
     const handleSend = async () => {
         try {
             await axios.patch("http://localhost:3001/users/1", {
-                race: userInput.raceId
+                race: userInput.raceId,
+                subRace: selectedSubId
             });
         } catch (error) {
             console.error("❌ Ошибка при отправке данных:", error);

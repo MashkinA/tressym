@@ -1,12 +1,19 @@
+html, body {
+    overflow-x: hidden;
+}
+
 .pageWrapper {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(to top, rgb(0 0 0 / 60%), transparent), url("/public/assets/background/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
     align-items: center;
+    overflow-x: hidden;
 }
 
 .charPage {
@@ -105,8 +112,7 @@
     height: 9px;
     width: 9px;
     transform: rotate(45deg);
-    background: #fff;
-    border: 1px solid #000;
+    border: 1px solid rgb(255 203 93);
 }
 
 .name1row {
@@ -131,6 +137,11 @@
     background: none;
     text-align: inherit;
     z-index: 1;
+    color: rgb(255 203 93);
+}
+
+.input::placeholder {
+    color: rgb(255 203 93);
 }
 
 .text {
@@ -139,7 +150,7 @@
     border-bottom: 1px solid rgb(255 203 93);
     font-size: 9px;
     line-height: 15px;
-    color: rgb(120 120 120);
+    color: rgb(255 203 93);
     font-weight: 500;
 }
 
@@ -157,6 +168,12 @@
     font-size: 8px;
     text-transform: uppercase;
     line-height: 12px;
+}
+
+.charlabel {
+    font-size: 8px;
+    text-transform: uppercase;
+    line-height: 20px;
 }
 
 .hitPoints {
@@ -319,9 +336,9 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 2px solid #a9a9ac;
     box-sizing: border-box;
-    padding: 0 5px;
+    padding: 7px;
+    position: relative;
 }
 
 .equipmentHeader {
@@ -331,8 +348,8 @@
     grid-template-columns: repeat(5, 1fr);
     text-align: start;
     box-sizing: border-box;
-    border-bottom: 1px solid #a9a9ac;
-    border-top: 1px solid #a9a9ac;
+    border-bottom: 1px solid rgb(255 203 93);
+    border-top: 1px solid rgb(255 203 93);
 }
 
 .equipmentHeaderList{
@@ -408,7 +425,7 @@
     flex-direction: column;
     align-items: center;
     z-index: 0;
-    transform: translateX(-5%);
+    transform: translateX(-10%) translateY(-10%);
 }
 
 .modifier {
@@ -447,19 +464,21 @@
     height: 20px;
     width: 100%;
     display: grid;
-    grid-template-columns: 20px 20px 80px;
+    grid-template-columns: 15px 20px 80px;
     box-sizing: border-box;
 }
 
 .featureFirst {
-    border-bottom: 1px solid #a9a9ac;
-    border-top: 1px solid #a9a9ac;
+    border-bottom: 1px solid rgb(255 203 93);
+    border-top: 1px solid rgb(255 203 93);
 }
 
 .featureBtn {
     height: 12px;
     width: 12px;
     border-radius: 50%;
+    border: 1px solid rgb(255 203 93);
+    background: none;
     cursor: pointer;
     place-self: center center;
 }
@@ -495,8 +514,11 @@
     width: 90px;
     display: flex;
     flex-direction: column;
-    border: 2px solid #a9a9ac;
+    justify-content: center;
     text-align: center;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .blockExtended {
@@ -504,26 +526,27 @@
 }
 
 .charValue {
-    font-size: 30px;
+    font-size: 25px;
+    line-height: 25px;
     width: 100%;
-    height: 40px;
-    border-top: 1px solid #a9a9ac;
+    height: 30px;
+    border-top: 1px solid rgb(255 203 93);
     box-sizing: border-box;
 }
 
 .charText {
     font-size: 15px;
-    line-height: 40px;
+    line-height: 25px;
 }
 
 .weaponBar {
     width: 100%;
     height: 165px;
-    border: 2px solid #a9a9ac;
-    padding: 0 5px;
+    padding: 7px;
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
 }
 
 .weapon {
@@ -532,6 +555,7 @@
     grid-template-columns: 120px 50px 100px 155px;
     grid-template-rows: repeat(7, 20px);
     place-items: start center;
+    border-top: 1px solid rgb(255 203 93);
 }
 
 .weapon > :nth-child(4n+1) { border-left: none; }
@@ -539,12 +563,12 @@
 
 .weaponInput {
     border: none;
-    border-left: 1px solid #a9a9ac;
-    outline: none;
+    border-left: 1px solid rgb(255 203 93);
     background: none;
     display: inline-flex;
     justify-content: center;
     text-align: start;
+    outline: none;
     width: 100%;
     height: 100%;
 }
@@ -553,22 +577,22 @@
     width: 100%;
     height: 100%;
     display: inline-flex;
-    border-bottom: 1px solid #a9a9ac;
-    border-left: 1px solid #a9a9ac;
+    border-left: 1px solid rgb(255 203 93);
     font-size: 8px;
     line-height: 10px;
     align-items: center;
+    justify-content: start;
     padding-left: 5px;
 }
 
 .classFeatures {
     width: 100%;
     height: 350px;
-    border: 2px solid #a9a9ac;
-    padding: 0 5px 5px;
+    padding: 7px;
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
 }
 
 .classColumns {
@@ -576,7 +600,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    border-top: 1px solid #4b4b4b;
+    border-top: 1px solid rgb(255 203 93);
     position: relative;
 }
 
@@ -587,7 +611,7 @@
     bottom: 0;
     left: 50%;
     width: 1px;
-    background-color: #a9a9ac;
+    background-color: rgb(255 203 93);
 }
 
 .classArea {
@@ -595,9 +619,11 @@
     height: 100%;
     resize: none;
     border: none;
+    outline: none;
+    text-decoration: none;
     background: transparent;
-    font-size: 10px;
-    line-height: 12px;
+    font-size: 8px;
+    line-height: 10px;
     padding: 5px 0 0 5px;
 }
 
@@ -612,22 +638,25 @@
 .featsColumn {
     width: 210px;
     height: 100%;
-    border: 2px solid #a9a9ac;
-    padding: 0 5px;
+    padding: 7px;
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: relative;
 }
 
 .featsInput {
     width: 100%;
     height: 100%;
+    padding: 5px 0 0 5px;
     resize: none;
     border: none;
     background: transparent;
-    border-top: 1px solid #a9a9ac;
-    font-size: 10px;
-    line-height: 12px;
+    border-top: 1px solid rgb(255 203 93);
+    font-size: 8px;
+    line-height: 10px;
+    z-index: 1;
+    outline: none;
 }
 
 .equipmentName {

@@ -142,7 +142,8 @@ export type SkillPageType = {
 export type SheetPageType = {
     id: number;
     name: string;
-    race: number,
+    race: number;
+    subRace: number;
     class: number;
     background: number;
     characteristic: {
@@ -169,6 +170,8 @@ export type SubRaceChars = {
 export type SubRace = {
     subRaceId: number;
     title: string;
+    size: string;
+    speed: number;
     chars: SubRaceChars[];
     description: string;
     abilities: SubRaceAbilities[];
