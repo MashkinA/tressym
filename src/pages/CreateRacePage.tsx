@@ -14,11 +14,13 @@ export const CreateRacePage = () => {
     const [selectedId, setSelectedId] = useState<number>(1);
     const [racePage, setRacePage] = useState<SpeciesPageType | null>(null);
 
+
     useEffect(() => {
         async function fetchPage() {
             try {
                 const response = await axios.get("http://localhost:3001/raceSelection");
                 setRacePage(response.data);
+
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
@@ -39,7 +41,8 @@ export const CreateRacePage = () => {
     const handleSend = async () => {
         try {
             await axios.patch("http://localhost:3001/users/1", {
-                race: userInput.raceId
+                race: userInput.raceId,
+                subRace: selectedSubId
             });
         } catch (error) {
             console.error("❌ Ошибка при отправке данных:", error);

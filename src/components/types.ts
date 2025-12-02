@@ -139,6 +139,24 @@ export type SkillPageType = {
     };
 };
 
+export type SheetPageType = {
+    id: number;
+    name: string;
+    race: number;
+    subRace: number;
+    class: number;
+    background: number;
+    characteristic: {
+        strength: number;
+        dexterity: number;
+        constitution: number;
+        intelligence: number;
+        wisdom: number
+        charisma: number;
+    };
+    skill: string[];
+}
+
 export type SubRaceAbilities = {
     title: string;
     description: string;
@@ -152,6 +170,8 @@ export type SubRaceChars = {
 export type SubRace = {
     subRaceId: number;
     title: string;
+    size: string;
+    speed: number;
     chars: SubRaceChars[];
     description: string;
     abilities: SubRaceAbilities[];
@@ -176,6 +196,9 @@ export type Class = {
     description: string;
     detailedInfo: string;
     hits: string;
+    spellcasting: string;
+    spellchar: string;
+    saveThrow: string[];
     skills: ClassSkills[];
 }
 

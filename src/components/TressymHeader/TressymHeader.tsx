@@ -8,12 +8,17 @@ const tressym = "/assets/icons/tressym.webp";
 export const TressymHeader = () => {
     return (
         <header className={cl.tressymHeader}>
-            <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
-            <h1>Tressym</h1>
-            <Link className={cl.linkBtn} to="/character/creation/name"> Книга игрока </Link>
-            <Link className={cl.linkBtn} to="/character/creation/name"> Сюжеты </Link>
-            <Link className={cl.linkBtn} to="/character/creation/name"> О нас </Link>
-            <StartButton path={"/character/creation/name"}> Создать персонажа </StartButton>
+            <div className={cl.tressymHeaderLeft}>
+                <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
+                <h1>Tressym</h1>
+            </div>
+
+            <div className={cl.tressymHeaderRight}>
+                <Link className={cl.linkBtn} to="/character/creation/name"> Книга игрока </Link>
+                <Link className={cl.linkBtn} to="/character/creation/name"> Сюжеты </Link>
+                <Link className={cl.linkBtn} to="/character/creation/name"> О нас </Link>
+                <StartButton path={"/character/creation/name"}> Создать персонажа </StartButton>
+            </div>
         </header>
     );
 };
