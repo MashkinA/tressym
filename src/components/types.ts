@@ -196,6 +196,9 @@ export type Class = {
     description: string;
     detailedInfo: string;
     hits: string;
+    spellcasting: string;
+    spellchar: string;
+    saveThrow: string[];
     skills: ClassSkills[];
 }
 

@@ -1,21 +1,18 @@
 import cl from '../styles/StartPage.module.css';
 import cla from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
-import {useEffect, useState} from "react";
 import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
-import axios from "axios";
 
 const backImage = "./assets/background/sleepyDragon.webp";
 
 export const StartPage = () => {
 
-    const [isFetchLoading, setIsFetchLoading] = useState(true);
+    const isFetchLoading = false;
 
-    useEffect(() => {
+    {/*useEffect(() => {
         async function fetchPage() {
             try {
                 const response = await axios.get("http://localhost:3001/startPage");
-                console.log(response.data);
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
@@ -24,7 +21,7 @@ export const StartPage = () => {
         }
 
         fetchPage();
-    }, []);
+    }, []);*/}
 
     return (
         <div >

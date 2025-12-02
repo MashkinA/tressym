@@ -21,6 +21,12 @@ html, body {
     flex-direction: column;
     width: 720px;
     height: 1020px;
+    margin-bottom: 200px;
+}
+
+.spellPage {
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .sheetHeader {
@@ -448,6 +454,17 @@ html, body {
     justify-content: center;
 }
 
+.spellValue {
+    font-size: 15px;
+    line-height: 20px;
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+}
+
 .abilityLabel {
     font-size: 6px;
     text-transform: uppercase;
@@ -471,16 +488,6 @@ html, body {
 .featureFirst {
     border-bottom: 1px solid rgb(255 203 93);
     border-top: 1px solid rgb(255 203 93);
-}
-
-.featureBtn {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    border: 1px solid rgb(255 203 93);
-    background: none;
-    cursor: pointer;
-    place-self: center center;
 }
 
 .featureValue {
@@ -667,3 +674,229 @@ html, body {
     line-height: 15px;
     text-transform: uppercase;
 }
+
+.leftColumn {
+    width: 475px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.spellInfo {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.spellcastingAbility {
+    height: 100%;
+    width: 140px;
+    padding: 8px;
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0;
+    box-sizing: border-box;
+}
+
+.spellcastingAbility > :nth-child(n+3) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(255 203 93);
+    border-right: 1px solid rgb(255 203 93);
+    box-sizing: border-box;
+}
+
+.spellcastingAbility > :nth-child(2),
+.spellcastingAbility > :nth-child(4),
+.spellcastingAbility > :nth-child(6),
+.spellcastingAbility > :nth-child(8) {
+    border-right: none;
+    padding-left: 5px;
+}
+
+.imageNslots {
+    width: 315px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.spellSlots {
+    height: 100px;
+    width: 100%;
+    padding: 8px;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(3, 1fr 1fr 2fr);
+    grid-template-rows: 12px 10px 20px 20px 20px;
+    gap: 0;
+    box-sizing: border-box;
+}
+
+.spellSlots > :nth-child(1) {
+    border-bottom: 1px solid rgb(255 203 93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / 10;
+    grid-row: 1;
+}
+
+.spellSlots > :nth-child(n+2) {
+    display: flex;
+    padding-left: 2px;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.spellSlots > :nth-child(9n+4),
+.spellSlots > :nth-child(9n+7) {
+    border-right: 1px solid rgb(255 203 93);
+}
+
+.spellImg {
+    width: 100%;
+    height: 30px;
+    border: 1px solid rgb(255 203 93);
+    box-sizing: border-box;
+}
+
+.spellTitle {
+    font-size: 7px;
+    line-height: 10px;
+    place-self: center start;
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.rightColumn {
+    width: 215px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cantrips {
+    width: 100%;
+    height: 860px;
+    padding: 8px;
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: 15px 125px 60px 45px 120px 1fr;
+    grid-template-rows: repeat(42, 1fr);
+}
+
+.cantrips > :nth-child(1) {
+    border-bottom: 1px solid rgb(255 203 93);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / 7;
+    grid-row: 1;
+}
+
+.cantrips > :nth-child(n) {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.cantrips > :nth-child(n+3) {
+    border-left: 1px solid rgb(255 203 93);
+}
+
+.cantrips > :nth-child(6n+2) {
+    border-left: none;
+}
+
+.appearance {
+    width: 100%;
+    height: 100px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.personality {
+    width: 100%;
+    height: 330px;
+    padding: 8px 8px 15px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.languages {
+    width: 100%;
+    height: 70px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.coins {
+    width: 100%;
+    height: 70px;
+    padding: 8px;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 15px 10px 20px;
+    gap: 4px;
+    box-sizing: border-box;
+}
+
+.coins > :nth-child(1) {
+    border-bottom: 1px solid rgb(255 203 93);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1 / 6;
+    grid-row: 1;
+}
+
+.coins > :nth-child(n) {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sequipment {
+    width: 100%;
+    height: 390px;
+    padding: 8px 8px 15px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+}
+
+.magicTool {
+    width: 100%;
+    height: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    text-align: start;
+}
+
+

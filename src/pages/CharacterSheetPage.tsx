@@ -6,6 +6,7 @@ import axios from "axios";
 import { Loader } from "../components/Loader/Loader.tsx";
 import type {Background, Class, SheetPageType, SubRace} from "../components/types.ts";
 import {NavBar} from "../components/NavBar/NavBar.tsx";
+import {SkillBtn} from "../components/SkillBtn/SkillBtn.tsx";
 
 const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
@@ -27,7 +28,13 @@ const weaponBorder = "/assets/icons/weaponBorder.webp";
 const classBorder = "/assets/icons/classBorder.webp";
 const featsBorder = "/assets/icons/featsBorder.webp";
 const equipmentBorder = "/assets/icons/equipmentBorder.webp";
-
+const spellcastingBorder = "/assets/icons/spellcastingBorder.webp";
+const spellslotsBorder = "/assets/icons/spellslotsBorder.webp";
+const appearanceBorder = "/assets/icons/appearanceBorder.webp";
+const personalityBorder = "/assets/icons/personalityBorder.webp";
+const languagesBorder = "/assets/icons/languagesBorder.webp";
+const sequipmentBorder = "/assets/icons/sequipmentBorder.webp";
+const cantripsBorder = "/assets/icons/cantripsBorder.webp";
 
 export const CharacterSheetPage = () => {
 
@@ -49,6 +56,26 @@ export const CharacterSheetPage = () => {
         return value > 0 ? `+${value}` : `${value}`;
     };
 
+    const skillCalculation = (count: number, skill: string): string => {
+        if (sheetPage?.skill.includes(skill)) {
+            const value = Math.floor((count - 10) / 2);
+            const upValue = value + 2;
+            return upValue > 0 ? `+${upValue}` : `${upValue}`;
+        } else {
+            return modifier(count)
+        }
+    };
+
+    const saveCalculation = (count: number, char: string): string => {
+        if (classs?.saveThrow.includes(char)) {
+            const value = Math.floor((count - 10) / 2);
+            const upValue = value + 2;
+            return upValue > 0 ? `+${upValue}` : `${upValue}`;
+        } else {
+            return modifier(count)
+        }
+    };
+
     useEffect(() => {
         const controller = new AbortController();
 
@@ -66,7 +93,6 @@ export const CharacterSheetPage = () => {
                     const raceData = raceRes.data?.mainInfo?.components?.[userRes.data.race - 1];
                     const subRace = raceData?.subcomponents?.find((sub: any) => sub.subRaceId === userRes.data.subRace);
                     if (subRace) setRace(subRace);
-                    console.log(subRace);
                 }
                 if (userRes.data.class > 0) {
                     const classRes = await axios.get("http://localhost:3001/classSelection", {
@@ -207,15 +233,15 @@ export const CharacterSheetPage = () => {
                             <h5 className={cl.hitHeader}>БРОСКИ</h5>
                             <label className={cl.sheetLabel}>
                                 <span>
-                                    <button className={cl.featureBtn}/>
-                                    <button className={cl.featureBtn}/>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
                                 </span>
                                 <span className={cl.label}>Успехи</span>
                                 <span>
-                                    <button className={cl.featureBtn}/>
-                                    <button className={cl.featureBtn}/>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
                                 </span>
                                 <span className={cl.label}>Провалы</span>
                             </label>
@@ -264,13 +290,13 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(strength)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Сила")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(strength, "Сила")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(strength)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Атлетика")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(strength, "Атлетика")}</span>
                                             <span className={cl.featureName}>Атлетика</span>
                                         </div>
                                     </div>
@@ -298,23 +324,23 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Ловкость")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(dexterity, "Ловкость")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Акробатика")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(dexterity, "Акробатика")}</span>
                                             <span className={cl.featureName}>Акробатика</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Ловкость рук")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(dexterity, "Ловкость рук")}</span>
                                             <span className={cl.featureName}>Ловкость рук</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(dexterity)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Скрытность")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(dexterity, "Скрытность")}</span>
                                             <span className={cl.featureName}>Скрытность</span>
                                         </div>
                                     </div>
@@ -342,8 +368,8 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(constitution)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Телосложение")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(constitution, "Телосложение")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                     </div>
@@ -356,12 +382,12 @@ export const CharacterSheetPage = () => {
                                     </picture>
                                     <h5 className={cl.abilitiesH}>Истощение</h5>
                                     <div className={cl.exhaustionBar}>
-                                        <button className={cl.featureBtn}/>
-                                        <button className={cl.featureBtn}/>
-                                        <button className={cl.featureBtn}/>
-                                        <button className={cl.featureBtn}/>
-                                        <button className={cl.featureBtn}/>
-                                        <button className={cl.featureBtn}/>
+                                        <SkillBtn/>
+                                        <SkillBtn/>
+                                        <SkillBtn/>
+                                        <SkillBtn/>
+                                        <SkillBtn/>
+                                        <SkillBtn/>
                                     </div>
                                 </section>
 
@@ -371,7 +397,7 @@ export const CharacterSheetPage = () => {
                                         <img src={inspirationBorder} alt="Рамка блока вдохновения"/>
                                     </picture>
                                     <h5 className={cl.abilitiesH}>Героическое вдохновение</h5>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
                                 </section>
                             </div>
 
@@ -398,33 +424,33 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Интеллект")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(intelligence, "Интеллект")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Анализ")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(intelligence, "Анализ")}</span>
                                             <span className={cl.featureName}>Анализ</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("История")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(intelligence, "История")}</span>
                                             <span className={cl.featureName}>История</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Магия")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(intelligence, "Магия")}</span>
                                             <span className={cl.featureName}>Магия</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Природа")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(intelligence, "Природа")}</span>
                                             <span className={cl.featureName}>Природа</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(intelligence)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Религия")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(intelligence, "Религия")}</span>
                                             <span className={cl.featureName}>Религия</span>
                                         </div>
                                     </div>
@@ -452,33 +478,33 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Мудрость")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(wisdom, "Мудрость")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Восприятие")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(wisdom, "Восприятие")}</span>
                                             <span className={cl.featureName}>Восприятие</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Выживание")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(wisdom, "Выживание")}</span>
                                             <span className={cl.featureName}>Выживание</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Медицина")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(wisdom, "Медицина")}</span>
                                             <span className={cl.featureName}>Медицина</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Проницательность")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(wisdom, "Проницательность")}</span>
                                             <span className={cl.featureName}>Проницательность</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(wisdom)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Уход за животными")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(wisdom, "Уход за животными")}</span>
                                             <span className={cl.featureName}>Уход за животными</span>
                                         </div>
                                     </div>
@@ -506,28 +532,28 @@ export const CharacterSheetPage = () => {
 
                                     <div className={cl.abilitiesList}>
                                         <div className={clsx(cl.feature, cl.featureFirst)}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <SkillBtn toggle={classs?.saveThrow.includes("Харизма")} block={true}/>
+                                            <span className={cl.featureValue}>{saveCalculation(charisma, "Харизма")}</span>
                                             <span className={clsx(cl.featureName, cl.featureSave)}>Спасбросок</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Выступление")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(charisma, "Выступление")}</span>
                                             <span className={cl.featureName}>Выступление</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Запугивание")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(charisma, "Запугивание")}</span>
                                             <span className={cl.featureName}>Запугивание</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Обман")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(charisma, "Обман")}</span>
                                             <span className={cl.featureName}>Обман</span>
                                         </div>
                                         <div className={cl.feature}>
-                                            <button className={cl.featureBtn}/>
-                                            <span className={cl.featureValue}>{modifier(charisma)}</span>
+                                            <SkillBtn toggle={sheetPage?.skill.includes("Убеждение")} block={true}/>
+                                            <span className={cl.featureValue}>{skillCalculation(charisma, "Убеждение")}</span>
                                             <span className={cl.featureName}>Убеждение</span>
                                         </div>
                                     </div>
@@ -545,19 +571,19 @@ export const CharacterSheetPage = () => {
                             <div className={cl.equipmentHeader}>
                                 <span className={cl.featureName}>Владение доспехами</span>
                                 <span className={cl.equipmentHeaderList}>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
                                     <span className={cl.featureName}>Легкая</span>
                                 </span>
                                 <span className={cl.equipmentHeaderList}>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
                                     <span className={cl.featureName}>Средняя</span>
                                 </span>
                                 <span className={cl.equipmentHeaderList}>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
                                     <span className={cl.featureName}>Тяжелая</span>
                                 </span>
                                 <span className={cl.equipmentHeaderList}>
-                                    <button className={cl.featureBtn}/>
+                                    <SkillBtn/>
                                     <span className={cl.featureName}>Щиты</span>
                                 </span>
                             </div>
@@ -728,6 +754,735 @@ export const CharacterSheetPage = () => {
                             </section>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div className={clsx(cl.charPage, cl.spellPage)}>
+                <div className={cl.leftColumn}>
+                    <div className={cl.spellInfo}>
+                        <div className={cl.spellcastingAbility}>
+                            <picture className={cl.border}>
+                                <source srcSet={spellcastingBorder} type="image/webp"/>
+                                <img src={spellcastingBorder} alt="Рамка блока заклинательных характеристик"/>
+                            </picture>
+                            <label className={cl.name1row}>
+                                <span className={cl.text}>{classs?.spellcasting}</span>
+                                <span className={cl.label}>Характеристика чар</span>
+                            </label>
+                            <span className={cl.spellValue}>
+                              {classs?.spellcasting === "-"
+                                  ? "-"
+                                  : modifier(sheetPage?.characteristic?.[classs?.spellchar as keyof typeof sheetPage.characteristic] ?? 0)}
+                            </span>
+                            <span className={cl.label}>заклинательный модификатор</span>
+                            <span className={cl.spellValue}>
+                              {classs?.spellcasting === "-"
+                                  ? "-"
+                                  : 10 + Math.floor(((sheetPage?.characteristic?.[classs?.spellchar as keyof typeof sheetPage.characteristic] ?? 0) - 10) / 2)}
+                            </span>
+                            <span className={cl.label}>сложность спасброска</span>
+                            <span className={cl.spellValue}>
+                              {classs?.spellcasting === "-"
+                                  ? "-"
+                                  : 2 + Math.floor(((sheetPage?.characteristic?.[classs?.spellchar as keyof typeof sheetPage.characteristic] ?? 0) - 10) / 2)}
+                            </span>
+                            <span className={cl.label}>бонус атаки заклинанием</span>
+                        </div>
+                        <div className={cl.imageNslots}>
+                            <div className={cl.spellImg}>
+
+                            </div>
+
+                            <div style={{ position: 'relative', height: '100px', width: '315px' }}>
+                                <picture className={cl.border}>
+                                    <source srcSet={spellslotsBorder} type="image/webp"/>
+                                    <img src={spellslotsBorder} alt="Рамка блока ячеек заклинаний"/>
+                                </picture>
+                                <div className={cl.spellSlots}>
+                                    <span className={cl.label}>ячейки заклинаний</span>
+                                    <span></span>
+                                    <span className={cl.spellTitle}>Всего</span>
+                                    <span className={cl.spellTitle}>Потрачено</span>
+                                    <span></span>
+                                    <span className={cl.spellTitle}>Всего</span>
+                                    <span className={cl.spellTitle}>Потрачено</span>
+                                    <span></span>
+                                    <span className={cl.spellTitle}>Всего</span>
+                                    <span className={cl.spellTitle}>Потрачено</span>
+                                    <span className={cl.featureName}>1-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>4-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>7-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>2-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>5-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>8-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>3-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>6-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                    <SkillBtn/>
+                                </span>
+                                    <span className={cl.featureName}>9-й</span>
+                                    <input className={cl.input} type="text"/>
+                                    <span>
+                                    <SkillBtn/>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style={{ position: 'relative', height: '860px', width: '100%' }}>
+                        <picture className={cl.border}>
+                            <source srcSet={cantripsBorder} type="image/webp"/>
+                            <img src={cantripsBorder} alt="Рамка блока ячеек заклинаний"/>
+                        </picture>
+                        <div className={cl.cantrips}>
+                            <h5 className={cl.label}>Заговоры и подготовленные заклинания</h5>
+                            <span className={cl.spellTitle}>Ур.</span>
+                            <span className={cl.spellTitle}>Название</span>
+                            <span className={cl.spellTitle}>Время создания</span>
+                            <span className={cl.spellTitle}>Дальность</span>
+                            <span className={cl.spellTitle}>Концентрация, ритуал, материал</span>
+                            <span className={cl.spellTitle}>Заметки</span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <span style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                            <SkillBtn/>
+                            <span className={cl.label}>К</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>Р</span>
+                            <SkillBtn/>
+                            <span className={cl.label}>М</span>
+                        </span>
+                            <input className={cl.input} type="text"/>
+                        </div> {/*Не открывать*/}
+                    </div>
+
+                </div>
+                <div className={cl.rightColumn}>
+                    <section className={cl.appearance}>
+                        <picture className={cl.border}>
+                            <source srcSet={appearanceBorder} type="image/webp"/>
+                            <img src={appearanceBorder} alt="Рамка блока внешности"/>
+                        </picture>
+                        <h5 className={cl.label}>Внешность</h5>
+                        <textarea className={cl.featsInput} maxLength={625}/>
+                    </section>
+
+                    <section className={cl.personality}>
+                        <picture className={cl.border}>
+                            <source srcSet={personalityBorder} type="image/webp"/>
+                            <img src={personalityBorder} alt="Рамка блока личностных качеств"/>
+                        </picture>
+                        <h5 className={cl.label}>Предыстория и личные качества</h5>
+                        <textarea className={cl.featsInput} maxLength={625}/>
+                        <h5 className={cl.label}>Мировозрение</h5>
+                        <input className={cl.input} type="text"/>
+                    </section>
+
+                    <section className={cl.languages}>
+                        <picture className={cl.border}>
+                            <source srcSet={languagesBorder} type="image/webp"/>
+                            <img src={languagesBorder} alt="Рамка блока владения языками"/>
+                        </picture>
+                        <h5 className={cl.label}>Владение языками</h5>
+                        <textarea className={cl.featsInput} maxLength={625}/>
+                    </section>
+
+                    <section className={cl.sequipment}>
+                        <picture className={cl.border}>
+                            <source srcSet={sequipmentBorder} type="image/webp"/>
+                            <img src={sequipmentBorder} alt="Рамка блока снаряжения"/>
+                        </picture>
+                        <h5 className={cl.label}>Снаряжение</h5>
+                        <textarea className={cl.featsInput} maxLength={625}/>
+                        <h5 className={cl.label}>Настройка на магические предметы</h5>
+                        <span className={cl.magicTool}>
+                            <SkillBtn/>
+                            <input className={cl.input} type="text"/>
+                        </span>
+
+                        <span className={cl.magicTool}>
+                            <SkillBtn/>
+                            <input className={cl.input} type="text"/>
+                        </span>
+
+                        <span className={cl.magicTool}>
+                            <SkillBtn/>
+                            <input className={cl.input} type="text"/>
+                        </span>
+                    </section>
+
+                    <div style={{ position: 'relative', height: '70px', width: '100%' }}>
+                        <picture className={cl.border}>
+                            <source srcSet={languagesBorder} type="image/webp"/>
+                            <img src={languagesBorder} alt="Рамка блока монет"/>
+                        </picture>
+                        <section className={cl.coins}>
+                            <h5 className={cl.label}>Монеты</h5>
+                            <span className={cl.spellTitle}>Медь</span>
+                            <span className={cl.spellTitle}>Серебро</span>
+                            <span className={cl.spellTitle}>Золото</span>
+                            <span className={cl.spellTitle}>Электрум</span>
+                            <span className={cl.spellTitle}>Платина</span>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                            <input className={cl.input} type="text"/>
+                        </section>
+                    </div>
+
                 </div>
             </div>
 

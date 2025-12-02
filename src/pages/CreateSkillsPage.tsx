@@ -13,10 +13,15 @@ type UserInput = {
 
 export const CreateSkillsPage = () => {
 
+    const [validStatus, setValidStatus] = useState(false)
     const [isFetchLoading, setIsFetchLoading] = useState(true);
     const [userInput, setUserInput] = useState<UserInput>({ selectedSkills: [] });
     const [skillPage, setSkillPage] = useState<SkillPageType | null>(null);
 
+
+    useEffect(() => {
+        setValidStatus(userInput.selectedSkills.length === skillPage?.mainInfo.components.amount);
+    }, [userInput]);
 
     useEffect(() => {
         async function fetchPage() {
@@ -32,6 +37,8 @@ export const CreateSkillsPage = () => {
 
         fetchPage();
     }, []);
+
+
 
 
     const handleTrackSkills = useCallback((skillsArray: string[]) => {
@@ -64,7 +71,7 @@ export const CreateSkillsPage = () => {
             />
 
             <NavBar
-                isValidationCorrect={true}
+                isValidationCorrect={validStatus}
                 prevPage={'/character/creation/characteristics'}
                 nextPage={'/character/creation/character-sheet'}
                 onNextClick={handleSend}
