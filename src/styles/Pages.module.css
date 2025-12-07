@@ -42,6 +42,66 @@
     transform: translateX(-50%);
 }
 
+.tressymHeaderReg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.loginForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 20vh;
+    width: 20vw;
+    display: grid;
+    gap: 1vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1r 1fr;
+}
+
+.loginInput {
+    padding: 8px 12px;
+    border: 1px solid rgb(255 203 93 / 50%);
+    border-radius: 6px;
+    background: none;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.loginInput::placeholder {
+    color: rgb(255 203 93 / 50%);
+}
+
+.loginInput:focus {
+    outline: none;
+    border-color: rgb(255 203 93);
+    box-shadow: 0 0 0 3px rgb(255 203 93 / 40%);
+}
+
+.loginBtn {
+    text-align: center;
+    text-decoration: none;
+    color: rgb(255 203 93);
+    border-color: rgb(255 203 93);
+    border-radius: 6px;
+    background: none;
+}
+
+.loginBtn:hover {
+    cursor: pointer;
+    box-shadow: 0 0 0 3px rgb(255 203 93 / 40%);
+}
+
+.loginBtn:visited {
+    color: rgb(255 203 93);
+}
+
 .headerPage,
 .headerPageCurrent {
     place-self: center;

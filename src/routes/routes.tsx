@@ -7,15 +7,21 @@ import { CreateBackgroundPage } from "../pages/CreateBackgroundPage.tsx";
 import { CreateCharsPage } from "../pages/CreateCharsPage.tsx";
 import { CreateSkillsPage } from "../pages/CreateSkillsPage.tsx";
 import { CharacterSheetPage } from "../pages/CharacterSheetPage";
+import { Registration } from "../pages/Registration.tsx";
+import { Login } from "../pages/Login.tsx";
+
+export const publicRoutes = [
+  { path: "/", element: <StartPage /> },
+  { path: "/login", element: <Login /> },
+  { path: "/registration", element: <Registration /> },
+];
 
 export const privateRoutes = [
-  { path: "*", element: <ErrorPage />, exact: true },
-  { path: "/", element: <StartPage />, exact: true },
-  { path: "/character/creation/name", element: <CreateNamePage />, exact: true },
-  { path: "/character/creation/race", element: <CreateRacePage />, exact: true },
-  { path: "/character/creation/class", element: <CreateClassPage />, exact: true },
-  { path: "/character/creation/background", element: <CreateBackgroundPage />, exact: true },
-  { path: "/character/creation/characteristics", element: <CreateCharsPage />, exact: true },
-  { path: "/character/creation/skills", element: <CreateSkillsPage />, exact: true },
-  { path: "/character/creation/character-sheet", element: <CharacterSheetPage />, exact: true },
-]
+  { path: "/character/creation/name", element: <CreateNamePage /> },
+  { path: "/character/creation/race", element: <CreateRacePage /> },
+  { path: "/character/creation/class", element: <CreateClassPage /> },
+  { path: "/character/creation/background", element: <CreateBackgroundPage /> },
+  { path: "/character/creation/characteristics", element: <CreateCharsPage /> },
+  { path: "/character/creation/skills", element: <CreateSkillsPage /> },
+  { path: "/character/creation/character-sheet", element: <CharacterSheetPage /> },
+];
