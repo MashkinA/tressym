@@ -6,12 +6,16 @@ import SelectBack from "../components/SelectBack/SelectBack.tsx";
 import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 import axios from "axios";
 import type { BackPageType } from "../components/types.ts";
+import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 
 export const CreateBackgroundPage = () => {
 
-    const [isFetchLoading, setIsFetchLoading] = useState(true);
+
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const [selectedId, setSelectedId] = useState<number>(1);
     const [backPage, setBackPage] = useState<BackPageType | null>(null);
+
+    const handleSend = UseHandleSend();
 
     useEffect(() => {
         async function fetchPage() {
@@ -21,30 +25,18 @@ export const CreateBackgroundPage = () => {
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
-                setIsFetchLoading(false);
+                setIsPageLoading(false);
             }
         }
 
         fetchPage();
     }, []);
 
-
-
     const userInput = {
-        "backgroundId": selectedId
-    }
-
-    const handleSend = async () => {
-        try {
-            await axios.patch("http://localhost:3001/users/1", {
-                background: userInput.backgroundId
-            });
-        } catch (error) {
-            console.error("❌ Ошибка при отправке данных:", error);
-        }
+        background: selectedId
     };
 
-    if (isFetchLoading || !backPage) {
+    if (isPageLoading || !backPage) {
         return <Loader />;
     }
 
@@ -61,11 +53,8 @@ export const CreateBackgroundPage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/class'}
                 nextPage={'/character/creation/characteristics'}
-                onNextClick={handleSend}
+                onNextClick={() => handleSend(userInput)}
             />
-
-            <div onClick={() => {console.log(userInput)}}></div>
-
         </div>
     );
 };

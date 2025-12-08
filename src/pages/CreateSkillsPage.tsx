@@ -6,21 +6,23 @@ import type { SkillPageType } from "../components/types.ts"
 import { NavBar } from "../components/NavBar/NavBar.tsx";
 import SelectSkills from "../components/SelectSkill/SelectSkills.tsx";
 import axios from "axios";
+import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 
-type UserInput = {
-    selectedSkills: string[];
+type UserInputType = {
+    skill: string[];
 }
 
 export const CreateSkillsPage = () => {
 
     const [validStatus, setValidStatus] = useState(false)
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-    const [userInput, setUserInput] = useState<UserInput>({ selectedSkills: [] });
+    const [userInput, setUserInput] = useState<UserInputType>({ skill: [] });
     const [skillPage, setSkillPage] = useState<SkillPageType | null>(null);
 
-
+    const handleSend = UseHandleSend();
+2
     useEffect(() => {
-        setValidStatus(userInput.selectedSkills.length === skillPage?.mainInfo.components.amount);
+        setValidStatus(userInput.skill.length === skillPage?.mainInfo.components.amount);
     }, [userInput]);
 
     useEffect(() => {
@@ -39,21 +41,9 @@ export const CreateSkillsPage = () => {
     }, []);
 
 
-
-
     const handleTrackSkills = useCallback((skillsArray: string[]) => {
-        setUserInput(prev => ({ ...prev, selectedSkills: skillsArray }));
+        setUserInput(prev => ({ ...prev, skill: skillsArray }));
     }, [setUserInput]);
-
-    const handleSend = async () => {
-        try {
-            await axios.patch("http://localhost:3001/users/1", {
-                skill: userInput.selectedSkills
-            });
-        } catch (error) {
-            console.error("❌ Ошибка при отправке данных:", error);
-        }
-    };
 
     if (isFetchLoading || !skillPage) {
         return <Loader />;
@@ -74,11 +64,8 @@ export const CreateSkillsPage = () => {
                 isValidationCorrect={validStatus}
                 prevPage={'/character/creation/characteristics'}
                 nextPage={'/character/creation/character-sheet'}
-                onNextClick={handleSend}
+                onNextClick={() => handleSend(userInput)}
             />
-
-            <div onClick={() => {console.log(userInput)}}></div>
-
         </div>
     );
 };

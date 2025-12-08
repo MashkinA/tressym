@@ -37,3 +37,33 @@
     line-height: 3vh;
     font-family: Roboto, sans-serif;
 }
+
+.user {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    justify-content: start;
+    align-items: center;
+    padding: 3vh;
+}
+
+.userImg {
+    height: 2.5vh;
+    justify-self: center;
+}
+
+.logout {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.logout:hover {
+    opacity: 1;
+}
