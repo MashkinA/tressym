@@ -5,6 +5,7 @@ import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import SelectChars from "../components/SelectChars/SelectChars.tsx";
 import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
+import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 import axios from "axios";
 
 type UserInput = {
@@ -21,7 +22,7 @@ export const CreateCharsPage = () => {
     const [validStatus, setValidStatus] = useState(true)
     const [isFetchLoading, setIsFetchLoading] = useState(true);
     const [charPage, setCharPage] = useState<CharPageType | null>(null);
-    const [userInput, setUserInput] = useState<UserInput>({
+    const [charValue, setCharValue] = useState<UserInput>({
         strengthValue: 15,
         dexterityValue: 14,
         constitutionValue: 13,
@@ -29,6 +30,8 @@ export const CreateCharsPage = () => {
         wisdomValue: 10,
         charismaValue: 8,
     });
+
+    const handleSend = UseHandleSend();
 
     useEffect(() => {
         async function fetchPage() {
@@ -38,7 +41,7 @@ export const CreateCharsPage = () => {
 
                 const components = response.data.mainInfo.components;
 
-                setUserInput({
+                setCharValue({
                     strengthValue: components[0]?.strengthRecommendValue ?? 15,
                     dexterityValue: components[1]?.dexterityRecommendValue ?? 14,
                     constitutionValue: components[2]?.constitutionRecommendValue ?? 13,
@@ -56,20 +59,14 @@ export const CreateCharsPage = () => {
         fetchPage();
     }, []);
 
-    const handleSend = async () => {
-        try {
-            await axios.patch("http://localhost:3001/users/1", {
-                characteristic: {
-                    strength: userInput.strengthValue,
-                    dexterity: userInput.dexterityValue,
-                    constitution: userInput.constitutionValue,
-                    intelligence: userInput.intelligenceValue,
-                    wisdom: userInput.wisdomValue,
-                    charisma: userInput.charismaValue
-                }
-            });
-        } catch (error) {
-            console.error("❌ Ошибка при отправке данных:", error);
+    const userInput = {
+        characteristic: {
+            strength: charValue.strengthValue,
+            dexterity: charValue.dexterityValue,
+            constitution: charValue.constitutionValue,
+            intelligence: charValue.intelligenceValue,
+            wisdom: charValue.wisdomValue,
+            charisma: charValue.charismaValue
         }
     };
 
@@ -84,17 +81,15 @@ export const CreateCharsPage = () => {
             />
             <SelectChars
                 characteristics={charPage.mainInfo.components}
-                onTrackChars={setUserInput}
+                onTrackChars={setCharValue}
                 onValidationCheck={setValidStatus}
             />
             <NavBar
                 isValidationCorrect={validStatus}
                 prevPage={'/character/creation/background'}
                 nextPage={'/character/creation/skills'}
-                onNextClick={handleSend}
+                onNextClick={() => handleSend(userInput)}
             />
-
-            <div onClick={() => {console.log(userInput)}}></div>
         </div>
     );
 };

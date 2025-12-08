@@ -6,13 +6,16 @@ import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPag
 import type { NamePageType } from "../components/types.ts";
 import cl from '../styles/Pages.module.css';
 import axios from "axios";
+import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 
 export const CreateNamePage = () => {
 
-    const [isFetchLoading, setIsFetchLoading] = useState(true);
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const [NamePage, setNamePage] = useState<NamePageType | null>(null);
     const [validStatus, setValidStatus] = useState(false);
-    const [name, setName] = useState<string | null>(null);
+    const [name, setName] = useState<string>('');
+
+    const handleSend = UseHandleSend();
 
     useEffect(() => {
         async function fetchPage() {
@@ -22,51 +25,40 @@ export const CreateNamePage = () => {
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
-                setIsFetchLoading(false);
+                setIsPageLoading(false);
             }
         }
-
         fetchPage();
     }, []);
 
-    const validationCheck = (name: string) => {
-        setName(name);
-        setValidStatus(!(name.length < 2 || name.length > 64));
+    const validationCheck = (value: string) => {
+        setName(value);
+        setValidStatus(!(value.length < 2 || value.length > 64));
     };
 
     const userInput = {
-        "name": name
-    }
-
-    const handleSend = async () => {
-        try {
-            await axios.patch("http://localhost:3001/users/1", {
-                name: userInput.name
-            });
-        } catch (error) {
-            console.error("❌ Ошибка при отправке данных:", error);
-        }
+        name: name
     };
 
-    if (isFetchLoading || !NamePage) {
+    if (isPageLoading || !NamePage) {
         return <Loader />;
     }
 
     return (
         <div className={cl.pageWrapper}>
-            <TressymHeaderPages
-                currentPage={NamePage.body.header.title}
-            />
+            <TressymHeaderPages currentPage={NamePage.body.header.title} />
+
             <NameForm
                 onChange={validationCheck}
                 inputHint={NamePage.mainInfo.components[0].description}
                 placeholder="Придумайте имя вашего персонажа"
             />
+
             <NavBar
                 isValidationCorrect={validStatus}
                 prevPage="/"
                 nextPage="/character/creation/race"
-                onNextClick={handleSend}
+                onNextClick={() => handleSend(userInput)}
             />
         </div>
     );

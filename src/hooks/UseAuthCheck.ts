@@ -14,7 +14,6 @@ export function UseAuthCheck() {
     const checkAuth = async () => {
         try {
             const res = await axios.get('http://localhost:5000/auth/check', { withCredentials: true });
-            console.log('auth check response:', res.data)
             setUser(res.data.user);
         } catch {
             setUser(null);

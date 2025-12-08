@@ -87,6 +87,40 @@ class authController {
             res.status(500).json({ message: "Ошибка получения пользователей" });
         }
     }
+
+    async updateProfile(req, res) {
+        try {
+            const userId = req.user?.id;
+            if (!userId) {
+                return res.status(401).json({ message: 'Неавторизован' });
+            }
+
+            const allowed = ['name', 'race', 'subRace', 'class', 'subClass', 'background', 'characteristic', 'skill'];
+            const updates = {};
+            for (const key of allowed) {
+                if (req.body[key] !== undefined) updates[key] = req.body[key];
+            }
+
+            if (Object.keys(updates).length === 0) {
+                return res.status(400).json({ message: 'Нет полей для обновления' });
+            }
+
+            const updatedUser = await User.findByIdAndUpdate(
+                userId,
+                { $set: updates },
+                { new: true }
+            ).select('-password');
+
+            if (!updatedUser) {
+                return res.status(404).json({ message: 'Пользователь не найден' });
+            }
+
+            return res.json({ message: 'Профиль обновлён', user: updatedUser });
+        } catch (e) {
+            console.error('Update profile error:', e);
+            return res.status(500).json({ message: 'Ошибка сервера' });
+        }
+    }
 }
 
 export default new authController();

@@ -15,7 +15,7 @@ export const Login = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/auth/login', { username, password }, { withCredentials: true });
+            await axios.post('http://localhost:5000/auth/login', { username, password }, { withCredentials: true });
             await axios.get('http://localhost:5000/auth/check', { withCredentials: true }).then(r => setUser(r.data.user));
             navigate('/');
         } catch (err: any) {

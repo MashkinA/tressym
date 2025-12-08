@@ -1,10 +1,8 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { UseAuthCheck } from "../hooks/UseAuthCheck";
 import { publicRoutes, privateRoutes } from "./routes";
 import { ProtectedRoute, GuestRoute } from "./authRoutes";
 import { ErrorPage } from "../pages/ErrorPage";
-import { StartPage } from "../pages/StartPage";
 import { Loader } from "../components/Loader/Loader";
 
 export const AppRouter = () => {

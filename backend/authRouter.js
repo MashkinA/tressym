@@ -35,4 +35,6 @@ router.post('/logout', (req, res) => {
     res.clearCookie('token').json({ message: 'Вы вышли' });
 });
 
+router.patch('/update', authMiddleware, controller.updateProfile);
+
 export default router;

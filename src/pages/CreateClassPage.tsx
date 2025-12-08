@@ -6,12 +6,15 @@ import {Loader} from "../components/Loader/Loader.tsx";
 import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 import axios from "axios";
 import type { ClassesPageType } from "../components/types.ts";
+import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 
 export const CreateClassPage = () => {
 
-    const [isFetchLoading, setIsFetchLoading] = useState(true);
+    const [isPageLoading, setIsPageLoading] = useState(true);
     const [selectedId, setSelectedId] = useState<number>(1);
     const [classPage, setClassPage] = useState<ClassesPageType | null>(null);
+
+    const handleSend = UseHandleSend();
 
     useEffect(() => {
         async function fetchPage() {
@@ -21,30 +24,18 @@ export const CreateClassPage = () => {
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
-                setIsFetchLoading(false);
+                setIsPageLoading(false);
             }
         }
 
         fetchPage();
     }, []);
 
-
-
     const userInput = {
-        "classId": selectedId,
-    }
-
-    const handleSend = async () => {
-        try {
-            await axios.patch("http://localhost:3001/users/1", {
-                class: userInput.classId
-            });
-        } catch (error) {
-            console.error("❌ Ошибка при отправке данных:", error);
-        }
+        class: selectedId
     };
 
-    if (isFetchLoading || !classPage) {
+    if (isPageLoading || !classPage) {
         return <Loader />;
     }
 
@@ -63,10 +54,8 @@ export const CreateClassPage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/race'}
                 nextPage={'/character/creation/background'}
-                onNextClick={handleSend}
+                onNextClick={() => handleSend(userInput)}
             />
-
-            <div onClick={() => {console.log(userInput)}}></div>
         </div>
     );
 };
