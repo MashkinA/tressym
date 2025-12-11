@@ -1,4 +1,5 @@
 import cl from "../../styles/Pages.module.css";
+import {Link} from "react-router-dom";
 const tressym = "/assets/icons/tressym.webp";
 
 type TressymHeaderPagesProps = {
@@ -16,12 +17,12 @@ export const TressymHeaderPages = ({ currentPage }: TressymHeaderPagesProps) => 
             </div>
 
             <div className={cl.tressymHeaderRight}>
-                <h6 className={currentPage === pages[0] ? cl.headerPageCurrent : cl.headerPage}>{ pages[0] }</h6>
-                <h6 className={currentPage === pages[1] ? cl.headerPageCurrent : cl.headerPage}>{ pages[1] }</h6>
-                <h6 className={currentPage === pages[2] ? cl.headerPageCurrent : cl.headerPage}>{ pages[2] }</h6>
-                <h6 className={currentPage === pages[3] ? cl.headerPageCurrent : cl.headerPage}>{ pages[3] }</h6>
-                <h6 className={currentPage === pages[4] ? cl.headerPageCurrent : cl.headerPage}>{ pages[4] }</h6>
-                <h6 className={currentPage === pages[5] ? cl.headerPageCurrent : cl.headerPage}>{ pages[5] }</h6>
+                <Link to={'/character/creation/name'} className={currentPage === pages[0] ? cl.headerPageCurrent : cl.headerPage}>{ pages[0] }</Link>
+                <Link to={'/character/creation/race'} className={currentPage === pages[1] ? cl.headerPageCurrent : cl.headerPage}>{ pages[1] }</Link>
+                <Link to={'/character/creation/class'} className={currentPage === pages[2] ? cl.headerPageCurrent : cl.headerPage}>{ pages[2] }</Link>
+                <Link to={'/character/creation/background'} className={currentPage === pages[3] ? cl.headerPageCurrent : cl.headerPage}>{ pages[3] }</Link>
+                <Link to={'/character/creation/characteristics'} className={currentPage === pages[4] ? cl.headerPageCurrent : cl.headerPage}>{ pages[4] }</Link>
+                <Link to={'/character/creation/skills'} className={currentPage === pages[5] ? cl.headerPageCurrent : cl.headerPage}>{ pages[5] }</Link>
             </div>
         </header>
     );

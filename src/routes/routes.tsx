@@ -1,5 +1,4 @@
 import { StartPage } from "../pages/StartPage.tsx";
-import { ErrorPage } from "../pages/ErrorPage.tsx";
 import { CreateNamePage } from "../pages/CreateNamePage.tsx";
 import { CreateRacePage } from "../pages/CreateRacePage.tsx";
 import { CreateClassPage } from "../pages/CreateClassPage.tsx";

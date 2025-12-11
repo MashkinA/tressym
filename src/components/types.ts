@@ -139,12 +139,14 @@ export type SkillPageType = {
     };
 };
 
-export type SheetPageType = {
-    id: number;
+export type UserType = {
+    username: string;
+    roles: string[];
     name: string;
     race: number;
     subRace: number;
     class: number;
+    subClass: number;
     background: number;
     characteristic: {
         strength: number;
@@ -214,6 +216,11 @@ export type Background = {
     equipment: string[];
 }
 
+export type Characteristics = {
+    recommendedClassId: number;
+    characteristics: Char[]
+}
+
 export type Char = {
     characteristicId: number;
     title: string;
@@ -226,6 +233,7 @@ export type Char = {
 }
 
 export type Skills = {
+    recommendedClassId: number;
     amount: number;
     skills: string[];
 }
