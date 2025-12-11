@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import authRouter from './authRouter.js';
+import apiRouter from './apiRouter.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -22,6 +23,8 @@ app.use(cors({
 }));
 
 app.use('/auth', authRouter);
+
+app.use('/creation', apiRouter);
 
 app.get('/', (req, res) => res.send('API is running'));
 

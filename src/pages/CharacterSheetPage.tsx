@@ -4,7 +4,7 @@ import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPag
 import {useEffect, useState} from "react";
 import axios from "axios";
 import { Loader } from "../components/Loader/Loader.tsx";
-import type {Background, Class, SheetPageType, SubRace} from "../components/types.ts";
+import type {Background, Class, SubRace, UserType} from "../components/types.ts";
 import {NavBar} from "../components/NavBar/NavBar.tsx";
 import {SkillBtn} from "../components/SkillBtn/SkillBtn.tsx";
 
@@ -39,10 +39,10 @@ const cantripsBorder = "/assets/icons/cantripsBorder.webp";
 export const CharacterSheetPage = () => {
 
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-    const [sheetPage, setSheetPage] = useState<SheetPageType | null>(null);
+    const [sheetPage, setSheetPage] = useState<UserType | null>(null);
     const [race, setRace] = useState<SubRace | null>(null);
-    const [classs, setClasss] = useState<Class | null>(null);
-    const [background, setBackground] = useState<Background | null>(null);
+    const [classs, setclasss] = useState<Class | null>(null);
+    const [background, setBackground] = useState<Background | null>(null); // пофиксить начисление плюсов перкам от предыстории сейчас этого нихуя нет
 
     const strength = sheetPage?.characteristic?.strength ?? 0;
     const dexterity = sheetPage?.characteristic?.dexterity ?? 0;
@@ -81,32 +81,40 @@ export const CharacterSheetPage = () => {
 
         async function fetchPage() {
             try {
-                const userRes = await axios.get("http://localhost:3001/users/1", {
-                    signal: controller.signal,
+                const userRes = await axios.get(`http://localhost:5000/auth/check`, {
+                    withCredentials: true,
+                    signal: controller.signal
                 });
-                setSheetPage(userRes.data);
+                const raceId = (userRes.data.user.race);
+                const subRaceId = (userRes.data.user.subRace);
+                const classId = (userRes.data.user.class);
+                const backgroundId = (userRes.data.user.background);
 
-                if (userRes.data.race > 0) {
-                    const raceRes = await axios.get("http://localhost:3001/raceSelection", {
+                setSheetPage(userRes.data.user);
+
+                if (raceId > 0) {
+                    const raceRes = await axios.get(`http://localhost:5000/creation/races/${raceId}`, {
+                        withCredentials: true,
                         signal: controller.signal,
                     });
-                    const raceData = raceRes.data?.mainInfo?.components?.[userRes.data.race - 1];
-                    const subRace = raceData?.subcomponents?.find((sub: any) => sub.subRaceId === userRes.data.subRace);
+
+                    const subRace = raceRes.data?.subcomponents?.find((sub: any) => sub.subRaceId === subRaceId);
                     if (subRace) setRace(subRace);
                 }
-                if (userRes.data.class > 0) {
-                    const classRes = await axios.get("http://localhost:3001/classSelection", {
+
+                if (classId > 0) {
+                    const classRes = await axios.get(`http://localhost:5000/creation/classes/${classId}`, {
+                        withCredentials: true,
                         signal: controller.signal,
                     });
-                    const classData = classRes.data?.mainInfo?.components?.[userRes.data.class - 1];
-                    if (classData) setClasss(classData);
+                    if (classRes.data) setclasss(classRes.data);
                 }
-                if (userRes.data.background > 0) {
-                    const backgroundRes = await axios.get("http://localhost:3001/backgroundSelection", {
+                if (backgroundId > 0) {
+                    const backgroundRes = await axios.get(`http://localhost:5000/creation/backgrounds/${backgroundId}`, {
+                        withCredentials: true,
                         signal: controller.signal,
                     });
-                    const backgroundData = backgroundRes.data?.mainInfo?.components?.[userRes.data.background - 1];
-                    if (backgroundData) setBackground(backgroundData);
+                    if (backgroundRes.data) setBackground(backgroundRes.data);
                 }
 
             } catch (error: any) {
@@ -1488,7 +1496,7 @@ export const CharacterSheetPage = () => {
 
             <NavBar
                 isValidationCorrect={true}
-                prevPage={'/character/creation/class'}
+                prevPage={'/character/creation/skills'}
                 nextPage={'/character/creation/characteristics'}
             />
         </div>

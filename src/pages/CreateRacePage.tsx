@@ -1,28 +1,32 @@
 import { useEffect, useState } from "react";
 import { NavBar } from '../components/NavBar/NavBar';
 import SelectRace from '../components/SelectRace/SelectRace.tsx';
-import type { SpeciesPageType } from "../components/types.ts";
+import type { Race } from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
-import { useAppSelector } from "../hooks/redux.ts";
+import {useAppDispatch, useAppSelector} from "../hooks/redux.ts";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 import axios from "axios";
+import {userSlice} from "../store/reducers/UserSlice.ts";
 
 export const CreateRacePage = () => {
 
     const [selectedId, setSelectedId] = useState<number>(1);
-    const [racePage, setRacePage] = useState<SpeciesPageType | null>(null);
+    const [racePage, setRacePage] = useState<Race[] | null>(null);
     const [isPageLoading, setIsPageLoading] = useState(true);
     const selectedSubId = useAppSelector((state) => state.userReducer.subRaceId);
-
+    const { setRace } = userSlice.actions
+    const dispatch = useAppDispatch()
     const handleSend = UseHandleSend();
+
+
 
     useEffect(() => {
         async function fetchPage() {
             try {
-                const response = await axios.get("http://localhost:3001/raceSelection");
-                setRacePage(response.data);
+                const res = await axios.get('http://localhost:5000/creation/races/list', { withCredentials: true });
+                setRacePage(res.data);
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
             } finally {
@@ -38,16 +42,21 @@ export const CreateRacePage = () => {
         subRace: selectedSubId
     };
 
+    const submitRace = ()=> {
+        dispatch(setRace(selectedId));
+        handleSend(userInput);
+    }
+
     if (isPageLoading || !racePage) {
         return <Loader />;
     }
 
     return (
         <div className={cl.pageWrapper}>
-            <TressymHeaderPages currentPage={racePage.body.header.title} />
+            <TressymHeaderPages currentPage={'Раса'} />
 
             <SelectRace
-                itemList={racePage.mainInfo.components}
+                itemList={racePage}
                 onSelectId={setSelectedId}
             />
 
@@ -55,7 +64,7 @@ export const CreateRacePage = () => {
                 isValidationCorrect={true}
                 prevPage={'/character/creation/name'}
                 nextPage={'/character/creation/class'}
-                onNextClick={() => handleSend(userInput)}
+                onNextClick={() => submitRace()}
             />
         </div>
     );

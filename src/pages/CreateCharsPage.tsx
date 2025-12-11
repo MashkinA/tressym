@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import { NavBar } from '../components/NavBar/NavBar';
-import type { CharPageType } from "../components/types.ts";
+import type { Characteristics } from "../components/types.ts";
 import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import SelectChars from "../components/SelectChars/SelectChars.tsx";
-import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
+import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 import axios from "axios";
 
@@ -21,42 +21,60 @@ export const CreateCharsPage = () => {
 
     const [validStatus, setValidStatus] = useState(true)
     const [isFetchLoading, setIsFetchLoading] = useState(true);
-    const [charPage, setCharPage] = useState<CharPageType | null>(null);
+    const [charPage, setCharPage] = useState<Characteristics | null>(null);
     const [charValue, setCharValue] = useState<UserInput>({
-        strengthValue: 15,
-        dexterityValue: 14,
-        constitutionValue: 13,
-        intelligenceValue: 12,
-        wisdomValue: 10,
+        strengthValue: 8,
+        dexterityValue: 8,
+        constitutionValue: 8,
+        intelligenceValue: 8,
+        wisdomValue: 8,
         charismaValue: 8,
     });
 
     const handleSend = UseHandleSend();
 
     useEffect(() => {
+        const controller = new AbortController();
+
         async function fetchPage() {
             try {
-                const response = await axios.get("http://localhost:3001/characteristicSelection");
-                setCharPage(response.data);
-
-                const components = response.data.mainInfo.components;
-
-                setCharValue({
-                    strengthValue: components[0]?.strengthRecommendValue ?? 15,
-                    dexterityValue: components[1]?.dexterityRecommendValue ?? 14,
-                    constitutionValue: components[2]?.constitutionRecommendValue ?? 13,
-                    intelligenceValue: components[3]?.intelligenceRecommendValue ?? 12,
-                    wisdomValue: components[4]?.wisdomRecommendValue ?? 10,
-                    charismaValue: components[5]?.charismaRecommendValue ?? 8,
+                const userRes = await axios.get(`http://localhost:5000/auth/check`, {
+                    withCredentials: true,
+                    signal: controller.signal
                 });
-            } catch (error) {
-                console.error('Ошибка загрузки данных:', error);
+                const recommendedClassId = (userRes.data.user.class);
+
+                    if (recommendedClassId > 0) {
+                        const res = await axios.get(`http://localhost:5000/creation/characteristics/${recommendedClassId}`, {
+                            withCredentials: true,
+                            signal: controller.signal
+                        });
+                        setCharPage(res.data);
+
+                        const components = res.data.characteristics;
+
+                        setCharValue({
+                            strengthValue: components[0]?.strengthRecommendValue ?? 8,
+                            dexterityValue: components[1]?.dexterityRecommendValue ?? 8,
+                            constitutionValue: components[2]?.constitutionRecommendValue ?? 8,
+                            intelligenceValue: components[3]?.intelligenceRecommendValue ?? 8,
+                            wisdomValue: components[4]?.wisdomRecommendValue ?? 8,
+                            charismaValue: components[5]?.charismaRecommendValue ?? 8,
+                        });
+                    }
+            } catch (error: any) {
+                if (error.name === 'CanceledError' || error.message === 'canceled') {
+                } else {
+                    console.error('Ошибка загрузки данных:', error);
+                }
             } finally {
                 setIsFetchLoading(false);
             }
         }
 
         fetchPage();
+
+        return () => controller.abort();
     }, []);
 
     const userInput = {
@@ -77,10 +95,10 @@ export const CreateCharsPage = () => {
     return (
         <div className={cl.pageWrapper}>
             <TressymHeaderPages
-                currentPage={charPage.body.header.title}
+                currentPage={'Способности'}
             />
             <SelectChars
-                characteristics={charPage.mainInfo.components}
+                characteristics={charPage.characteristics}
                 onTrackChars={setCharValue}
                 onValidationCheck={setValidStatus}
             />

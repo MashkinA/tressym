@@ -1,12 +1,12 @@
 import { Schema, model } from 'mongoose';
 
 const CharacteristicSchema = new Schema({
-    strength:    { type: Number, default: 0 },
-    dexterity:   { type: Number, default: 0 },
-    constitution:{ type: Number, default: 0 },
-    intelligence:{ type: Number, default: 0 },
-    wisdom:      { type: Number, default: 0 },
-    charisma:    { type: Number, default: 0 },
+    strength:    { type: Number, default: 8 },
+    dexterity:   { type: Number, default: 8 },
+    constitution:{ type: Number, default: 8 },
+    intelligence:{ type: Number, default: 8 },
+    wisdom:      { type: Number, default: 8 },
+    charisma:    { type: Number, default: 8 },
 }, { _id: false });
 
 const UserSchema = new Schema({
@@ -16,11 +16,11 @@ const UserSchema = new Schema({
     roles:     [{ type: String, ref: 'Role', default: 'USER' }],
 
     name:       { type: String, default: '' },
-    race:       { type: Number, default: 0 },
-    subRace:    { type: Number, default: 0 },
-    class:      { type: Number, default: 0 },
-    subClass:   { type: Number, default: 0 },
-    background: { type: Number, default: 0 },
+    race:       { type: Number, default: 1 },
+    subRace:    { type: Number, default: 1 },
+    class:      { type: Number, default: 1 },
+    subClass:   { type: Number, default: 1 },
+    background: { type: Number, default: 1 },
 
     characteristic: { type: CharacteristicSchema, default: () => ({}) },
 

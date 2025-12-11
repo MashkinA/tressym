@@ -108,7 +108,8 @@
     font-size: 3vh;
     line-height: 10vh;
     opacity: 0.5;
-    cursor: auto;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .headerPageCurrent {
