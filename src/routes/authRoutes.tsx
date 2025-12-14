@@ -1,5 +1,5 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
+import type {JSX} from "react";
 
 type Props = { children: JSX.Element; isAuth: boolean };
 
