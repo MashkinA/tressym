@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import authRouter from './authRouter.js';
 import apiRouter from './apiRouter.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
@@ -27,6 +29,15 @@ app.use('/auth', authRouter);
 app.use('/creation', apiRouter);
 
 app.get('/', (req, res) => res.send('API is running'));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'tressym/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'tressym/dist', 'index.html'));
+});
 
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
