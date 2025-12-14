@@ -4,6 +4,7 @@ import authRouter from './authRouter.js';
 import apiRouter from './apiRouter.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+dotenv.config({ path: path.resolve('../.env') });
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import dotenv from 'dotenv';
