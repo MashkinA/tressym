@@ -17,14 +17,15 @@ html, body {
 }
 
 .charPage {
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     width: 720px;
     height: 1020px;
-    margin-bottom: 200px;
 }
 
 .spellPage {
+    margin-top: 100px;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -609,16 +610,6 @@ html, body {
     grid-template-columns: 1fr 1fr;
     border-top: 1px solid rgb(255 203 93);
     position: relative;
-}
-
-.classColumns::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    background-color: rgb(255 203 93);
 }
 
 .classArea {

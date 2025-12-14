@@ -5,8 +5,9 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import { Loader } from "../components/Loader/Loader.tsx";
 import type {Background, Class, SubRace, UserType} from "../components/types.ts";
-import {NavBar} from "../components/NavBar/NavBar.tsx";
+import {SheetPageBar} from "../components/SheetPageBar/SheetPageBar.tsx";
 import {SkillBtn} from "../components/SkillBtn/SkillBtn.tsx";
+
 
 const tracery = "/assets/icons/tracery.webp";
 const tressym = "/assets/icons/tressym.webp";
@@ -50,6 +51,10 @@ export const CharacterSheetPage = () => {
     const intelligence = sheetPage?.characteristic?.intelligence ?? 0;
     const wisdom = sheetPage?.characteristic?.wisdom ?? 0;
     const charisma = sheetPage?.characteristic?.charisma ?? 0;
+
+    const handleDownloadPdf = () => {
+        window.print();
+    }
 
     const modifier = (count: number): string => {
         const value = Math.floor((count - 10) / 2);
@@ -736,7 +741,7 @@ export const CharacterSheetPage = () => {
                             </picture>
                             <h5 className={cl.label}>Классовые особенности</h5>
                             <section className={cl.classColumns}>
-                                <textarea className={cl.classArea} defaultValue={classs?.skills.map(a => `${a.title}: ${a.description}`).join("\n\n")} />
+                                <textarea style={{ borderRight: '1px solid rgb(255 203 93)'}} className={cl.classArea} defaultValue={classs?.skills.map(a => `${a.title}: ${a.description}`).join("\n\n")} />
                                 <textarea className={cl.classArea} />
                             </section>
                         </div>
@@ -1494,10 +1499,9 @@ export const CharacterSheetPage = () => {
                 </div>
             </div>
 
-            <NavBar
-                isValidationCorrect={true}
+            <SheetPageBar
                 prevPage={'/character/creation/skills'}
-                nextPage={'/character/creation/characteristics'}
+                onDownloadPdf={handleDownloadPdf}
             />
         </div>
     );

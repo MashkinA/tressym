@@ -1,0 +1,17 @@
+@media print {
+    @page {
+        size: a4;
+        margin: 12mm;
+    }
+
+    html,
+    body {
+        height: auto !important;
+    }
+
+    nav,
+    header,
+    footer {
+        display: none !important;
+    }
+}

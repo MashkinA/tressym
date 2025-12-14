@@ -26,3 +26,10 @@
 .linkBtn:visited {
     color: rgb(255 203 93);
 }
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
