@@ -35,7 +35,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'tressym/dist')));
 
-app.get('*', (req, res) => {
+app.all('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'tressym/dist', 'index.html'));
 });
 
