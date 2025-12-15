@@ -1,5 +1,5 @@
-import axios from "axios";
-import { UseAuthCheck } from "./UseAuthCheck.ts"; // используй своё существующее имя хука
+import api from "../api/axios.ts"
+import { UseAuthCheck } from "./UseAuthCheck.ts";
 
 type Payload = Record<string, any>;
 
@@ -13,8 +13,8 @@ export function UseHandleSend() {
         }
 
         try {
-            const res = await axios.patch(
-                'http://localhost:5000/auth/update',
+            const res = await api.patch(
+                '/auth/update',
                 payload,
                 { withCredentials: true }
             );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UseAuthCheck } from '../hooks/UseAuthCheck.ts';
 import cl from "../styles/Pages.module.css";
@@ -16,8 +16,8 @@ export const Registration = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/auth/register', { username, password }, { withCredentials: true });
-            await axios.get('http://localhost:5000/auth/check', { withCredentials: true }).then(r => setUser(r.data.user));
+            await api.post('/auth/register', { username, password }, { withCredentials: true });
+            await api.get('/auth/check', { withCredentials: true }).then(r => setUser(r.data.user));
             navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Ошибка при регистрации');

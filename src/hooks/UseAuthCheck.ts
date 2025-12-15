@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from "../api/axios.ts";
 
 export type UserType = {
     id: string;
@@ -13,7 +13,7 @@ export function UseAuthCheck() {
 
     const checkAuth = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/auth/check', { withCredentials: true });
+            const res = await api.get('/auth/check', { withCredentials: true });
             setUser(res.data.user);
         } catch {
             setUser(null);

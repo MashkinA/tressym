@@ -5,7 +5,7 @@ import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPag
 import type { Skills } from "../components/types.ts"
 import { NavBar } from "../components/NavBar/NavBar.tsx";
 import SelectSkills from "../components/SelectSkill/SelectSkills.tsx";
-import axios from "axios";
+import api from "../api/axios.ts";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 
 type UserInputType = {
@@ -29,14 +29,14 @@ export const CreateSkillsPage = () => {
 
         async function fetchPage() {
             try {
-                const userRes = await axios.get(`http://localhost:5000/auth/check`, {
+                const userRes = await api.get(`/auth/check`, {
                     withCredentials: true,
                     signal: controller.signal
                 });
                 const recommendedClassId = (userRes.data.user.class);
 
                 if (recommendedClassId > 0) {
-                    const res = await axios.get(`http://localhost:5000/creation/skills/${recommendedClassId}`, {
+                    const res = await api.get(`/creation/skills/${recommendedClassId}`, {
                         withCredentials: true,
                         signal: controller.signal
                     });

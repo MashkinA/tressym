@@ -4,7 +4,7 @@ import cl from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import SelectBack from "../components/SelectBack/SelectBack.tsx";
 import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
-import axios from "axios";
+import api from "../api/axios.ts";
 import type { Background } from "../components/types.ts";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
 import {userSlice} from "../store/reducers/UserSlice.ts";
@@ -23,7 +23,7 @@ export const CreateBackgroundPage = () => {
     useEffect(() => {
         async function fetchPage() {
             try {
-                const res = await axios.get("http://localhost:5000/creation/backgrounds/list", { withCredentials: true });
+                const res = await api.get("/creation/backgrounds/list", { withCredentials: true });
                 setBackPage(res.data);
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);

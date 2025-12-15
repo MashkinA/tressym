@@ -3,7 +3,7 @@ import cla from "../styles/Pages.module.css";
 import { Loader } from "../components/Loader/Loader.tsx";
 import { TressymHeader } from "../components/TressymHeader/TressymHeader.tsx";
 import { UseAuthCheck } from "../hooks/UseAuthCheck.ts";
-import axios from "axios";
+import api from "../api/axios.ts";
 
 const backImage = "./assets/background/sleepyDragon.webp";
 const tressym = "/assets/icons/tressym.webp";
@@ -14,7 +14,7 @@ export const StartPage = () => {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:5000/auth/logout', {}, { withCredentials: true });
+            await api.post('/auth/logout', {}, { withCredentials: true });
             setUser(null);
         } catch (e) {
             console.error('Ошибка выхода', e);
