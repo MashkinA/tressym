@@ -36,11 +36,16 @@ app.use(cors({
 app.use('/auth', authRouter);
 app.use('/creation', apiRouter);
 
-// Статика фронтенда
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Catch-all SPA (для любых маршрутов кроме AP)
-app.all(/^\/(?!auth|creation).*/, (req, res) => {
+app.use((req, res, next) => {
+    if (
+        req.path.startsWith('/auth') ||
+        req.path.startsWith('/creation')
+    ) {
+        return next();
+    }
+
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
