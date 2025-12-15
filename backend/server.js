@@ -39,7 +39,7 @@ app.use('/creation', apiRouter);
 // Статика фронтенда
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Catch-all SPA (для любых маршрутов кроме API)
+// Catch-all SPA (для любых маршрутов кроме AP)
 app.all(/^\/(?!auth|creation).*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
