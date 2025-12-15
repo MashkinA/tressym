@@ -6,7 +6,7 @@ import { Loader } from "../components/Loader/Loader.tsx";
 import SelectChars from "../components/SelectChars/SelectChars.tsx";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
-import axios from "axios";
+import api from "../api/axios.ts";
 
 type UserInput = {
     strengthValue: number;
@@ -38,14 +38,14 @@ export const CreateCharsPage = () => {
 
         async function fetchPage() {
             try {
-                const userRes = await axios.get(`http://localhost:5000/auth/check`, {
+                const userRes = await api.get(`/auth/check`, {
                     withCredentials: true,
                     signal: controller.signal
                 });
                 const recommendedClassId = (userRes.data.user.class);
 
                     if (recommendedClassId > 0) {
-                        const res = await axios.get(`http://localhost:5000/creation/characteristics/${recommendedClassId}`, {
+                        const res = await api.get(`/creation/characteristics/${recommendedClassId}`, {
                             withCredentials: true,
                             signal: controller.signal
                         });

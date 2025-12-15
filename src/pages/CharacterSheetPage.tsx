@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import api from "../api/axios.ts";
 import { Loader } from "../components/Loader/Loader.tsx";
 import type {Background, Class, SubRace, UserType} from "../components/types.ts";
 import {SheetPageBar} from "../components/SheetPageBar/SheetPageBar.tsx";
@@ -86,7 +87,7 @@ export const CharacterSheetPage = () => {
 
         async function fetchPage() {
             try {
-                const userRes = await axios.get(`http://localhost:5000/auth/check`, {
+                const userRes = await api.get(`/auth/check`, {
                     withCredentials: true,
                     signal: controller.signal
                 });
@@ -98,7 +99,7 @@ export const CharacterSheetPage = () => {
                 setSheetPage(userRes.data.user);
 
                 if (raceId > 0) {
-                    const raceRes = await axios.get(`http://localhost:5000/creation/races/${raceId}`, {
+                    const raceRes = await api.get(`/creation/races/${raceId}`, {
                         withCredentials: true,
                         signal: controller.signal,
                     });
@@ -108,14 +109,14 @@ export const CharacterSheetPage = () => {
                 }
 
                 if (classId > 0) {
-                    const classRes = await axios.get(`http://localhost:5000/creation/classes/${classId}`, {
+                    const classRes = await api.get(`/creation/classes/${classId}`, {
                         withCredentials: true,
                         signal: controller.signal,
                     });
                     if (classRes.data) setclasss(classRes.data);
                 }
                 if (backgroundId > 0) {
-                    const backgroundRes = await axios.get(`http://localhost:5000/creation/backgrounds/${backgroundId}`, {
+                    const backgroundRes = await api.get(`/creation/backgrounds/${backgroundId}`, {
                         withCredentials: true,
                         signal: controller.signal,
                     });

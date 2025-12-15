@@ -7,7 +7,7 @@ import { Loader } from "../components/Loader/Loader.tsx";
 import {useAppDispatch, useAppSelector} from "../hooks/redux.ts";
 import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
 import { UseHandleSend } from "../hooks/UseHandleSend.ts";
-import axios from "axios";
+import api from "../api/axios.ts";
 import {userSlice} from "../store/reducers/UserSlice.ts";
 
 export const CreateRacePage = () => {
@@ -25,7 +25,7 @@ export const CreateRacePage = () => {
     useEffect(() => {
         async function fetchPage() {
             try {
-                const res = await axios.get('http://localhost:5000/creation/races/list', { withCredentials: true });
+                const res = await api.get('/creation/races/list', { withCredentials: true });
                 setRacePage(res.data);
             } catch (error) {
                 console.error('Ошибка загрузки данных:', error);
