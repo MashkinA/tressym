@@ -37,13 +37,12 @@ app.use('/creation', apiRouter);
 // Статика фронтенда
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Catch-all для SPA (должен быть после всех маршрутов)
+// Catch-all SPA (для любых маршрутов, кроме API)
 app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, '../dist', 'index.html'), err => {
-        if (err) {
-            next(err);
-        }
-    });
+    if (req.path.startsWith('/auth') || req.path.startsWith('/creation')) {
+        return next(); // пропускаем API запросы
+    }
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 // Глобальный обработчик ошибок
