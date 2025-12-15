@@ -9,9 +9,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "server": "json-server -w server/db.json -p 3001",
-    "test": "concurrently \"npm run server\" \"npm run dev\""
+    "preview": "vite preview"
   },
   "dependencies": {
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
