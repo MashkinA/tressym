@@ -50,6 +50,9 @@ app.use((err, req, res, next) => {
 const start = async () => {
     try {
         await mongoose.connect(MONGO_URI, {
+            serverSelectionTimeoutMS: 30000,
+            socketTimeoutMS: 45000,
+            family: 4
         });
         app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
     } catch (error) {
