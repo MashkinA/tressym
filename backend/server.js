@@ -39,17 +39,9 @@ app.use('/creation', apiRouter);
 // Статика фронтенда
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Catch-all SPA для всех маршрутов, кроме API
-app.get('/:catchAll(.*)', (req, res, next) => {
-    if (req.path.startsWith('/auth') || req.path.startsWith('/creation')) {
-        return next(); // пропускаем API маршруты
-    }
-    res.sendFile(path.join(__dirname, '../dist', 'index.html'), err => {
-        if (err) {
-            console.error('Error sending index.html:', err);
-            res.status(500).send('Internal server error');
-        }
-    });
+// Catch-all SPA (для любых маршрутов кроме API)
+app.all(/^\/(?!auth|creation).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 // Глобальный обработчик ошибок
