@@ -8,9 +8,11 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Загрузка переменных окружения
+// Определяем __dirname для ES-модулей
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Загружаем переменные окружения
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const PORT = process.env.PORT || 5000;
@@ -37,12 +39,17 @@ app.use('/creation', apiRouter);
 // Статика фронтенда
 app.use(express.static(path.join(__dirname, '../dist')));
 
-// Catch-all SPA (для любых маршрутов, кроме API)
-app.use((req, res, next) => {
+// Catch-all SPA для всех маршрутов, кроме API
+app.get('/:catchAll(.*)', (req, res, next) => {
     if (req.path.startsWith('/auth') || req.path.startsWith('/creation')) {
-        return next(); // пропускаем API запросы
+        return next(); // пропускаем API маршруты
     }
-    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../dist', 'index.html'), err => {
+        if (err) {
+            console.error('Error sending index.html:', err);
+            res.status(500).send('Internal server error');
+        }
+    });
 });
 
 // Глобальный обработчик ошибок
