@@ -16,6 +16,7 @@ export const StartPage = () => {
         try {
             await api.post('/auth/logout', {}, { withCredentials: true });
             setUser(null);
+            window.location.href = '/';
         } catch (e) {
             console.error('Ошибка выхода', e);
         }

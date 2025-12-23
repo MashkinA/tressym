@@ -18,7 +18,7 @@ export const Login = () => {
         try {
             await api.post('/auth/login', { username, password }, { withCredentials: true });
             await api.get('/auth/check', { withCredentials: true }).then(r => setUser(r.data.user));
-            navigate('/');
+            window.location.href = '/';
         } catch (err: any) {
             setError(err.response?.data?.message || 'Ошибка при входе');
         }
