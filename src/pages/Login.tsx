@@ -3,6 +3,7 @@ import api from "../api/axios.ts";
 import { useNavigate } from 'react-router-dom';
 import { UseAuthCheck } from '../hooks/UseAuthCheck.ts';
 import cl from "../styles/Pages.module.css";
+import { Link } from "react-router-dom";
 const tressym = "/assets/icons/tressym.webp";
 
 export const Login = () => {
@@ -26,10 +27,10 @@ export const Login = () => {
     return (
         <main className={cl.pageWrapper}>
             <header className={cl.tressymHeader}>
-                <div className={cl.tressymHeaderLeft}>
+                <Link className={cl.tressymHeaderLeft} to="/">
                     <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
                     <h1>Tressym</h1>
-                </div>
+                </Link>
                 <div className={cl.tressymHeaderReg}>
                     <h1>Вход</h1>
                 </div>
