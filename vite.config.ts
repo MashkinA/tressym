@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth': 'http://localhost:5000',
-      '/creation': 'http://localhost:5000',
+      '/creation': 'http://localhost:5000'
     },
   },
 })
