@@ -1,3 +1,39 @@
+@media (width < 1024px) {
+    .pageWrapper {
+        display: none !important;
+    }
+
+    .mobileWarning {
+        display: flex !important;
+    }
+}
+
+.mobileWarning {
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(to top, rgb(0 0 0 / 60%), transparent), url("/public/assets/background/background.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.mobileWarningInner {
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+}
+
+.mobileWarningText {
+    width: 100%;
+    font-size: 5vh;
+}
+
 .pageWrapper {
     width: 100vw;
     height: 100vh;
