@@ -11,10 +11,10 @@ export const TressymHeader = ({auth}: TressymHeaderProps) => {
 
     return (
         <header className={cl.tressymHeader}>
-            <div className={cl.tressymHeaderLeft}>
+            <Link className={cl.tressymHeaderLeft} to="/">
                 <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
                 <h1>Tressym</h1>
-            </div>
+            </Link>
                 {
                     auth ? (
                         <div className={cl.tressymHeaderRight}>

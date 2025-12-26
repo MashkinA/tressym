@@ -1,5 +1,5 @@
 import cl from "../../styles/Pages.module.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 const tressym = "/assets/icons/tressym.webp";
 
 type TressymHeaderPagesProps = {
@@ -11,10 +11,10 @@ const pages = ["Имя", "Раса", "Класс", "Происхождение",
 export const TressymHeaderPages = ({ currentPage }: TressymHeaderPagesProps) => {
     return (
         <header className={cl.tressymHeaderPages}>
-            <div className={cl.tressymHeaderLeft}>
+            <Link className={cl.tressymHeaderLeft} to={"/"}>
                 <img className={cl.pageCreateHeaderTressym} src={ tressym }  alt="Трессум" />
                 <h1>Tressym</h1>
-            </div>
+            </Link>
 
             <div className={cl.tressymHeaderRight}>
                 <Link to={'/character/creation/name'} className={currentPage === pages[0] ? cl.headerPageCurrent : cl.headerPage}>{ pages[0] }</Link>
