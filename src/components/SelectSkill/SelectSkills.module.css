@@ -1,3 +1,9 @@
+@media (height < 1070px) {
+    .skillsList {
+        height: 430px !important;
+    }
+}
+
 .selectSkills {
     width: 100vw;
     height: 80vh;
