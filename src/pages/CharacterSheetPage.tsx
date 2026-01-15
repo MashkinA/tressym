@@ -1,10 +1,10 @@
 import cl from "../styles/CharacterSheetPage.module.css";
 import clsx from "clsx";
-import { TressymHeaderPages } from "../components/TressymHeader/TressymHeaderPages.tsx";
+import {TressymHeaderPages} from "../components/TressymHeader/TressymHeaderPages.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import api from "../api/axios.ts";
-import { Loader } from "../components/Loader/Loader.tsx";
+import {Loader} from "../components/Loader/Loader.tsx";
 import type {Background, Class, SubRace, UserType} from "../components/types.ts";
 import {SheetPageBar} from "../components/SheetPageBar/SheetPageBar.tsx";
 import {SkillBtn} from "../components/SkillBtn/SkillBtn.tsx";
@@ -164,7 +164,7 @@ export const CharacterSheetPage = () => {
 
                         <label className={cl.sheetLabel}>
                             <span className={cl.text}>{background?.title}</span>
-                            <span className={cl.label}>Предыстория</span>
+                            <span className={cl.label}>Просхождение</span>
                         </label>
 
                         <label className={cl.sheetLabel}>
@@ -205,9 +205,15 @@ export const CharacterSheetPage = () => {
                             <img src={armorBorder} alt="Рамка блока брони"/>
                         </picture>
                         <span className={cl.label}>Класс защиты</span>
-                        <input className={cl.inputArmor} type="text"/>
+                        <input className={cl.inputArmor}
+                               type="text"
+                               inputMode="numeric"
+                               pattern="[0-9]*"
+                               onChange={e => {
+                                   e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                               }}/>
                         <span className={cl.label}>Щит</span>
-                        <div className={cl.shieldCheck}></div>
+                        <SkillBtn/>
                     </div>
 
                     <div className={cl.hits}>
@@ -832,27 +838,51 @@ export const CharacterSheetPage = () => {
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>4-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>7-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>2-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>5-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
@@ -864,20 +894,38 @@ export const CharacterSheetPage = () => {
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>3-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>6-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                     <SkillBtn/>
                                 </span>
                                     <span className={cl.featureName}>9-й</span>
-                                    <input className={cl.input} type="text"/>
+                                    <input className={cl.input}
+                                           type="text"
+                                           inputMode="numeric"
+                                           pattern="[0-9]*"
+                                           onChange={e => {
+                                               e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                           }}/>
                                     <span>
                                     <SkillBtn/>
                                 </span>
@@ -1489,11 +1537,46 @@ export const CharacterSheetPage = () => {
                             <span className={cl.spellTitle}>Золото</span>
                             <span className={cl.spellTitle}>Электрум</span>
                             <span className={cl.spellTitle}>Платина</span>
-                            <input className={cl.input} type="text"/>
-                            <input className={cl.input} type="text"/>
-                            <input className={cl.input} type="text"/>
-                            <input className={cl.input} type="text"/>
-                            <input className={cl.input} type="text"/>
+                            <input className={cl.input}
+                                   type="text"
+                                   inputMode="numeric"
+                                   pattern="[0-9]*"
+                                   onChange={e => {
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                   }}
+                            />
+                            <input className={cl.input}
+                                   type="text"
+                                   inputMode="numeric"
+                                   pattern="[0-9]*"
+                                   onChange={e => {
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                   }}
+                            />
+                            <input className={cl.input}
+                                   type="text"
+                                   inputMode="numeric"
+                                   pattern="[0-9]*"
+                                   onChange={e => {
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                   }}
+                            />
+                            <input className={cl.input}
+                                   type="text"
+                                   inputMode="numeric"
+                                   pattern="[0-9]*"
+                                   onChange={e => {
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                   }}
+                            />
+                            <input className={cl.input}
+                                   type="text"
+                                   inputMode="numeric"
+                                   pattern="[0-9]*"
+                                   onChange={e => {
+                                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                                   }}
+                            />
                         </section>
                     </div>
 
